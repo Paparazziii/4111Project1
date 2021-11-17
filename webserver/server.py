@@ -190,6 +190,9 @@ def manageer():
 def park():
   return render_template("park.html")
 
+@app.route('/index')
+def index():
+  return render_template("index.html")
 
 # Example of adding new data to the database
 #@app.route('/add', methods=['POST'])
