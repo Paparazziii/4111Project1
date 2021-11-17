@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-=======
+
 <!-- breeder template -->
 <html>
   <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -41,30 +40,6 @@
     </tr>
     {% endfor %}
   </table>
->>>>>>> Stashed changes
-
-<html>
-    <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-      body{ 
-        font-size: 15pt;
-        font-family: arial;
-      }
-    </style>
-  <head>
-    <titile>Breeders Information</titile>>
-  </head>>
-  
-  <body>
-    <h1>CURRENT BREEDERS</h1>
-  
-    <div>{{data}}</div>
-  
-    <div>
-      {% for n in data %}
-      <div>{{n}}</div>
-      {% endfor %}
-    </div>
   
   <!--operations-->
   <form method="POST" action="/add">
