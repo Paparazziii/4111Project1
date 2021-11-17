@@ -1,35 +1,157 @@
 <html>
-  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style>
     body{ 
       font-size: 15pt;
       font-family: arial;
     }
   </style>
-
 <head>
-      <title>Animal Information</title>>
+  <titile>Animals Information</titile>>
 </head>>
+
 <body>
   <h1>CURRENT ANIMALS</h1>
-  <div>{{data}}</div>
-
-  <div>
-    {% for n in data %}
-    <div>{{n}}</div>
+  
+  <!--print table-->
+  <table>
+    <tr>
+      <th>A_ID</th>
+      <th>Species</th>
+      <th>Age</th>
+      <th>Comes From</th>
+      <th>Eating Property</th>
+      <th>Activity Time</th>
+      <th>Lifestyle</th>
+      <th>Park Name</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+      <td>{{item[3]}}</td>
+      <td>{{item[4]}}</td>
+      <td>{{item[5]}}</td>
+      <td>{{item[6]}}</td>
+      <td>{{item[7]}}</td>
+    </tr>
     {% endfor %}
-  </div>
-
+  </table>
 <!-- operations -->
-<form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+
+<!--error handler-->
+{% if addMessage %}
+<p>{{ addMessage }}</p>
+{% endif %}
+<!--add-->
+<p>Add New Animal</p>
+<p>Please fill the form to create a new Animal: </p>
+<form method="POST" action ="/addAnimal">
+<p>
+    <label for="aid">A_ID</label>
+    <input type="text" name="aid">
+</p>
+<p>
+    <label for="species">Species</label>
+    <input type="text" name="species">
+</p>
+<p>
+    <label for="age">Age</label>
+    <input type="text" name="age">
+</p>
+<p>
+    <label for="comes_from">Comes From</label>
+    <input type="text" name="comes_from">
+</p>
+<p>
+    <label for="eating_property">Eating Property</label>
+    <input type="text" name="eating_property">
+</p>
+<p>
+  <label for="activity_time">Activity Time</label>
+  <input type="text" name="activity_time">
+</p>
+<p>
+  <label for="lifestyle">Lifestyle</label>
+  <input type="text" name="lifestyle">
+</p>
+<p>
+  <label for="parkname">Park Name</label>
+  <input type="text" name="parkname">
+</p>
+<p>
+    <input type="submit" value="Add">
+</p>
+</form>
+<!--update-->
+<!--error handler-->
+{% if updateMessage %}
+<p>{{ updateMessage }}</p>
+{% endif %}
+<p>Update Current Animal</p>
+<p>Please refill the form with your update information: </p>
+<form method="POST" action ="/updateAnimal">
+    <p>
+      <label for="aid">A_ID</label>
+      <input type="text" name="aid">
+  </p>
+  <p>
+      <label for="species">Species</label>
+      <input type="text" name="species">
+  </p>
+  <p>
+      <label for="age">Age</label>
+      <input type="text" name="age">
+  </p>
+  <p>
+      <label for="comes_from">Comes From</label>
+      <input type="text" name="comes_from">
+  </p>
+  <p>
+      <label for="eating_property">Eating Property</label>
+      <input type="text" name="eating_property">
+  </p>
+  <p>
+    <label for="activity_time">Activity Time</label>
+    <input type="text" name="activity_time">
+  </p>
+  <p>
+    <label for="lifestyle">Lifestyle</label>
+    <input type="text" name="lifestyle">
+  </p>
+  <p>
+    <label for="parkname">Park Name</label>
+    <input type="text" name="parkname">
+  </p>
+   <p>
+       <input type="submit" value="Update">
+   </p>
 </form>
 
-<!-- link to other pages -->
-<p><a href="another"><button>Manage Trainers</button>></a></p>
-<p><a href="breeder"><button>Manage Breeders</button>></a></p>
+<!--delete-->
+<!--error handler-->
+{% if deleteMessage %}
+<p>{{ deleteMessage }}</p>
+{% endif %}
+
+<p>Delete Current Animal</p>
+<p>Please enter the A_ID of Animal you want to delete: </p>
+<form method="POST" action ="/deleteAnimal">
+<p>
+    <label for="aid">A_ID</label>
+    <input type="text" name="aid">
+</p>
+<p>
+    <input type="submit" value="Delete">
+</p>
+</form>
+
+<!--link to other page-->
+<p><a href="another"><button>Manage Traniers</button></a></p>
+<p><a href="breeder"><button>Manage Breeders</button></a></p>
+<p><a href="park"><button>Manage Parks</button>></a></p>
 <p><a href="food"><button>Manage Food</button></a></p>
-<p><a href="park"><button>Manage Park</button></a></p>
-<p><a href="animalShow"><button>Manage Park</button></a></p>
+<p><a href="animalShow"><button>Manage Animal Shows</button>></a></p>
 </body>
 </html>

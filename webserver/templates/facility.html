@@ -1,3 +1,4 @@
+
 <!-- facility template -->
 <html>
   <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -14,21 +15,112 @@
 
 <body>
   <h1>CURRENT FACILITIES</h1>
-  <div>{{data}}</div>
 
-  <div>
-    {% for n in data %}
-    <div>{{n}}</div>
+  <table>
+    <tr>
+      <th>F_ID</th>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Open Hours</th>
+      <th>Park Name</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+      <td>{{item[3]}}</td>
+      <td>{{item[4]}}</td>
+    </tr>
     {% endfor %}
-  </div>
-
+  </table>
 
 <!-- operations -->
-<form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-</form>
+ <!--error handler-->
+ {% if addMessage %}
+ <p>{{ addMessage }}</p>
+ {% endif %}
+ <!--add-->
+ <p>Add New Facility</p>
+ <p>Please fill the form to create a new Facility: </p>
+ <form method="POST" action ="/addFacility">
+ <p>
+     <label for="fid">F_ID</label>
+     <input type="text" name="fid">
+ </p>
+ <p>
+     <label for="type">Type</label>
+     <input type="text" name="type">
+ </p>
+ <p>
+     <label for="name">Name</label>
+     <input type="text" name="name">
+ </p>
+ <p>
+     <label for="open_hour">Open Hours</label>
+     <input type="text" name="open_hour">
+ </p>
+ <p>
+     <label for="pname">Park Name</label>
+     <input type="text" name="pname">
+ </p>
+ <p>
+     <input type="submit" value="Add">
+ </p>
+ </form>
+ <!--update-->
+ <!--error handler-->
+ {% if updateMessage %}
+ <p>{{ updateMessage }}</p>
+ {% endif %}
+ <p>Update Current Facility</p>
+ <p>Please refill the form with your update information: </p>
+ <form method="POST" action ="/updateFacility">
+    <p>
+        <label for="fid">F_ID</label>
+        <input type="text" name="fid">
+    </p>
+    <p>
+        <label for="type">Type</label>
+        <input type="text" name="type">
+    </p>
+    <p>
+        <label for="name">Name</label>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label for="open_hour">Open Hours</label>
+        <input type="text" name="open_hour">
+    </p>
+    <p>
+        <label for="pname">Park Name</label>
+        <input type="text" name="pname">
+    </p>
+    <p>
+        <input type="submit" value="Update">
+    </p>
+ </form>
+
+ <!--delete-->
+ <!--error handler-->
+ {% if deleteMessage %}
+ <p>{{ deleteMessage }}</p>
+ {% endif %}
+
+ <p>Delete Current Facility</p>
+ <p>Please enter the F_ID of Facility you want to delete: </p>
+ <form method="POST" action ="/deleteFacility">
+ <p>
+     <label for="fid">F_ID</label>
+     <input type="text" name="fid">
+ </p>
+ <p>
+     <input type="submit" value="Delete">
+ </p>
+ </form>
 <!-- back to last page -->
 #back to previous page
 <p><a href="park"><button>Back to Park Page</button></a></p>
 </body>
 </html>
+
