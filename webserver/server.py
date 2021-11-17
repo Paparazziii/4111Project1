@@ -306,14 +306,14 @@ def addBreeder():
                   last_name, work_time, mid)
                   VALUES(%s, %s, %s, %s, %s)""",
                    bid, firstName, lastName, workTime, mid)
-    return redirect('/breeder.html')
+    return redirect('/breeder')
 
 
 @app.route('/deleteBreeder', methods=['POST'])
 def deleteBreeder():
     bid = request.form['bid']
     g.conn.execute("DELETE FROM Breeder_Managed WHERE bid = %s", bid)
-    return redirect('/breeder.html')
+    return redirect('/breeder')
 
 
 @app.route('/updateBreeder', methods=['POST'])
@@ -327,7 +327,7 @@ def updateBreeder():
                   last_name, work_time, mid) = (%s, %s, %s, %s)
                   WHERE bid = %s""",
                    firstName, lastName, workTime, mid, bid)
-    return redirect('/breeder.html')
+    return redirect('/breeder')
 
 
 @app.route('/addTrainer', methods=['POST'])
@@ -341,14 +341,14 @@ def addTrainer():
               last_name, work_time, mid)
               VALUES(%s, %s, %s, %s, %s)""",
                    tid, firstName, lastName, workTime, mid)
-    return redirect('/another.html')
+    return redirect('/another')
 
 
 @app.route('/deleteTrainer', methods=['POST'])
 def deleteTrainer():
     tid = request.form['tid']
     g.conn.execute("DELETE FROM Trainer_Managed WHERE tid = %s", tid)
-    return redirect('/another.html')
+    return redirect('/another')
 
 
 @app.route('/updateTrainer', methods=['POST'])
@@ -362,7 +362,7 @@ def updateTrainer():
               last_name, work_time, mid) = (%s, %s, %s, %s)
               WHERE tid = %s""",
                    firstName, lastName, workTime, mid, tid)
-    return redirect('/another.html')
+    return redirect('/another')
 
 
 @app.route('/addFood', methods=['POST'])
@@ -370,20 +370,20 @@ def addFood():
     fname = request.form['fname']
     timePurchased = request.form['time_purchased']
     brand = request.form['brand']
-    unitPrice = request.form['unit_price']
-    amount = request.form['amount']
-    g.conn.execute("""INSERT INTO Food(fname, time_purchased, brand
+    unitPrice = float(request.form['unit_price'])
+    amount = int(request.form['amount'])
+    g.conn.execute("""INSERT INTO Food(fname, time_purchased, brand,
                 unit_price, amount)
                 VALUES(%s, %s, %s, %s, %s)""",
                    fname, timePurchased, brand, unitPrice, amount)
-    return redirect('/food.html')
+    return redirect('/food')
 
 
 @app.route('/deleteFood', methods=['POST'])
 def deleteFood():
     fname = request.form['fname']
     g.conn.execute("""DELETE FROM Food WHERE fname = %s""", fname)
-    return redirect('/food.html')
+    return redirect('/food')
 
 
 @app.route('/updateFood', methods=['POST'])
@@ -391,108 +391,108 @@ def updateFood():
     fname = request.form['fname']
     timePurchased = request.form['time_purchased']
     brand = request.form['brand']
-    unitPrice = request.form['unit_price']
-    amount = request.form['amount']
-    g.conn.execute("""UPDATE Food SET (time_purchased, brand
+    unitPrice = float(request.form['unit_price'])
+    amount = int(request.form['amount'])
+    g.conn.execute("""UPDATE Food SET (time_purchased, brand,
                 unit_price, amount) = (%s, %s, %s, %s)
                 WHERE fname = %s""",
                    timePurchased, brand, unitPrice, amount, fname)
-    return redirect('/food.html')
+    return redirect('/food')
 
 
 @app.route('/addAnimalShow', methods=['POST'])
 def addAnimalShow():
     sid = request.form['sid']
     showName = request.form['show_name']
-    seat = request.form['seat']
+    seat = int(request.form['seat'])
     time = request.form['time']
     pname = request.form['pname']
     g.conn.execute("""INSERT INTO Animal_Show_Held(sid, show_name,
                 seat, time, pname) VALUES(%s, %s, %s, %s, %s)""",
                    sid, showName, seat, time, pname)
-    return redirect('/animalShow.html')
+    return redirect('/animalShow')
 
 
 @app.route('/deleteAnimalShow', methods=['POST'])
 def deleteAnimalShow():
     sid = request.form['sid']
-    g.conn.execute("DELETE FROM Animal_Show_Held WHERE sid = %", sid)
-    return redirect('/animalShow.html')
+    g.conn.execute("DELETE FROM Animal_Show_Held WHERE sid = %s", sid)
+    return redirect('/animalShow')
 
 
 @app.route('/updateAnimalShow', methods=['POST'])
 def updateAnimalShow():
     sid = request.form['sid']
     showName = request.form['show_name']
-    seat = request.form['seat']
+    seat = int(request.form['seat'])
     time = request.form['time']
     pname = request.form['pname']
     g.conn.execute("""UPDATE Animal_Show_Held SET (show_name,
                 seat, time, pname) = (%s, %s, %s, %s)
                 WHERE sid = %s""",
                    showName, seat, time, pname, sid)
-    return redirect('/animalShow.html')
+    return redirect('/animalShow')
 
 
 @app.route('/addFacility', methods=['POST'])
 def addFacility():
     fid = request.form['fid']
-    type = request.form['type']
+    typee = request.form['type']
     name = request.form['name']
     openHour = request.form['open_hour']
     pname = request.form['pname']
     g.conn.execute("""INSERT INTO Facility_Located(fid, type, name,
                 open_hour, pname) VALUES(%s, %s, %s, %s, %s)""",
-                   fid, type, name, openHour, pname)
-    return redirect('/facility.html')
+                   fid, typee, name, openHour, pname)
+    return redirect('/facility')
 
 
 @app.route('/deleteFacility', methods=['POST'])
 def deleteFacility():
     fid = request.form['fid']
     g.conn.execute("DELETE FROM Facility_Located WHERE fid = %s", fid)
-    return redirect('/facility.html')
+    return redirect('/facility')
 
 
 @app.route('/updateFacility', methods=['POST'])
 def updateFacility():
     fid = request.form['fid']
-    type = request.form['type']
+    typee = request.form['type']
     name = request.form['name']
     openHour = request.form['open_hour']
     pname = request.form['pname']
     g.conn.execute("""UPDATE Facility_Located SET (type, name,
                 open_hour, pname) = (%s, %s, %s, %s)
                 WHERE fid = %s""",
-                   type, name, openHour, pname, fid)
-    return redirect('/facility.html')
+                   typee, name, openHour, pname, fid)
+    return redirect('/facility')
 
 
 @app.route('/addPark', methods=['POST'])
 def addPark():
     pname = request.form['pname']
     openHour = request.form['open_hour']
-    type = request.form['type']
+    typee = request.form['type']
     g.conn.execute("""INSERT INTO Park(pname, open_hour, type)
-                VALUES (%s, %s, %s)""", pname, openHour, type)
-    return redirect('/park.html')
+                VALUES (%s, %s, %s)""", pname, openHour, typee)
+    return redirect('/park')
 
 
 @app.route('/deletePark', methods=['POST'])
 def deletePark():
     pname = request.form['pname']
     g.conn.execute('DELETE FROM Park WHERE pname = %s', pname)
-    return redirect('/park.html')
+    return redirect('/park')
 
 
 @app.route('/updatePark', methods=['POST'])
 def updatePark():
     pname = request.form['pname']
     openHour = request.form['open_hour']
-    type = request.form['type']
-    g.conn.execute("""UPDATE Park(open_hour, type)
-                = (%s, %s) WHERE pname = %s""", openHour, type, pname)
-    return redirect('/park.html')
+    typee = request.form['type']
+    g.conn.execute("""UPDATE Park SET (open_hour, type)
+                = (%s, %s) WHERE pname = %s""", openHour, typee, pname)
+    return redirect('/park')
 
 
 @app.route('/addManager', methods=['POST'])
@@ -503,14 +503,14 @@ def addManager():
     workTime = request.form['work_time']
     g.conn.execute("""INSERT INTO Manager(mid, first_name, last_name, work_time)
                 VALUES(%s, %s, %s, %s)""", mid, firstName, lastName, workTime)
-    return redirect('/manager.html')
+    return redirect('/manager')
 
 
 @app.route('/deleteManager', methods=['POST'])
 def deleteManager():
     mid = request.form['mid']
     g.conn.execute("""DELETE FROM Manager WHERE mid = %s""", mid)
-    return redirect('/manager.html')
+    return redirect('/manager')
 
 
 @app.route('/updateManager', methods=['POST'])
@@ -519,9 +519,9 @@ def updateManager():
     firstName = request.form['first_name']
     lastName = request.form['last_name']
     workTime = request.form['work_time']
-    g.conn.execute("""UPDATE Manager(first_name, last_name, work_time)
+    g.conn.execute("""UPDATE Manager SET (first_name, last_name, work_time)
                 = (%s, %s, %s) WHERE mid = %s""", firstName, lastName, workTime, mid)
-    return redirect('/manager.html')
+    return redirect('/manager')
 
 
 @app.route('/login')
