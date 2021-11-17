@@ -374,10 +374,10 @@ def addFood():
     amount = int(request.form['amount'])
     if unitPrice<0:
         message = "Unit Price Should be Larger than 0!"
-        return render_template('food.html',message=message)
+        return render_template('food.html',addMessage=message)
     if amount <0:
         message = "Amount Should be Larger than 0!"
-        return render_template('food.html',messgae=message)
+        return render_template('food.html',addMessgae=message)
     g.conn.execute("""INSERT INTO Food(fname, time_purchased, brand,
                 unit_price, amount)
                 VALUES(%s, %s, %s, %s, %s)""",
