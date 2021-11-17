@@ -1,3 +1,47 @@
+<<<<<<< Updated upstream
+=======
+<!-- breeder template -->
+<html>
+  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<head>
+    <title>Breeders Information</title>>
+</head>>
+
+<body>
+  <h1>CURRENT BREEDERS</h1>
+  <!-- <div>{{data}}</div>
+
+  <div>
+    {% for n in data %}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div> -->
+  <table>
+    <tr>
+      <th>B_ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Work Time</th>
+      <th>M_ID</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+      <td>{{item[3]}}</td>
+      <td>{{item[4]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+>>>>>>> Stashed changes
 
 <html>
     <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

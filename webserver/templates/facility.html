@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 
 <html>
@@ -35,3 +36,56 @@
   </body>
   </html>
   
+=======
+<!-- facility template -->
+<html>
+  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<head>
+    <title>Facility Information</title>>
+</head>>
+
+<body>
+  <h1>CURRENT FACILITIES</h1>
+  <!-- <div>{{data}}</div>
+
+  <div>
+    {% for n in data %}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div> -->
+  <table>
+    <tr>
+      <th>F_ID</th>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Open Hours</th>
+      <th>Park Name</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+      <td>{{item[3]}}</td>
+      <td>{{item[4]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+<!-- operations -->
+<form method="POST" action="/add">
+<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+</form>
+<!-- back to last page -->
+#back to previous page
+<p><a href="park"><button>Back to Park Page</button></a></p>
+</body>
+</html>
+>>>>>>> Stashed changes

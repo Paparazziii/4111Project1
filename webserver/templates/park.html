@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 <html>
     <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -30,6 +31,46 @@
   <!--link to other page-->
   <p><a href="facility"><button>Manage Facilities</button>></a></p>
   <p><a href="another"><button>Manage Trainers</button>></a></p>
+=======
+<!-- park template -->
+<html>
+  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<head>
+    <title>Parks Information</title>>
+</head>>
+
+<body>
+  <h1>CURRENT PARKS</h1>
+  <!-- <div>{{data}}</div>
+
+  <div>
+    {% for n in data %}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div> -->
+
+  <table>
+    <tr>
+      <th>Park Name</th>
+      <th>Open Hours</th>
+      <th>Animal Type</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+>>>>>>> Stashed changes
 
   <!--back to last page-->
   <p><a href="index"><button>Back to Animal Page</button>></a></p>
