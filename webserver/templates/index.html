@@ -1,14 +1,18 @@
 <html>
+  <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style>
     body{ 
       font-size: 15pt;
       font-family: arial;
     }
   </style>
-
+<head>
+  <titile>Animals Information</titile>>
+</head>>
 
 <body>
-  <h1>ANIMALS!</h1>
+  <h1>CURRENT ANIMALS</h1>
+
   <div>{{data}}</div>
 
   <div>
@@ -17,13 +21,18 @@
     {% endfor %}
   </div>
 
-<p><a href="another">Go to the other page</a></p>
 
+
+<!--operations-->
 <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
 </form>
 
+<!--link to other page-->
+<p><a href="another"><button>Manage Traniers</button></a></p>
+<p><a href="breeder"><button>Manage Breeders</button></a></p>
+<p><a href="park"><button>Manage Parks</button>></a></p>
+<p><a href="food"><button>Manage Food</button></a></p>
+<p><a href="animalShow"><button>Manage Animal Shows</button>></a></p>
 </body>
-
-
 </html>

@@ -1,1 +1,37 @@
-template for manager
+
+<html>
+    <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      body{ 
+        font-size: 15pt;
+        font-family: arial;
+      }
+    </style>
+  <head>
+    <titile>Managers Information</titile>>
+  </head>>
+  
+  <body>
+    <h1>CURRENT MANAGERS</h1>
+  
+    <div>{{data}}</div>
+  
+    <div>
+      {% for n in data %}
+      <div>{{n}}</div>
+      {% endfor %}
+    </div>
+  
+  
+  
+  <!--operations-->
+  <form method="POST" action="/add">
+  <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+  </form>
+  
+  <!--back to last page-->
+  <p><a href="another"><button>Go back to Trainers Page</button>></a></p>
+  <p><a href="breeder"><button>Go back to Breeders Page</button>></a></p>
+  </body>
+  </html>
+  
