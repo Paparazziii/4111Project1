@@ -14,13 +14,6 @@
 
 <body>
   <h1>CURRENT FOOD</h1>
-  <!-- <div>{{data}}</div>
-
-  <div>
-    {% for n in data %}
-    <div>{{n}}</div>
-    {% endfor %}
-  </div> -->
 
   <table>
     <tr>
@@ -42,8 +35,87 @@
   </table>
 
 <!-- operations -->
-<form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+<!--error handler-->
+{% if addMessage %}
+<p>{{ addMessage }}</p>
+{% endif %}
+<!--add-->
+<p>Add New Food</p>
+<p>Please fill the form to create a new Food: </p>
+<form method="POST" action ="/addFood">
+<p>
+    <label for="fname">Food Name</label>
+    <input type="text" name="fname">
+</p>
+<p>
+    <label for="time_purchased">Purchased Time</label>
+    <input type="text" name="time_purchased">
+</p>
+<p>
+    <label for="brand">Brand</label>
+    <input type="text" name="brand">
+</p>
+<p>
+    <label for="unit_price">Unit Price</label>
+    <input type="text" name="unit_price">
+</p>
+<p>
+    <label for="amount">Total Amount</label>
+    <input type="text" name="amount">
+</p>
+<p>
+    <input type="submit" value="Add">
+</p>
+</form>
+<!--update-->
+<!--error handler-->
+{% if updateMessage %}
+<p>{{ updateMessage }}</p>
+{% endif %}
+<p>Update Current Food</p>
+<p>Please refill the form with your update information: </p>
+<form method="POST" action ="/updateFood">
+    <p>
+        <label for="fname">Food Name</label>
+        <input type="text" name="fname">
+    </p>
+    <p>
+        <label for="time_purchased">Purchased Time</label>
+        <input type="text" name="time_purchased">
+    </p>
+    <p>
+        <label for="brand">Brand</label>
+        <input type="text" name="brand">
+    </p>
+    <p>
+        <label for="unit_price">Unit Price</label>
+        <input type="text" name="unit_price">
+    </p>
+    <p>
+        <label for="amount">Total Amount</label>
+        <input type="text" name="amount">
+    </p>
+   <p>
+       <input type="submit" value="Update">
+   </p>
+</form>
+
+<!--delete-->
+<!--error handler-->
+{% if deleteMessage %}
+<p>{{ deleteMessage }}</p>
+{% endif %}
+
+<p>Delete Current Food</p>
+<p>Please enter the Food Name of Food you want to delete: </p>
+<form method="POST" action ="/deleteFood">
+<p>
+    <label for="fname">Food Name</label>
+    <input type="text" name="fname">
+</p>
+<p>
+    <input type="submit" value="Delete">
+</p>
 </form>
 
 <!-- back to last page-->

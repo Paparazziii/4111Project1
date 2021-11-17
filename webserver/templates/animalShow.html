@@ -12,13 +12,6 @@
   </head>>
 <body>
   <h1>CURRENT SHOWS</h1>
-  <!-- <div>{{data}}</div>
-
-  <div>
-    {% for n in data %}
-    <div>{{n}}</div>
-    {% endfor %}
-  </div> -->
 
  <!--print table-->
  <table>
@@ -41,9 +34,89 @@
   </table>
 
 <!-- operations -->
-<form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-</form>
+
+<!--error handler-->
+{% if addMessage %}
+        <p>{{ addMessage }}</p>
+{% endif %}
+    <!--add-->
+    <p>Add New Animal Show</p>
+    <p>Please fill the form to create a new Animal Show: </p>
+    <form method="POST" action ="/addAnimalShow">
+        <p>
+            <label for="sid">S_ID</label>
+            <input type="text" name="sid">
+        </p>
+        <p>
+            <label for="show_name">Show Name</label>
+            <input type="text" name="show_name">
+        </p>
+        <p>
+            <label for="seat">Number of Seats</label>
+            <input type="text" name="seat">
+        </p>
+        <p>
+            <label for="time">Show Time</label>
+            <input type="text" name="time">
+        </p>
+        <p>
+            <label for="pname">Park Name</label>
+            <input type="text" name="pname">
+        </p>
+        <p>
+            <input type="submit" value="Add">
+        </p>
+    </form>
+    <!--update-->
+    <!--error handler-->
+    {% if updateMessage %}
+        <p>{{ updateMessage }}</p>
+    {% endif %}
+    <p>Update Current Animal Show</p>
+    <p>Please refill the form with your update information: </p>
+    <form method="POST" action ="/updateAnimalShow">
+        <p>
+            <label for="sid">S_ID</label>
+            <input type="text" name="sid">
+        </p>
+        <p>
+            <label for="show_name">Show Name</label>
+            <input type="text" name="show_name">
+        </p>
+        <p>
+            <label for="seat">Number of Seats</label>
+            <input type="text" name="seat">
+        </p>
+        <p>
+            <label for="time">Show Time</label>
+            <input type="text" name="time">
+        </p>
+        <p>
+            <label for="pname">Park Name</label>
+            <input type="text" name="pname">
+        </p>
+        <p>
+            <input type="submit" value="Update">
+        </p>
+    </form>
+
+    <!--delete-->
+    <!--error handler-->
+    {% if deleteMessage %}
+        <p>{{ deleteMessage }}</p>
+    {% endif %}
+
+    <p>Delete Current Animal Show</p>
+    <p>Please enter the S_ID of Animal Show you want to delete: </p>
+    <form method="POST" action ="/deleteAnimalShow">
+        <p>
+            <label for="sid">S_ID</label>
+            <input type="text" name="sid">
+        </p>
+        <p>
+            <input type="submit" value="Delete">
+        </p>
+    </form>
 
 <!-- link to other pages -->
 <p><a href="park"><button>Manage Park</button>></a></p>

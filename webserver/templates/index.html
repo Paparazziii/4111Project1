@@ -39,8 +39,112 @@
     {% endfor %}
   </table>
 <!-- operations -->
-<form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+
+<!--error handler-->
+{% if addMessage %}
+<p>{{ addMessage }}</p>
+{% endif %}
+<!--add-->
+<p>Add New Animal</p>
+<p>Please fill the form to create a new Animal: </p>
+<form method="POST" action ="/addAnimal">
+<p>
+    <label for="aid">A_ID</label>
+    <input type="text" name="aid">
+</p>
+<p>
+    <label for="species">Species</label>
+    <input type="text" name="species">
+</p>
+<p>
+    <label for="age">Age</label>
+    <input type="text" name="age">
+</p>
+<p>
+    <label for="comes_from">Comes From</label>
+    <input type="text" name="comes_from">
+</p>
+<p>
+    <label for="eating_property">Eating Property</label>
+    <input type="text" name="eating_property">
+</p>
+<p>
+  <label for="activity_time">Activity Time</label>
+  <input type="text" name="activity_time">
+</p>
+<p>
+  <label for="lifestyle">Lifestyle</label>
+  <input type="text" name="lifestyle">
+</p>
+<p>
+  <label for="parkname">Park Name</label>
+  <input type="text" name="parkname">
+</p>
+<p>
+    <input type="submit" value="Add">
+</p>
+</form>
+<!--update-->
+<!--error handler-->
+{% if updateMessage %}
+<p>{{ updateMessage }}</p>
+{% endif %}
+<p>Update Current Animal</p>
+<p>Please refill the form with your update information: </p>
+<form method="POST" action ="/updateAnimal">
+    <p>
+      <label for="aid">A_ID</label>
+      <input type="text" name="aid">
+  </p>
+  <p>
+      <label for="species">Species</label>
+      <input type="text" name="species">
+  </p>
+  <p>
+      <label for="age">Age</label>
+      <input type="text" name="age">
+  </p>
+  <p>
+      <label for="comes_from">Comes From</label>
+      <input type="text" name="comes_from">
+  </p>
+  <p>
+      <label for="eating_property">Eating Property</label>
+      <input type="text" name="eating_property">
+  </p>
+  <p>
+    <label for="activity_time">Activity Time</label>
+    <input type="text" name="activity_time">
+  </p>
+  <p>
+    <label for="lifestyle">Lifestyle</label>
+    <input type="text" name="lifestyle">
+  </p>
+  <p>
+    <label for="parkname">Park Name</label>
+    <input type="text" name="parkname">
+  </p>
+   <p>
+       <input type="submit" value="Update">
+   </p>
+</form>
+
+<!--delete-->
+<!--error handler-->
+{% if deleteMessage %}
+<p>{{ deleteMessage }}</p>
+{% endif %}
+
+<p>Delete Current Animal</p>
+<p>Please enter the A_ID of Animal you want to delete: </p>
+<form method="POST" action ="/deleteAnimal">
+<p>
+    <label for="aid">A_ID</label>
+    <input type="text" name="aid">
+</p>
+<p>
+    <input type="submit" value="Delete">
+</p>
 </form>
 
 <!--link to other page-->
