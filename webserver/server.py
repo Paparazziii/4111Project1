@@ -164,32 +164,86 @@ def index():
 #
 @app.route('/another')
 def another():
-  return render_template("another.html")
+    cursor = g.conn.execute("SELECT * FROM Trainer_Managed")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("another.html", **context)
+
 
 @app.route('/breeder')
 def breeder():
-  return render_template("breeder.html")
+    cursor = g.conn.execute("SELECT * FROM Breeder_Managed")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("breeder.html", **context)
+
 
 @app.route('/facility')
 def facility():
-  return render_template("facility.html")
+    cursor = g.conn.execute("SELECT * FROM Facility_Located")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("facility.html", **context)
+
 
 @app.route('/food')
 def food():
-  return render_template("food.html")
+    cursor = g.conn.execute("SELECT * FROM Food")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("food.html", **context)
+
 
 @app.route('/animalShow')
 def animalShow():
-  return render_template("animalShow.html")
+    cursor = g.conn.execute("SELECT * FROM Animal_Show_Held")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("animalShow.html", **context)
+
 
 @app.route('/manager')
 def manageer():
-  return render_template("manager.html")
+    cursor = g.conn.execute("SELECT * FROM Manager")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("manager.html", **context)
+
 
 @app.route('/park')
 def park():
-  return render_template("park.html")
-
+    cursor = g.conn.execute("SELECT * FROM Park")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))  # can also be accessed using result[0]
+        print(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("park.html", **context)
 
 # Example of adding new data to the database
 #@app.route('/add', methods=['POST'])
