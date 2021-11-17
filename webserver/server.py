@@ -202,15 +202,15 @@ def park():
 def addAnimal():
   aid = request.form['aid']
   species = request.form['species']
-  age = request.form['age']
+  age = int(request.form['age'])
   comesFrom = request.form['comes_from']
   eatingProperty = request.form['eating_property']
   activityTime = request.form['activity_time']
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
   g.conn.execute("""INSERT INTO Animal_Founded(aid,species,age,comes_from,
-                  eating_property,activity_time,lifestyle,pname
-                  VALUES (%s,%s,%s,%s,%s,%s,%s,%s)""", 
+                  eating_property,activity_time,lifestyle,pname)
+                  VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""", 
                  aid, species, age, comesFrom,
                  eatingProperty, activityTime, lifestyle, pname)
   return redirect('/')
