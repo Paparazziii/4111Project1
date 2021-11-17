@@ -1,1 +1,116 @@
-template for manager
+
+<!-- manager template -->
+<html>
+  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<head>
+    <title>Managers Information</title>>
+</head>>
+
+<body>
+  <h1>CURRENT MANAGERS</h1>
+
+  <table>
+    <tr>
+      <th>M_ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Work Time</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{item[2]}}</td>
+      <td>{{item[3]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+<!-- operations -->
+<!--error handler-->
+{% if addMessage %}
+<p>{{ addMessage }}</p>
+{% endif %}
+<!--add-->
+<p>Add New Manager</p>
+<p>Please fill the form to create a new Manager: </p>
+<form method="POST" action ="/addManager">
+<p>
+    <label for="mid">M_ID</label>
+    <input type="text" name="mid">
+</p>
+<p>
+    <label for="first_name">First Name</label>
+    <input type="text" name="first_name">
+</p>
+<p>
+    <label for="last_name">Last Name</label>
+    <input type="text" name="last_name">
+</p>
+<p>
+    <label for="work_time">Work Time</label>
+    <input type="text" name="work_time">
+</p>
+<p>
+    <input type="submit" value="Add">
+</p>
+</form>
+<!--update-->
+<!--error handler-->
+{% if updateMessage %}
+<p>{{ updateMessage }}</p>
+{% endif %}
+<p>Update Current Manager</p>
+<p>Please refill the form with your update information: </p>
+<form method="POST" action ="/updateManager">
+    <p>
+        <label for="mid">M_ID</label>
+        <input type="text" name="mid">
+    </p>
+    <p>
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name">
+    </p>
+    <p>
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name">
+    </p>
+    <p>
+        <label for="work_time">Work Time</label>
+        <input type="text" name="work_time">
+    </p>
+    <p>
+        <input type="submit" value="Update">
+    </p>
+</form>
+
+<!--delete-->
+<!--error handler-->
+{% if deleteMessage %}
+<p>{{ deleteMessage }}</p>
+{% endif %}
+
+<p>Delete Current Manager</p>
+<p>Please enter the M_ID of Manager you want to delete: </p>
+<form method="POST" action ="/deleteManager">
+<p>
+    <label for="mid">M_ID</label>
+    <input type="text" name="mid">
+</p>
+<p>
+    <input type="submit" value="Delete">
+</p>
+</form>
+
+<!-- back to last page -->
+<p><a href="breeder"><button>Back to Breeder Page</button></a></p>
+<p><a href="another"><button>Back to Trainer Page</button></a></p>
+</body>
+</html>
