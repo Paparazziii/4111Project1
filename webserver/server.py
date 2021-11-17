@@ -115,7 +115,7 @@ def index():
   cursor = g.conn.execute("SELECT * FROM Animal_Founded")
   lines = []
   for result in cursor:
-    lines.append(result)  # can also be accessed using result[0]
+    lines.append(list(result))  # can also be accessed using result[0]
     print(list(result))
   cursor.close()
 
