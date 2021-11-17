@@ -1,1 +1,33 @@
-template for food
+<!-- food template -->
+<html>
+  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+<head>
+    <title>Food Information</title>>
+</head>>
+
+<body>
+  <h1>CURRENT FOOD</h1>
+  <div>{{data}}</div>
+
+  <div>
+    {% for n in data %}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div>
+
+
+<!-- operations -->
+<form method="POST" action="/add">
+<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+</form>
+
+<!-- back to last page-->
+<p><a href="index"><button>Back to Animals Page</button></a></p>
+</body>
+</html>
