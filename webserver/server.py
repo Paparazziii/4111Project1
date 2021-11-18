@@ -296,7 +296,7 @@ def addAnimal():
       fk.append(line["pname"])
   cursor.close()
   if pname not in fk:
-      message = "The Park Name Does Not Existed! "
+      message = "The Park Name Does Not Exist! "
       return render_template("index.html",addMessage=message)  
     
   g.conn.execute("""INSERT INTO Animal_Founded(aid,species,age,comes_from,
@@ -371,7 +371,7 @@ def updateAnimal():
       fk.append(line["pname"])
   cursor.close()
   if pname not in fk:
-      message = "The Park Name Does Not Existed! "
+      message = "The Park Name Does Not Exist! "
       return render_template("index.html",updateMessage=message)
 
   g.conn.execute("""UPDATE Animal_Founded SET (species, age, comes_from,
@@ -413,7 +413,7 @@ def addBreeder():
       fk.append(line["mid"])
     cursor.close()
     if mid not in fk:
-      message = "The MID Does NOT Existed! "
+      message = "The MID Does NOT Exist! "
       return render_template("breeder.html", addMessage=message)
     
     g.conn.execute("""INSERT INTO Breeder_Managed(bid, first_name,
@@ -433,7 +433,7 @@ def deleteBreeder():
       pk.append(result["bid"])
     cursor.close()
     if bid not in pk:
-      message = "The BID Does NOT Existed!"
+      message = "The BID Does NOT Exist!"
       return render_template("breeder.html", deleteMessage=message)
     
     g.conn.execute("DELETE FROM Breeder_Managed WHERE bid = %s", bid)
@@ -462,7 +462,7 @@ def updateBreeder():
       pk.append(result["bid"])
     cursor.close()
     if bid not in pk:
-      message = "The BID Does NOT Existed!"
+      message = "The BID Does NOT Exist!"
       return render_template("breeder.html", updateMessage=message)
 
     cursor2 = g.conn.execute("SELECT mid FROM Manager")
@@ -471,7 +471,7 @@ def updateBreeder():
       fk.append(line["mid"])
     cursor.close()
     if mid not in fk:
-      message = "The MID Does NOT Existed! "
+      message = "The MID Does NOT Exist! "
       return render_template("breeder.html", updateMessage=message)
     
     g.conn.execute("""UPDATE Breeder_Managed SET (first_name,
@@ -488,6 +488,33 @@ def addTrainer():
     lastName = request.form['last_name']
     workTime = request.form['work_time']
     mid = request.form['mid']
+    
+    if tid == '':
+      message = "TID cannot be NULL"
+      return render_template("trainer.html", addMessage=message)
+
+    if mid == '':
+      message = "MID cannot be NULL"
+      return render_template("trainer.html", addMessage=message)
+
+    cursor = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    pk = []
+    for result in cursor:
+      pk.append(result["tid"])
+    cursor.close()
+    if tid in pk:
+      message = "The TID Has Already Existed!"
+      return render_template("trainer.html", addMessage=message)
+
+    cursor2 = g.conn.execute("SELECT mid FROM Manager")
+    fk = []
+    for line in cursor2:
+      fk.append(line["mid"])
+    cursor.close()
+    if mid not in fk:
+      message = "The MID Does NOT Exist! "
+      return render_template("trainer.html", addMessage=message)
+
     g.conn.execute("""INSERT INTO Trainer_Managed(tid, first_name,
               last_name, work_time, mid)
               VALUES(%s, %s, %s, %s, %s)""",
@@ -498,6 +525,16 @@ def addTrainer():
 @app.route('/deleteTrainer', methods=['POST'])
 def deleteTrainer():
     tid = request.form['tid']
+    
+    cursor = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    pk = []
+    for result in cursor:
+      pk.append(result["tid"])
+    cursor.close()
+    if tid not in pk:
+      message = "The TID Does NOT Exist!"
+      return render_template("trainer.html", deleteMessage=message)
+    
     g.conn.execute("DELETE FROM Trainer_Managed WHERE tid = %s", tid)
     return redirect('/another')
 
@@ -509,6 +546,33 @@ def updateTrainer():
     lastName = request.form['last_name']
     workTime = request.form['work_time']
     mid = request.form['mid']
+    
+    if tid == '':
+      message = "TID cannot be NULL"
+      return render_template("trainer.html", updateMessage=message)
+
+    if mid == '':
+      message = "MID cannot be NULL"
+      return render_template("trainer.html", updateMessage=message)
+
+    cursor = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    pk = []
+    for result in cursor:
+      pk.append(result["tid"])
+    cursor.close()
+    if tid not in pk:
+      message = "The TID Does NOT Exist!"
+      return render_template("trainer.html", updateMessage=message)
+
+    cursor2 = g.conn.execute("SELECT mid FROM Manager")
+    fk = []
+    for line in cursor2:
+      fk.append(line["mid"])
+    cursor.close()
+    if mid not in fk:
+      message = "The MID Does NOT Exist! "
+      return render_template("trainer.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Trainer_Managed SET (first_name,
               last_name, work_time, mid) = (%s, %s, %s, %s)
               WHERE tid = %s""",
