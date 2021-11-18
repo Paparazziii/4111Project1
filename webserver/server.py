@@ -917,7 +917,7 @@ def addPark():
         pk.append(result["type"])
     cursor.close()
     if typee in pk:
-        message = "The Type Has Already Exited!"
+        message = "The Type Has Already Existed!"
         return render_template("park.html", addMessage=message)
 
     cursor2 = g.conn.execute("SELECT pname FROM Park")
@@ -967,7 +967,7 @@ def updatePark():
         pk.append(result["type"])
     cursor.close()
     if typee in pk:
-        message = "The Type Has Already Exited!"
+        message = "The Type Has Already Existed!"
         return render_template("park.html", updateMessage=message)
 
     cursor2 = g.conn.execute("SELECT pname FROM Park")
@@ -990,6 +990,20 @@ def addManager():
     firstName = request.form['first_name']
     lastName = request.form['last_name']
     workTime = request.form['work_time']
+    
+    if mid == '':
+      message = "MID cannot be NULL"
+      return render_template("manager.html", addMessage=message)
+
+    cursor = g.conn.execute("SELECT mid FROM Manager")
+    pk = []
+    for result in cursor:
+      pk.append(result["mid"])
+    cursor.close()
+    if mid in pk:
+      message = "The MID Has Already Existed!"
+      return render_template("manager.html", addMessage=message)
+    
     g.conn.execute("""INSERT INTO Manager(mid, first_name, last_name, work_time)
                 VALUES(%s, %s, %s, %s)""", mid, firstName, lastName, workTime)
     return redirect('/manager')
@@ -998,6 +1012,16 @@ def addManager():
 @app.route('/deleteManager', methods=['POST'])
 def deleteManager():
     mid = request.form['mid']
+    
+    cursor = g.conn.execute("SELECT mid FROM Manager")
+    pk = []
+    for result in cursor:
+      pk.append(result["mid"])
+    cursor.close()
+    if mid not in pk:
+      message = "The MID Does NOT Exist!"
+      return render_template("manager.html", deleteMessage=message)
+    
     g.conn.execute("""DELETE FROM Manager WHERE mid = %s""", mid)
     return redirect('/manager')
 
@@ -1008,6 +1032,20 @@ def updateManager():
     firstName = request.form['first_name']
     lastName = request.form['last_name']
     workTime = request.form['work_time']
+     
+    if mid == '':
+      message = "MID cannot be NULL"
+      return render_template("manager.html", updateMessage=message)
+
+    cursor = g.conn.execute("SELECT mid FROM Manager")
+    pk = []
+    for result in cursor:
+      pk.append(result["mid"])
+    cursor.close()
+    if mid not in pk:
+      message = "The MID Does NOT Exist!"
+      return render_template("manager.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Manager SET (first_name, last_name, work_time)
                 = (%s, %s, %s) WHERE mid = %s""", firstName, lastName, workTime, mid)
     return redirect('/manager')
