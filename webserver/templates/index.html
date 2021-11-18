@@ -1,29 +1,116 @@
+
 <html>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    function errorWindow(){
-       if(deleteMessage){
-          window.alert(deleteMessage)
-       }
-       if(addMessage){
-         window.alert(addMessage)
-       }
-    }
   </script>
   <style>
     body{ 
-      font-size: 15pt;
+      font-size: 10pt;
       font-family: arial;
     }
-  </style>
+    .table table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table th {
+	background-color:#93DAFF;
+	color:#000000
+}
+.table,.table th,.table td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table th,.table td {
+	border: 1px solid #6fcdfe;
+	border-width:1px 0 1px 0
+}
+.table tr {
+	border: 1px solid #ffffff;
+}
+.table tr:nth-child(odd){
+	background-color:#dbf2fe;
+}
+.table tr:nth-child(even){
+	background-color:#ffffff;
+}
+
+    .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+form {
+  display: flex; 
+  align-items: flex-end;
+
+}
+input {
+  flex-grow: 1;
+  align-self: flex-end;
+}
+.color{
+  width:100%;
+  background-color: #d8effc;
+}
+.button{
+
+  float:inline-start;
+}
+
+</style>
+
 <head>
-  <titile>Animals Information</titile>>
-</head>>
+  <title>Animals Information</title>
+</head>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
 
 <body>
-  <h1>CURRENT ANIMALS</h1>
-  
   <!--print table-->
-  <table>
+  <table  class = "table">
+    <caption>
+      <h2>
+        CURRENT ANIMALS
+      </h2>
+    </caption>>
     <tr>
       <th>A_ID</th>
       <th>Species</th>
@@ -48,122 +135,114 @@
     {% endfor %}
   </table>
 <!-- operations -->
-
-<!--error handler-->
-<!-- {% if addMessage %} -->
-  <!-- errorWindow(addMessage) -->
-<!-- <p>{{ addMessage }}</p> -->
-<!-- {% endif %} -->
 <!--add-->
-<p>Add New Animal</p>
-<p>Please fill the form to create a new Animal: </p>
-<form method="POST" action ="/addAnimal">
-<p>
-    <label for="aid">A_ID</label>
-    <input type="text" name="aid">
-</p>
-<p>
-    <label for="species">Species</label>
-    <input type="text" name="species">
-</p>
-<p>
-    <label for="age">Age</label>
-    <input type="text" name="age">
-</p>
-<p>
-    <label for="comes_from">Comes From</label>
-    <input type="text" name="comes_from">
-</p>
-<p>
-    <label for="eating_property">Eating Property</label>
-    <input type="text" name="eating_property">
-</p>
-<p>
-  <label for="activity_time">Activity Time</label>
-  <input type="text" name="activity_time">
-</p>
-<p>
-  <label for="lifestyle">Lifestyle</label>
-  <input type="text" name="lifestyle">
-</p>
-<p>
-  <label for="parkname">Park Name</label>
-  <input type="text" name="parkname">
-</p>
-<p>
-    <input type="submit" onclick = "errorWindow()" value="Add">
-</p>
-</form>
-<!--update-->
-<!--error handler-->
-<!-- {% if updateMessage %}
-  errorWindow(updateMessage) -->
-<!-- <p>{{ updateMessage }}</p> -->
-<!-- {% endif %} -->
-<p>Update Current Animal</p>
-<p>Please refill the form with your update information: </p>
-<form method="POST" action ="/updateAnimal">
-    <p>
-      <label for="aid">A_ID</label>
-      <input type="text" name="aid">
-  </p>
-  <p>
-      <label for="species">Species</label>
-      <input type="text" name="species">
-  </p>
-  <p>
-      <label for="age">Age</label>
-      <input type="text" name="age">
-  </p>
-  <p>
-      <label for="comes_from">Comes From</label>
-      <input type="text" name="comes_from">
-  </p>
-  <p>
-      <label for="eating_property">Eating Property</label>
-      <input type="text" name="eating_property">
-  </p>
-  <p>
-    <label for="activity_time">Activity Time</label>
-    <input type="text" name="activity_time">
-  </p>
-  <p>
-    <label for="lifestyle">Lifestyle</label>
-    <input type="text" name="lifestyle">
-  </p>
-  <p>
-    <label for="parkname">Park Name</label>
-    <input type="text" name="parkname">
-  </p>
-   <p>
-       <input type="submit" value="Update">
-   </p>
-</form>
-
-<!--delete-->
-<!--error handler-->
-{% if deleteMessage %}
-  errorWindow(deleteMessage)
-<!-- <p>{{ deleteMessage }}</p> -->
-{% endif %}
-
-<p>Delete Current Animal</p>
-<p>Please enter the A_ID of Animal you want to delete: </p>
-<form method="POST" action ="/deleteAnimal">
-<p>
-    <label for="aid">A_ID</label>
-    <input type="text" name="aid">
-</p>
-<p>
-    <input type="submit" value="Delete">
-</p>
-</form>
-
 <!--link to other page-->
+
 <p><a href="another"><button>Manage Traniers</button></a></p>
 <p><a href="breeder"><button>Manage Breeders</button></a></p>
-<p><a href="park"><button>Manage Parks</button>></a></p>
+<p><a href="park"><button>Manage Parks</button></a></p>
 <p><a href="food"><button>Manage Food</button></a></p>
-<p><a href="animalShow"><button>Manage Animal Shows</button>></a></p>
+<p><a href="animalShow"><button>Manage Animal Shows</button></a></p>
+<p></p>
+
+  <div class="color">
+    <p><h4>Add New Animal</h4></p>
+      <p><h8>Please fill the form to create a new Animal: </h8></p>
+<form method="POST" action ="/addAnimal">
+<div>
+    <label for="aid">A_ID</label>
+    <input type="text"style="width: 150px" name="aid">
+</div>
+<div>
+    <label for="species">Species</label>
+    <input type="text"style="width: 150px" name="species">
+</div>
+<div>
+    <label for="age">Age</label>
+    <input type="text"style="width: 150px" name="age">
+</div>
+<div>
+    <label for="comes_from">Comes From</label>
+    <input type="text" style="width: 150px"name="comes_from">
+</div>
+<div>
+    <label for="eating_property">Eating Property</label>
+    <input type="text" style="width: 157px"name="eating_property">
+</div>
+<div>
+  <label for="activity_time">Activity Time</label>
+  <input type="text" style="width: 150px"name="activity_time">
+</div>
+<div>
+  <label for="lifestyle">Lifestyle</label>
+  <input type="text"style="width: 150px" name="lifestyle">
+</div>
+<div>
+  <label for="parkname">Park Name</label>
+  <input type="text" style="width: 150px"name="parkname">
+</div>
+<div>
+  <button type="submit">Add</button>
+  </div>
+</form>
+</div>
+<!--update-->
+<div class="color" >
+  <p><h4>Update Current Animal</h4></p>
+    <p><h8>Please refill the form with update information: </h8></p>
+  <form method="POST" action ="/addAnimal">
+  <div>
+      <label for="aid">A_ID</label>
+      <input type="text"style="width: 148px" name="aid">
+  </div>
+  <div>
+      <label for="species">Species</label>
+      <input type="text" style="width: 148px"name="species">
+  </div>
+  <div>
+      <label for="age">Age</label>
+      <input type="text"style="width: 148px" name="age">
+  </div>
+  <div>
+      <label for="comes_from">Comes From</label>
+      <input type="text" style="width: 148px"name="comes_from">
+  </div>
+  <div>
+      <label for="eating_property">Eating Property</label>
+      <input type="text"style="width: 159px" name="eating_property">
+  </div>
+  <div>
+    <label for="activity_time">Activity Time</label>
+    <input type="text" style="width: 150px"name="activity_time">
+  </div>
+  <div>
+    <label for="lifestyle">Lifestyle</label>
+    <input type="text" style="width: 148px"name="lifestyle">
+  </div>
+  <div>
+    <label for="parkname">Park Name</label>
+    <input type="text" style="width: 140px"name="parkname">
+  </div>
+  <div>
+    <button type="submit">Update</button>
+    </div>
+  </form>
+  </div>
+<!--delete-->
+<div class="color">
+<p><h4>Delete Current Animal</h4>
+<h8>Please enter the A_ID of Animal you want to delete:</h8></p>
+
+<form method="POST" action ="/deleteAnimal">
+<div>
+    <label for="aid">A_ID</label>
+    <input type="text" name="aid">
+</div>
+<div>
+  <button type="submit">Delete</button>
+</div>
+</form>
+</div>
+
 </body>
 </html>
