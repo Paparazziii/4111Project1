@@ -5,15 +5,105 @@
         font-size: 15pt;
         font-family: arial;
       }
+      .table table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table th {
+	background-color:#93DAFF;
+	color:#000000
+}
+.table,.table th,.table td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table th,.table td {
+	border: 1px solid #6fcdfe;
+	border-width:1px 0 1px 0
+}
+.table tr {
+	border: 1px solid #ffffff;
+}
+.table tr:nth-child(odd){
+	background-color:#dbf2fe;
+}
+.table tr:nth-child(even){
+	background-color:#ffffff;
+}
+      .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+form {
+  display: flex; 
+  align-items: flex-end;
+
+}
+input {
+  flex-grow: 1;
+  align-self: flex-end;
+}
+.color{
+  width:100%;
+  background-color: #d8effc;
+}
+.button{
+
+  float:inline-start;
+}
     </style>
 <head>
     <title>Trainers Information</title>>
 </head>>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
 
 <body>
-  <h1>CURRENT TRAINERS</h1>
-
-   <table>
+   <table class="table">
+    <tr>
+      <caption>
+        <h2>
+          CURRENT TRAINERS
+        </h2>
+      </caption>
     <tr>
       <th>T_ID</th>
       <th>First Name</th>
@@ -31,95 +121,88 @@
     </tr>
     {% endfor %}
   </table>
-
-<!-- operations -->
-<!--error handler-->
-{% if addMessage %}
-        <p>{{ addMessage }}</p>
-{% endif %}
-    <!--add-->
-    <p>Add New Trainer</p>
-    <p>Please fill the form to create a new Trainer: </p>
-    <form method="POST" action ="/addTrainer">
-        <p>
-            <label for="tid">T_ID</label>
-            <input type="text" name="tid">
-        </p>
-        <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name">
-        </p>
-        <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name">
-        </p>
-        <p>
-            <label for="work_time">Work Time</label>
-            <input type="text" name="work_time">
-        </p>
-        <p>
-            <label for="mid">M_ID</label>
-            <input type="text" name="mid">
-        </p>
-        <p>
-            <input type="submit" value="Add">
-        </p>
-    </form>
-    <!--update-->
-    <!--error handler-->
-    {% if updateMessage %}
-        <p>{{ updateMessage }}</p>
-    {% endif %}
-    <p>Update Current Trainer</p>
-    <p>Please refill the form with your update information: </p>
-    <form method="POST" action ="/updateTrainer">
-        <p>
-            <label for="tid">T_ID</label>
-            <input type="text" name="tid">
-        </p>
-        <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name">
-        </p>
-        <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name">
-        </p>
-        <p>
-            <label for="work_time">Work Time</label>
-            <input type="text" name="work_time">
-        </p>
-        <p>
-            <label for="mid">M_ID</label>
-            <input type="text" name="mid">
-        </p>
-        <p>
-            <input type="submit" value="Update">
-        </p>
-    </form>
-
-    <!--delete-->
-    <!--error handler-->
-    {% if deleteMessage %}
-        <p>{{ deleteMessage }}</p>
-    {% endif %}
-
-    <p>Delete Current Trainer</p>
-    <p>Please enter the T_ID of Trainer you want to delete: </p>
-    <form method="POST" action ="/deleteTrainer">
-        <p>
-            <label for="tid">T_ID</label>
-            <input type="text" name="tid">
-        </p>
-        <p>
-            <input type="submit" value="Delete">
-        </p>
-    </form>
-
 <!-- link to other pages -->
-<p><a href="manager"><button>Access Manager Info</button>></a></p>
+<p><a href="manager"><button>Access Manager Info</button></a></p>
+<p></p>
+<!-- operations -->
+
+    <!--add-->
+    <div class="color">
+    <p><h4>Add New Trainer</h4></p>
+    <p><h8>Please fill the form to create a new Trainer:</h8> </p>
+    <form method="POST" action ="/addTrainer">
+        <div>
+            <label for="tid">T_ID</label>
+            <input type="text" name="tid">
+        </div>
+        <div>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name">
+        </div>
+        <div>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name">
+        </div>
+        <div>
+            <label for="work_time">Work Time</label>
+            <input type="text" name="work_time">
+        </div>
+        <div>
+            <label for="mid">M_ID</label>
+            <input type="text" name="mid">
+        </div>
+        <div>
+            <input type="submit" value="Add">
+        </div>
+    </form>
+    </div>
+    <!--update-->
+<div class="color">
+    <p><h4>Update Current Trainer</h4></p>
+    <p><h8>Please refill the form with your update information: </h8></p>
+    <form method="POST" action ="/updateTrainer">
+        <div>
+            <label for="tid">T_ID</label>
+            <input type="text" name="tid">
+        </div>
+        <div>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name">
+        </div>
+        <div>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name">
+        </div>
+        <div>
+            <label for="work_time">Work Time</label>
+            <input type="text" name="work_time">
+        </div>
+        <div>
+            <label for="mid">M_ID</label>
+            <input type="text" name="mid">
+        </div>
+        <div>
+            <input type="submit" value="Update">
+        </div>
+    </form>
+</div>
+    <!--delete-->
+
+<div class="color">
+    <p><h4>Delete Current Trainer</h4></p>
+    <p><h5>Please enter the T_ID of Trainer you want to delete: </h5></p>
+    <form method="POST" action ="/deleteTrainer">
+        <div>
+            <label for="tid">T_ID</label>
+            <input type="text" name="tid">
+        </div>
+        <div>
+            <input type="submit" value="Delete">
+        </div>
+    </form>
+    </div>
 
 <!-- back to last page -->
-<p><a href="/"><button>Back to Animal Page</button>></a></p>
+<p><a href="/"><button>Back to Animal Page</button></a></p>
 </body>
 </html>
