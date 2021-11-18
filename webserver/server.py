@@ -906,6 +906,29 @@ def addPark():
     pname = request.form['pname']
     openHour = request.form['open_hour']
     typee = request.form['type']
+    
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("park.html", addMessage=message)
+
+    cursor = g.conn.execute("SELECT type FROM Park")
+    pk = []
+    for result in cursor:
+        pk.append(result["type"])
+    cursor.close()
+    if typee in pk:
+        message = "The Type Has Already Exited!"
+        return render_template("park.html", addMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor2.close()
+    if pname in fk:
+        message = "The Park Has Already Existed! "
+        return render_template("park.html", addMessage=message)
+    
     g.conn.execute("""INSERT INTO Park(pname, open_hour, type)
                 VALUES (%s, %s, %s)""", pname, openHour, typee)
     return redirect('/park')
@@ -914,6 +937,16 @@ def addPark():
 @app.route('/deletePark', methods=['POST'])
 def deletePark():
     pname = request.form['pname']
+    
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor2.close()
+    if pname not in fk:
+        message = "The Park Does NOT Exist! "
+        return render_template("park.html", deleteMessage=message)
+    
     g.conn.execute('DELETE FROM Park WHERE pname = %s', pname)
     return redirect('/park')
 
@@ -923,6 +956,29 @@ def updatePark():
     pname = request.form['pname']
     openHour = request.form['open_hour']
     typee = request.form['type']
+    
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("park.html", updateMessage=message)
+
+    cursor = g.conn.execute("SELECT type FROM Park")
+    pk = []
+    for result in cursor:
+        pk.append(result["type"])
+    cursor.close()
+    if typee in pk:
+        message = "The Type Has Already Exited!"
+        return render_template("park.html", updateMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor2.close()
+    if pname not in fk:
+        message = "The Park Does NOT Existed! "
+        return render_template("park.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Park SET (open_hour, type)
                 = (%s, %s) WHERE pname = %s""", openHour, typee, pname)
     return redirect('/park')
