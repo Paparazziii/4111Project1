@@ -6,15 +6,107 @@
         font-size: 15pt;
         font-family: arial;
       }
+      .table table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table th {
+	background-color:#93DAFF;
+	color:#000000
+}
+.table,.table th,.table td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table th,.table td {
+	border: 1px solid #6fcdfe;
+	border-width:1px 0 1px 0
+}
+.table tr {
+	border: 1px solid #ffffff;
+}
+.table tr:nth-child(odd){
+	background-color:#dbf2fe;
+}
+.table tr:nth-child(even){
+	background-color:#ffffff;
+}
+      .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+form {
+  display: flex; 
+  align-items: flex-end;
+
+}
+input {
+  flex-grow: 1;
+  align-self: flex-end;
+}
+.color{
+  width:100%;
+  background-color: #d8effc;
+}
+.button{
+
+  float:inline-start;
+}
     </style>
   <head>
-    <titile>Animal Shows Information</titile>>
-  </head>>
+
+    <title>Animal Shows Information</title>
+  </head>
+  <!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
+
 <body>
-  <h1>CURRENT SHOWS</h1>
 
  <!--print table-->
- <table>
+ <table class="table">
+    <caption>
+        <h2>
+            CURRENT SHOWS
+        </h2>
+      </caption>
     <tr>
       <th>S_ID</th>
       <th>Show Name</th>
@@ -32,98 +124,89 @@
     </tr>
     {% endfor %}
   </table>
+<!-- link to other pages -->
+<p><a href="park"><button>Manage Park</button></a></p>
+<p><a href="another"><button>Manage Trainers</button></a></p>
+<p></p>
 
 <!-- operations -->
-
-<!--error handler-->
-{% if addMessage %}
-        <p>{{ addMessage }}</p>
-{% endif %}
     <!--add-->
-    <p>Add New Animal Show</p>
-    <p>Please fill the form to create a new Animal Show: </p>
+    <div class="color">
+    <p><h4>Add New Animal Show</h4></p>
+    <p><h8>Please fill the form to create a new Animal Show: </h8></p>
     <form method="POST" action ="/addAnimalShow">
-        <p>
+        <div>
             <label for="sid">S_ID</label>
             <input type="text" name="sid">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="show_name">Show Name</label>
             <input type="text" name="show_name">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="seat">Number of Seats</label>
             <input type="text" name="seat">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="time">Show Time</label>
             <input type="text" name="time">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="pname">Park Name</label>
             <input type="text" name="pname">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Add">
-        </p>
+        </div>
     </form>
+    </div>
     <!--update-->
-    <!--error handler-->
-    {% if updateMessage %}
-        <p>{{ updateMessage }}</p>
-    {% endif %}
-    <p>Update Current Animal Show</p>
-    <p>Please refill the form with your update information: </p>
+    <div class="color">
+    <p><h4>Update Current Animal Show</h4></p>
+    <p><h8>Please refill the form with your update information:</h8> </p>
     <form method="POST" action ="/updateAnimalShow">
-        <p>
+        <div>
             <label for="sid">S_ID</label>
             <input type="text" name="sid">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="show_name">Show Name</label>
             <input type="text" name="show_name">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="seat">Number of Seats</label>
             <input type="text" name="seat">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="time">Show Time</label>
             <input type="text" name="time">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="pname">Park Name</label>
             <input type="text" name="pname">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Update">
-        </p>
+        </div>
     </form>
-
+</div>
     <!--delete-->
-    <!--error handler-->
-    {% if deleteMessage %}
-        <p>{{ deleteMessage }}</p>
-    {% endif %}
-
-    <p>Delete Current Animal Show</p>
-    <p>Please enter the S_ID of Animal Show you want to delete: </p>
+    <div class="color">
+    <p><h4>Delete Current Animal Show</h4></p>
+    <p><h8>Please enter the S_ID of Animal Show you want to delete: </h8></p>
     <form method="POST" action ="/deleteAnimalShow">
-        <p>
+        <div>
             <label for="sid">S_ID</label>
             <input type="text" name="sid">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Delete">
-        </p>
+        </div>
     </form>
-
-<!-- link to other pages -->
-<p><a href="park"><button>Manage Park</button>></a></p>
-<p><a href="another"><button>Manage Trainers</button>></a></p>
+</div>
 
 <!-- back to last page -->
-<p><a href="/"><button>Back to Animal Page</button>></a></p>
+<p><a href="/"><button>Back to Animal Page</button></a></p>
 </body>
 </html>
 
