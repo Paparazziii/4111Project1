@@ -1,5 +1,9 @@
 <html>
-  <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    function errorWindow(currentMessage){
+      alert(currentMessage)
+    }
+  </script>
   <style>
     body{ 
       font-size: 15pt;
@@ -42,7 +46,8 @@
 
 <!--error handler-->
 {% if addMessage %}
-<p>{{ addMessage }}</p>
+  errorWindow(addMessage)
+<!-- <p>{{ addMessage }}</p> -->
 {% endif %}
 <!--add-->
 <p>Add New Animal</p>
@@ -87,7 +92,8 @@
 <!--update-->
 <!--error handler-->
 {% if updateMessage %}
-<p>{{ updateMessage }}</p>
+  errorWindow(updateMessage)
+<!-- <p>{{ updateMessage }}</p> -->
 {% endif %}
 <p>Update Current Animal</p>
 <p>Please refill the form with your update information: </p>
@@ -132,7 +138,8 @@
 <!--delete-->
 <!--error handler-->
 {% if deleteMessage %}
-<p>{{ deleteMessage }}</p>
+  errorWindow(deleteMessage)
+<!-- <p>{{ deleteMessage }}</p> -->
 {% endif %}
 
 <p>Delete Current Animal</p>
