@@ -700,6 +700,39 @@ def addAnimalShow():
     seat = int(request.form['seat'])
     time = request.form['time']
     pname = request.form['pname']
+    
+    if sid == '':
+      message = "SID cannot be NULL"
+      return render_template("animalShow.html", addMessage=message)
+    
+    if pname =='':
+      mssage = "Park Name cannot be NULL"
+      return render_template("animalShow.html", addMessage=message)
+    
+    if seat == '':
+      message = "Seat cannot be NULL"
+      return render_template("animalShow.html",addMessage=message)
+    else:
+      seat = int(seat)
+
+    cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
+    pk = []
+    for result in cursor:
+      pk.append(result["sid"])
+    cursor.close()
+    if sid in pk:
+      message = "The Show Has Already Existed!"
+      return render_template("animalShow.html", addMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+      fk.append(line["pname"])
+    cursor.close()
+    if pname not in fk:
+      message = "The Park Does NOT Exist! "
+      return render_template("animalShow.html", addMessage=message)
+    
     g.conn.execute("""INSERT INTO Animal_Show_Held(sid, show_name,
                 seat, time, pname) VALUES(%s, %s, %s, %s, %s)""",
                    sid, showName, seat, time, pname)
@@ -709,6 +742,16 @@ def addAnimalShow():
 @app.route('/deleteAnimalShow', methods=['POST'])
 def deleteAnimalShow():
     sid = request.form['sid']
+    
+    cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
+    pk = []
+    for result in cursor:
+      pk.append(result["sid"])
+    cursor.close()
+    if sid not in pk:
+      message = "The Show Does NOT Exist!"
+      return render_template("animalShow.html", deleteMessage=message)
+    
     g.conn.execute("DELETE FROM Animal_Show_Held WHERE sid = %s", sid)
     return redirect('/animalShow')
 
@@ -720,6 +763,39 @@ def updateAnimalShow():
     seat = int(request.form['seat'])
     time = request.form['time']
     pname = request.form['pname']
+    
+    if sid == '':
+      message = "SID cannot be NULL"
+      return render_template("animalShow.html", updateMessage=message)
+    
+    if pname == '':
+      message = "Park Name cannot be NULL"
+      return render_template("animalShow.html", updateMessage=message)
+
+    if seat == '':
+      message = "Seat cannot be NULL"
+      return render_template("animalShow.html", updateMessage=message)
+    else:
+      seat = int(seat)
+
+    cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
+    pk = []
+    for result in cursor:
+      pk.append(result["sid"])
+    cursor.close()
+    if sid not in pk:
+      message = "The Show Does NOT Exist!"
+      return render_template("animalShow.html", updateMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+      fk.append(line["pname"])
+    cursor.close()
+    if pname not in fk:
+      message = "The Park Does NOT Exist! "
+      return render_template("animalShow.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Animal_Show_Held SET (show_name,
                 seat, time, pname) = (%s, %s, %s, %s)
                 WHERE sid = %s""",
@@ -734,6 +810,8 @@ def addFacility():
     name = request.form['name']
     openHour = request.form['open_hour']
     pname = request.form['pname']
+                         
+                         
     g.conn.execute("""INSERT INTO Facility_Located(fid, type, name,
                 open_hour, pname) VALUES(%s, %s, %s, %s, %s)""",
                    fid, typee, name, openHour, pname)
