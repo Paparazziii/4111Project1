@@ -262,6 +262,7 @@ def addAnimal():
   activityTime = request.form['activity_time']
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
+    
   cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
   pk = []
   for result in cursor:
@@ -270,6 +271,16 @@ def addAnimal():
   if aid in pk:
       message = "The aid has already existed!"
       return render_template("index.html",addMessage=message)
+    
+  cursor2 = g.conn.execute("SELECT pname FROM Park")
+  fk = []
+  for line in cursor2:
+      fk.append(line["pname"])
+  cursor.close()
+  if pname not in fk:
+      message = "The Park Name Does Not Existed! "
+      return render_template("index.html",addMessage=message)  
+    
   g.conn.execute("""INSERT INTO Animal_Founded(aid,species,age,comes_from,
                   eating_property,activity_time,lifestyle,pname)
                   VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""", 
