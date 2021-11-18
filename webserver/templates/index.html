@@ -1,7 +1,12 @@
 <html>
   <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    function errorWindow(currentMessage){
-      alert(currentMessage)
+    function errorWindow(){
+       if(deleteMessage){
+          window.alert(deleteMessage)
+       }
+       if(addMessage){
+         window.alert(addMessage)
+       }
     }
   </script>
   <style>
@@ -45,10 +50,10 @@
 <!-- operations -->
 
 <!--error handler-->
-{% if addMessage %}
-  errorWindow(addMessage)
+<!-- {% if addMessage %} -->
+  <!-- errorWindow(addMessage) -->
 <!-- <p>{{ addMessage }}</p> -->
-{% endif %}
+<!-- {% endif %} -->
 <!--add-->
 <p>Add New Animal</p>
 <p>Please fill the form to create a new Animal: </p>
@@ -86,15 +91,15 @@
   <input type="text" name="parkname">
 </p>
 <p>
-    <input type="submit" value="Add">
+    <input type="submit" onclick = "errorWindow()" value="Add">
 </p>
 </form>
 <!--update-->
 <!--error handler-->
-{% if updateMessage %}
-  errorWindow(updateMessage)
+<!-- {% if updateMessage %}
+  errorWindow(updateMessage) -->
 <!-- <p>{{ updateMessage }}</p> -->
-{% endif %}
+<!-- {% endif %} -->
 <p>Update Current Animal</p>
 <p>Please refill the form with your update information: </p>
 <form method="POST" action ="/updateAnimal">
