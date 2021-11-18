@@ -1074,7 +1074,7 @@ def searchTrainer():
             names.append(name)
         cursor2.close()
     context = dict(data=names)
-    message = " ".join(names)
+    message = ", ".join(names)
     
     cursor3 = g.conn.execute("""SELECT bid FROM Breeded_By WHERE aid=%s""", aid)
     bid = []
@@ -1090,35 +1090,23 @@ def searchTrainer():
             name = firstName + " " + lastName
             namess.append(name)
         cursor4.close()
-    message2 = " ".join(namess)
+    message2 = ", ".join(namess)
     
     return render_template("indexSearch.html", trainerMessage=message,breederMessage=message2)
 
 
-@app.route('/searchBreeder',methods=['POST'])
-def searchBreeder():
+def searchFood():
     aid = request.form['aid']
-
     if aid == '':
         message = "AID cannot be NULL"
-        return render_template('index.html', searchMessage=message)
+        return render_template('index.html',searchMessage=message)
 
-    cursor = g.conn.execute("""SELECT bid FROM Breeded_By WHERE aid=%s""", aid)
-    bid = []
-    for result in cursor:
-        bid.append(result["bid"])
-    cursor.close()
-    names = []
-    for t in bid:
-        cursor2 = g.conn.execute("""SELECT * FROM Breeder_Managed WHERE bid=%s""", t)
-        for line in cursor2:
-            firstName = line["first_name"]
-            lastName = line["last_name"]
-            name = firstName + " " + lastName
-            names.append(name)
-        cursor2.close()
-    message = " ".join(names)
-    return render_template("indexSearch.html", breederMessage=m)
+    cursor = g.conn.execute("""SELECT fname FROM Eat WHERE aid=%s""",aid)
+    food = []
+    for line in cursor:
+        food.append(line['fname'])
+    message = ', '.join(food)
+    return render_template("indexSearch.html",foodMessage=message)
 
 
 @app.route('/login')
