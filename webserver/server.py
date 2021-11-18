@@ -256,27 +256,28 @@ def park():
 def addAnimal():
   aid = request.form['aid']
   species = request.form['species']
-  age = int(request.form['age'])
+  age = request.form['age']
   comesFrom = request.form['comes_from']
   eatingProperty = request.form['eating_property']
   activityTime = request.form['activity_time']
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  if aid == " ":
+  if aid == '':
       message = "AID cannot be NULL"
       return render_template("index.html",addMessage = message)
 
-  if age != " ":
+  if age != '':
       age = int(age)
   else:
-      age = None
+      message = "Age cannot be NULL"
+      return render_template("index.html",addMessage = message)
 
   if age != None and age<0:
       message = "Age cannot be Smaller Than 0"
       return render_template("index.html",addMessage = message)
 
-  if pname == " ":
+  if pname == '':
       message = "Park Name cannot be NULL"
       return render_template("index.html",addMessage = message)
     
