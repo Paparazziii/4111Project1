@@ -42,9 +42,11 @@
 <!-- operations -->
 
 <!--error handler-->
-{% if addMessage %} -->
-<p>{{ addMessage }}</p>
- {% endif %}
+<div class ="flashes">
+{% if addMessage %}
+  {{addMessage|safe}}
+{% endif %}
+</div>>
 <!--add-->
 <p>Add New Animal</p>
 <p>Please fill the form to create a new Animal: </p>
