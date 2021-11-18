@@ -294,7 +294,7 @@ def addAnimal():
   fk = []
   for line in cursor2:
       fk.append(line["pname"])
-  cursor.close()
+  cursor2.close()
   if pname not in fk:
       message = "The Park Name Does Not Exist! "
       return render_template("index.html",addMessage=message)  
@@ -369,7 +369,7 @@ def updateAnimal():
   fk = []
   for line in cursor2:
       fk.append(line["pname"])
-  cursor.close()
+  cursor2.close()
   if pname not in fk:
       message = "The Park Name Does Not Exist! "
       return render_template("index.html",updateMessage=message)
@@ -411,7 +411,7 @@ def addBreeder():
     fk = []
     for line in cursor2:
       fk.append(line["mid"])
-    cursor.close()
+    cursor2.close()
     if mid not in fk:
       message = "The MID Does NOT Exist! "
       return render_template("breeder.html", addMessage=message)
@@ -469,7 +469,7 @@ def updateBreeder():
     fk = []
     for line in cursor2:
       fk.append(line["mid"])
-    cursor.close()
+    cursor2.close()
     if mid not in fk:
       message = "The MID Does NOT Exist! "
       return render_template("breeder.html", updateMessage=message)
@@ -510,7 +510,7 @@ def addTrainer():
     fk = []
     for line in cursor2:
       fk.append(line["mid"])
-    cursor.close()
+    cursor2.close()
     if mid not in fk:
       message = "The MID Does NOT Exist! "
       return render_template("trainer.html", addMessage=message)
@@ -568,7 +568,7 @@ def updateTrainer():
     fk = []
     for line in cursor2:
       fk.append(line["mid"])
-    cursor.close()
+    cursor2.close()
     if mid not in fk:
       message = "The MID Does NOT Exist! "
       return render_template("trainer.html", updateMessage=message)
@@ -728,7 +728,7 @@ def addAnimalShow():
     fk = []
     for line in cursor2:
       fk.append(line["pname"])
-    cursor.close()
+    cursor2.close()
     if pname not in fk:
       message = "The Park Does NOT Exist! "
       return render_template("animalShow.html", addMessage=message)
@@ -791,7 +791,7 @@ def updateAnimalShow():
     fk = []
     for line in cursor2:
       fk.append(line["pname"])
-    cursor.close()
+    cursor2.close()
     if pname not in fk:
       message = "The Park Does NOT Exist! "
       return render_template("animalShow.html", updateMessage=message)
@@ -832,7 +832,7 @@ def addFacility():
     fk = []
     for line in cursor2:
         fk.append(line["pname"])
-    cursor.close()
+    cursor2.close()
     if pname not in fk:
         message = "The Park Does NOT Exist! "
         return render_template("facility.html", addMessage=message)                     
@@ -889,7 +889,7 @@ def updateFacility():
     fk = []
     for line in cursor2:
         fk.append(line["pname"])
-    cursor.close()
+    cursor2.close()
     if pname not in fk:
         message = "The Park Does NOT Exist!"
         return render_template("facility.html", updateMessage=message)
