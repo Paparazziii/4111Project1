@@ -19,9 +19,9 @@
 <body>
     <div class="color">
         <h1>Search Result</h1>
-          <!--print result-->
-          {% for item in data %}
-          <div>{{item}}</div>
+          {% if foodMessage %}
+          <p>Need to buy more: {{foodMessage}}<p>
+          {% endif %}
     </div>
 
 <!-- back to last page -->
