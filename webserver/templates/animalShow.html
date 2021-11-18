@@ -73,13 +73,40 @@ input {
 }
     </style>
   <head>
-    <titile>Animal Shows Information</titile>>
-  </head>>
+
+    <title>Animal Shows Information</title>
+  </head>
+  <!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
+
 <body>
-  <h1>CURRENT SHOWS</h1>
 
  <!--print table-->
- <table>
+ <table class="table">
+    <caption>
+        <h2>
+            CURRENT SHOWS
+        </h2>
+      </caption>>
     <tr>
       <th>S_ID</th>
       <th>Show Name</th>
@@ -99,11 +126,6 @@ input {
   </table>
 
 <!-- operations -->
-
-<!--error handler-->
-{% if addMessage %}
-        <p>{{ addMessage }}</p>
-{% endif %}
     <!--add-->
     <p>Add New Animal Show</p>
     <p>Please fill the form to create a new Animal Show: </p>
@@ -133,10 +155,7 @@ input {
         </p>
     </form>
     <!--update-->
-    <!--error handler-->
-    {% if updateMessage %}
-        <p>{{ updateMessage }}</p>
-    {% endif %}
+
     <p>Update Current Animal Show</p>
     <p>Please refill the form with your update information: </p>
     <form method="POST" action ="/updateAnimalShow">
@@ -166,10 +185,6 @@ input {
     </form>
 
     <!--delete-->
-    <!--error handler-->
-    {% if deleteMessage %}
-        <p>{{ deleteMessage }}</p>
-    {% endif %}
 
     <p>Delete Current Animal Show</p>
     <p>Please enter the S_ID of Animal Show you want to delete: </p>
