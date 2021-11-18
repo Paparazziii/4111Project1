@@ -1,0 +1,32 @@
+
+
+<html>
+    <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      body{ 
+        font-size: 15pt;
+        font-family: arial;
+      }
+      .color{
+        width:100%;
+        background-color: #d8effc;
+
+      }
+    </style>
+<head>
+    <title>TrainerResult</title>
+</head>
+
+<body>
+    <div class="color">
+        <h1>Search Result</h1>
+          <!--print result-->
+          {% for item in data %}
+          <div>{{item}}</div>
+    </div>
+
+<!-- back to last page -->
+<p><a href="another"><button>Back</button></a></p>
+</body>
+</html>
+
