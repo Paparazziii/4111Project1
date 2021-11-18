@@ -7,11 +7,52 @@
       font-size: 15pt;
       font-family: arial;
     }
+    .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
   </style>
 
 <head>
     <title>Breeders Information</title>>
 </head>>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
 
 <body>
   <h1>CURRENT BREEDERS</h1>
@@ -36,10 +77,6 @@
   </table>
   
   <!--operations-->
-    <!--error handler-->
-    {% if addMessage %}
-    <p>{{ addMessage }}</p>
-    {% endif %}
     <!--add-->
     <p>Add New Breeder</p>
     <p>Please fill the form to create a new Breeder: </p>
@@ -69,10 +106,6 @@
     </p>
     </form>
     <!--update-->
-    <!--error handler-->
-    {% if updateMessage %}
-    <p>{{ updateMessage }}</p>
-    {% endif %}
     <p>Update Current Breeder</p>
     <p>Please refill the form with your update information: </p>
     <form method="POST" action ="/updateBreeder">
@@ -102,10 +135,6 @@
     </form>
 
     <!--delete-->
-    <!--error handler-->
-    {% if deleteMessage %}
-    <p>{{ deleteMessage }}</p>
-    {% endif %}
 
     <p>Delete Current Breeder</p>
     <p>Please enter the B_ID of Breeder you want to delete: </p>

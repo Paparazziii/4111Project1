@@ -5,10 +5,51 @@
         font-size: 15pt;
         font-family: arial;
       }
+      .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
     </style>
 <head>
     <title>Trainers Information</title>>
 </head>>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
 
 <body>
   <h1>CURRENT TRAINERS</h1>
@@ -33,10 +74,7 @@
   </table>
 
 <!-- operations -->
-<!--error handler-->
-{% if addMessage %}
-        <p>{{ addMessage }}</p>
-{% endif %}
+
     <!--add-->
     <p>Add New Trainer</p>
     <p>Please fill the form to create a new Trainer: </p>
@@ -66,10 +104,7 @@
         </p>
     </form>
     <!--update-->
-    <!--error handler-->
-    {% if updateMessage %}
-        <p>{{ updateMessage }}</p>
-    {% endif %}
+
     <p>Update Current Trainer</p>
     <p>Please refill the form with your update information: </p>
     <form method="POST" action ="/updateTrainer">
@@ -99,10 +134,7 @@
     </form>
 
     <!--delete-->
-    <!--error handler-->
-    {% if deleteMessage %}
-        <p>{{ deleteMessage }}</p>
-    {% endif %}
+
 
     <p>Delete Current Trainer</p>
     <p>Please enter the T_ID of Trainer you want to delete: </p>
