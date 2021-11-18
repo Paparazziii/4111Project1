@@ -7,12 +7,9 @@
       font-family: arial;
     }
     .alert {
-  
-}
-.success{
-  padding: 20px;
-  background-color: #10fa08;
-  color: white;
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
 }
 
 .closebtn {
@@ -56,27 +53,6 @@
 </div>
 {% endif %}
 
-<!--success-->
-{% if addSuccess %}
-<div class="success">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Success!</strong> {{addSuccess}}
-</div>
-{% endif %}
-
-{% if updateSuccess %}
-<div class="success">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Success!</strong> {{updateSuccess}}
-</div>
-{% endif %}
-
-{% if deleteSuccess %}
-<div class="success">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Success!</strong> {{deleteSuccess}}
-</div>
-{% endif %}
 <body>
   <h1>CURRENT ANIMALS</h1>
   
