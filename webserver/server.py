@@ -359,7 +359,7 @@ def updateAnimal():
   cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
   pk = []
   for result in cursor:
-    pk.append(result["aid"])
+      pk.append(result["aid"])
   cursor.close()
   if aid not in pk:
       message = "The AID Does NOT Exist!"
@@ -368,7 +368,7 @@ def updateAnimal():
   cursor2 = g.conn.execute("SELECT pname FROM Park")
   fk = []
   for line in cursor2:
-    fk.append(line["pname"])
+      fk.append(line["pname"])
   cursor.close()
   if pname not in fk:
       message = "The Park Name Does Not Existed! "
@@ -389,6 +389,33 @@ def addBreeder():
     lastName = request.form['last_name']
     workTime = request.form['work_time']
     mid = request.form['mid']
+    
+    if bid == '':
+      message = "BID cannot be NULL"
+      return render_template("breeder.html", addMessage=message)
+
+    if mid == '':
+      message = "MID cannot be NULL"
+      return render_template("breeder.html", addMessage=message)
+
+    cursor = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    pk = []
+    for result in cursor:
+      pk.append(result["bid"])
+    cursor.close()
+    if bid in pk:
+      message = "The BID Has Already Existed!"
+      return render_template("breeder.html", addMessage=message)
+
+    cursor2 = g.conn.execute("SELECT mid FROM Manager")
+    fk = []
+    for line in cursor2:
+      fk.append(line["mid"])
+    cursor.close()
+    if mid not in fk:
+      message = "The MID Does NOT Existed! "
+      return render_template("breeder.html", addMessage=message)
+    
     g.conn.execute("""INSERT INTO Breeder_Managed(bid, first_name,
                   last_name, work_time, mid)
                   VALUES(%s, %s, %s, %s, %s)""",
@@ -399,6 +426,16 @@ def addBreeder():
 @app.route('/deleteBreeder', methods=['POST'])
 def deleteBreeder():
     bid = request.form['bid']
+    
+    cursor = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    pk = []
+    for result in cursor:
+      pk.append(result["bid"])
+    cursor.close()
+    if bid not in pk:
+      message = "The BID Does NOT Existed!"
+      return render_template("breeder.html", deleteMessage=message)
+    
     g.conn.execute("DELETE FROM Breeder_Managed WHERE bid = %s", bid)
     return redirect('/breeder')
 
@@ -410,6 +447,33 @@ def updateBreeder():
     lastName = request.form['last_name']
     workTime = request.form['work_time']
     mid = request.form['mid']
+    
+    if bid == '':
+      message = "BID cannot be NULL"
+      return render_template("breeder.html", updateMessage=message)
+
+    if mid == '':
+      message = "MID cannot be NULL"
+      return render_template("breeder.html", updateMessage=message)
+
+    cursor = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    pk = []
+    for result in cursor:
+      pk.append(result["bid"])
+    cursor.close()
+    if bid not in pk:
+      message = "The BID Does NOT Existed!"
+      return render_template("breeder.html", updateMessage=message)
+
+    cursor2 = g.conn.execute("SELECT mid FROM Manager")
+    fk = []
+    for line in cursor2:
+      fk.append(line["mid"])
+    cursor.close()
+    if mid not in fk:
+      message = "The MID Does NOT Existed! "
+      return render_template("breeder.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Breeder_Managed SET (first_name,
                   last_name, work_time, mid) = (%s, %s, %s, %s)
                   WHERE bid = %s""",
