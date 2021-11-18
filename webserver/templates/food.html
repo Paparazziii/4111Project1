@@ -7,16 +7,106 @@
       font-size: 15pt;
       font-family: arial;
     }
+    .table table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table th {
+	background-color:#93DAFF;
+	color:#000000
+}
+.table,.table th,.table td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table th,.table td {
+	border: 1px solid #6fcdfe;
+	border-width:1px 0 1px 0
+}
+.table tr {
+	border: 1px solid #ffffff;
+}
+.table tr:nth-child(odd){
+	background-color:#dbf2fe;
+}
+.table tr:nth-child(even){
+	background-color:#ffffff;
+}
+    .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+form {
+  display: flex; 
+  align-items: flex-end;
+
+}
+input {
+  flex-grow: 1;
+  align-self: flex-end;
+}
+.color{
+  width:100%;
+  background-color: #d8effc;
+}
+.button{
+
+  float:inline-start;
+}
   </style>
 <head>
-    <title>Food Information</title>>
-</head>>
+    <title>Food Information</title>
+</head>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
 
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
 <body>
-  <h1>CURRENT FOOD</h1>
+  
 
-  <table>
+  <table class="table">
     <tr>
+        <caption>
+            <h2>
+              CURRENT FOOD
+            </h2>
+          </caption>>
       <th>Food Name</th>
       <th>Purchased Time</th>
       <th>Brand</th>
@@ -35,89 +125,83 @@
   </table>
 
 <!-- operations -->
-<!--error handler-->
-{% if addMessage %}
-<p>{{ addMessage }}</p>
-{% endif %}
+
 <!--add-->
-<p>Add New Food</p>
-<p>Please fill the form to create a new Food: </p>
+<div class="color">
+<p><h4>Add New Food</h4></p>
+<p><h8>Please fill the form to create a new Food: </h8></p>
 <form method="POST" action ="/addFood">
-<p>
+<div>
     <label for="fname">Food Name</label>
     <input type="text" name="fname">
-</p>
-<p>
+</div>
+<div>
     <label for="time_purchased">Purchased Time</label>
     <input type="text" name="time_purchased">
-</p>
-<p>
+</div>
+<div>
     <label for="brand">Brand</label>
     <input type="text" name="brand">
-</p>
-<p>
+</div>
+<div>
     <label for="unit_price">Unit Price</label>
     <input type="text" name="unit_price">
-</p>
-<p>
+</div>
+<div>
     <label for="amount">Total Amount</label>
     <input type="text" name="amount">
-</p>
-<p>
+</div>
+<div>
     <input type="submit" value="Add">
-</p>
+</div>
 </form>
 <!--update-->
-<!--error handler-->
-{% if updateMessage %}
-<p>{{ updateMessage }}</p>
-{% endif %}
-<p>Update Current Food</p>
-<p>Please refill the form with your update information: </p>
+</div>
+
+<div class="color">
+<p><h4>Update Current Food</h4></p>
+<p><h8>Please refill the form with your update information:</h8> </p>
 <form method="POST" action ="/updateFood">
-    <p>
+    <div>
         <label for="fname">Food Name</label>
         <input type="text" name="fname">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="time_purchased">Purchased Time</label>
         <input type="text" name="time_purchased">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="brand">Brand</label>
         <input type="text" name="brand">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="unit_price">Unit Price</label>
         <input type="text" name="unit_price">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="amount">Total Amount</label>
         <input type="text" name="amount">
-    </p>
-   <p>
+    </div>
+   <div>
        <input type="submit" value="Update">
-   </p>
+   </div>
 </form>
-
+</div>
 <!--delete-->
-<!--error handler-->
-{% if deleteMessage %}
-<p>{{ deleteMessage }}</p>
-{% endif %}
 
-<p>Delete Current Food</p>
-<p>Please enter the Food Name of Food you want to delete: </p>
+<div class="color">
+<p><h4>Delete Current Food</h4></p>
+<p><h8>Please enter the Food Name of Food you want to delete: </h8></p>
 <form method="POST" action ="/deleteFood">
-<p>
+<div>
     <label for="fname">Food Name</label>
     <input type="text" name="fname">
-</p>
-<p>
+</div>
+<div>
     <input type="submit" value="Delete">
-</p>
+</div>
 </form>
-
+</div>
 <!-- back to last page-->
 <p><a href="/"><button>Back to Animals Page</button></a></p>
 </body>
