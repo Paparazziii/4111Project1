@@ -1,11 +1,5 @@
 <html>
   <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    function errorWindow(current){
-       if(addMessage){
-         window.alert("hhhhhh")
-         window.alert(current)
-       }
-    }
   </script>
   <style>
     body{ 
@@ -48,10 +42,9 @@
 <!-- operations -->
 
 <!--error handler-->
-<!-- {% if addMessage %} -->
-  <!-- errorWindow(addMessage) -->
-<!-- <p>{{ addMessage }}</p> -->
-<!-- {% endif %} -->
+{% if addMessage %} -->
+<p>{{ addMessage }}</p>
+ {% endif %}
 <!--add-->
 <p>Add New Animal</p>
 <p>Please fill the form to create a new Animal: </p>
@@ -89,15 +82,14 @@
   <input type="text" name="parkname">
 </p>
 <p>
-    <input type="submit" onclick = "errorWindow({addMessage})" value="Add">
+    <input type="submit" value="Add">
 </p>
 </form>
 <!--update-->
 <!--error handler-->
-<!-- {% if updateMessage %}
-  errorWindow(updateMessage) -->
-<!-- <p>{{ updateMessage }}</p> -->
-<!-- {% endif %} -->
+ {% if updateMessage %}
+<p>{{ updateMessage }}</p>
+{% endif %}
 <p>Update Current Animal</p>
 <p>Please refill the form with your update information: </p>
 <form method="POST" action ="/updateAnimal">
@@ -141,8 +133,7 @@
 <!--delete-->
 <!--error handler-->
 {% if deleteMessage %}
-  errorWindow(deleteMessage)
-<!-- <p>{{ deleteMessage }}</p> -->
+ <p>{{ deleteMessage }}</p>
 {% endif %}
 
 <p>Delete Current Animal</p>
@@ -160,8 +151,8 @@
 <!--link to other page-->
 <p><a href="another"><button>Manage Traniers</button></a></p>
 <p><a href="breeder"><button>Manage Breeders</button></a></p>
-<p><a href="park"><button>Manage Parks</button>></a></p>
+<p><a href="park"><button>Manage Parks</button></a></p>
 <p><a href="food"><button>Manage Food</button></a></p>
-<p><a href="animalShow"><button>Manage Animal Shows</button>></a></p>
+<p><a href="animalShow"><button>Manage Animal Shows</button></a></p>
 </body>
 </html>
