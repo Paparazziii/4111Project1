@@ -1074,7 +1074,8 @@ def searchTrainer():
             names.append(name)
         cursor2.close()
     context = dict(data=names)
-    return render_template("indexSearch.html", **context)
+    message = " ".join(names)
+    return render_template("indexSearch.html", trainerMessage=message)
 
 
 @app.route('/searchBreeder',methods=['POST'])
@@ -1099,8 +1100,8 @@ def searchBreeder():
             name = firstName + " " + lastName
             names.append(name)
         cursor2.close()
-    context = dict(data=names)
-    return render_template("indexSearch.html", **context)
+    message = " ".join(names)
+    return render_template("indexSearch.html", breederMessage=m)
 
 
 @app.route('/login')
