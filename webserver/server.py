@@ -1092,7 +1092,7 @@ def searchTrainer():
         cursor4.close()
     message2 = " ".join(namess)
     
-    return render_template("indexSearch.html", trainerMessage=message,breaderMessage=message2)
+    return render_template("indexSearch.html", trainerMessage=message,breederMessage=message2)
 
 
 @app.route('/searchBreeder',methods=['POST'])
