@@ -1128,6 +1128,30 @@ def searchFood():
     return render_template("indexSearch.html",foodMessage=message)
 
 
+@app.route('/checkStorage',methods = ['POST'])
+def checkStorage():
+    amount = request.form['amount']
+    if amount == '':
+        message ="Amount cannot be NULL"
+        return render_template('food.html', searchMessage=message)
+    else:
+        amount = int(amount)
+
+    if amount<0:
+        message = "Amount should not be smaller than 0"
+        return render_template('food.html', searchMessage=message)
+
+    cursor = g.conn.execute("""SELECT amount FROM Food WHERE amount<%s""",amount)
+    res = []
+    for line in cursor:
+        food = line['fname']
+        storage = line['amount']
+        tot = food + " " + storage
+        res.append(tot)
+    message0 = ", ".join(res)
+    return render_template("foodSearch.html", foodMessage = message0)
+
+
 @app.route('/login')
 def login():
     abort(401)
