@@ -19,9 +19,13 @@
     <div class="color">
         <h1>Search Result</h1>
           <!--print result-->
-          {% for item in data %}
-          <div>{{item}}</div>
-	  {% endfor %}
+          {% if trainerMessage %}
+          <p>Trainer: {{trainerMessage}}</p>
+          {% endif %}
+        
+          {% if breederMessage %}
+          <p>Breeder: {{breederMessage}}</p>
+          {% endif %}
     </div>
 
 <!-- back to last page -->
