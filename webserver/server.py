@@ -1077,9 +1077,10 @@ def searchTrainer():
     for t in tid:
         cursor2 = g.conn.execute("""SELECT * FROM Trainer_Managed WHERE tid=%s""", t)
         for line in cursor2:
+            tidd = line["tid"]
             firstName = line["first_name"]
             lastName = line["last_name"]
-            name = firstName + " " + lastName
+            name = tidd + " " + firstName + " " + lastName
             names.append(name)
         cursor2.close()
     context = dict(data=names)
@@ -1094,9 +1095,10 @@ def searchTrainer():
     for t in bid:
         cursor4 = g.conn.execute("""SELECT * FROM Breeder_Managed WHERE bid=%s""", t)
         for line in cursor4:
+            bidd = line["bid"]
             firstName = line["first_name"]
             lastName = line["last_name"]
-            name = firstName + " " + lastName
+            name = bidd + " " + firstName + " " + lastName
             namess.append(name)
         cursor4.close()
     message2 = ", ".join(namess)
