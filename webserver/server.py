@@ -328,7 +328,7 @@ def deleteAnimal():
 def updateAnimal():
   aid = request.form['aid']
   species = request.form['species']
-  age = int(request.form['age'])
+  age = request.form['age']
   comesFrom = request.form['comes_from']
   eatingProperty = request.form['eating_property']
   activityTime = request.form['activity_time']
@@ -343,7 +343,7 @@ def updateAnimal():
       age = int(age)
   else:
       message = "Age cannot be NULL"
-      return render_template("index.html",addMessage = message)
+      return render_template("index.html",updateMessage = message)
 
   if age<0:
       message = "Age cannot be Smaller Than 0"
