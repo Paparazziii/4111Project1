@@ -1095,6 +1095,7 @@ def searchTrainer():
     return render_template("indexSearch.html", trainerMessage=message,breederMessage=message2)
 
 
+@app.route('/searchFood',methods=['POST'])
 def searchFood():
     aid = request.form['aid']
     if aid == '':
