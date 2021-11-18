@@ -1,11 +1,9 @@
 <html>
   <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    function errorWindow(){
-       if(deleteMessage){
-          window.alert(deleteMessage)
-       }
+    function errorWindow(current){
        if(addMessage){
-         window.alert(addMessage)
+         window.alert("hhhhhh")
+         window.alert(current)
        }
     }
   </script>
@@ -91,7 +89,7 @@
   <input type="text" name="parkname">
 </p>
 <p>
-    <input type="submit" onclick = "errorWindow()" value="Add">
+    <input type="submit" onclick = "errorWindow({addMessage})" value="Add">
 </p>
 </form>
 <!--update-->
