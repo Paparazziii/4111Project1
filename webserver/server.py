@@ -1075,7 +1075,24 @@ def searchTrainer():
         cursor2.close()
     context = dict(data=names)
     message = " ".join(names)
-    return render_template("indexSearch.html", trainerMessage=message)
+    
+    cursor3 = g.conn.execute("""SELECT bid FROM Breeded_By WHERE aid=%s""", aid)
+    bid = []
+    for result in cursor:
+        bid.append(result["bid"])
+    cursor3.close()
+    namess = []
+    for t in bid:
+        cursor4 = g.conn.execute("""SELECT * FROM Breeder_Managed WHERE bid=%s""", t)
+        for line in cursor4:
+            firstName = line["first_name"]
+            lastName = line["last_name"]
+            name = firstName + " " + lastName
+            namess.append(name)
+        cursor4.close()
+    message2 = " ".join(namess)
+    
+    return render_template("indexSearch.html", trainerMessage=message,breaderMessage=message2)
 
 
 @app.route('/searchBreeder',methods=['POST'])
