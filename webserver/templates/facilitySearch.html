@@ -5,16 +5,23 @@
         font-size: 15pt;
         font-family: arial;
       }
+      .color{
+        width:100%;
+        background-color: #d8effc;
+
+      }
     </style>
 <head>
     <title>FacilityResult</title>
 </head>
 
 <body>
-  <h1>Search Result</h1>
-
-<!--print result-->
-{{data}}
+    <div class="color">
+        <h1>Search Result</h1>
+          <!--print result-->
+          {% for item in data %}
+          <div>{{item}}</div>
+    </div>
 
 <!-- back to last page -->
 <p><a href="facility"><button>Back</button></a></p>
