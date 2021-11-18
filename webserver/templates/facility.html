@@ -7,17 +7,107 @@
       font-size: 15pt;
       font-family: arial;
     }
+    .table table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table th {
+	background-color:#93DAFF;
+	color:#000000
+}
+.table,.table th,.table td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table th,.table td {
+	border: 1px solid #6fcdfe;
+	border-width:1px 0 1px 0
+}
+.table tr {
+	border: 1px solid #ffffff;
+}
+.table tr:nth-child(odd){
+	background-color:#dbf2fe;
+}
+.table tr:nth-child(even){
+	background-color:#ffffff;
+}
+    .alert {
+    padding: 20px;
+    background-color: #ff0404;
+    color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+form {
+  display: flex; 
+  align-items: flex-end;
+
+}
+input {
+  flex-grow: 1;
+  align-self: flex-end;
+}
+.color{
+  width:100%;
+  background-color: #d8effc;
+}
+.button{
+
+  float:inline-start;
+}
   </style>
 
 <head>
-    <title>Facility Information</title>>
-</head>>
+    <title>Facility Information</title>
+</head>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
+
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
 
 <body>
-  <h1>CURRENT FACILITIES</h1>
 
-  <table>
+  <table class="table">
     <tr>
+        <caption>
+            <h2>
+              CURRENT FACILITIES
+            </h2>
+          </caption>
       <th>F_ID</th>
       <th>Type</th>
       <th>Name</th>
@@ -36,90 +126,82 @@
   </table>
 
 <!-- operations -->
- <!--error handler-->
- {% if addMessage %}
- <p>{{ addMessage }}</p>
- {% endif %}
  <!--add-->
- <p>Add New Facility</p>
- <p>Please fill the form to create a new Facility: </p>
+ <div class="color">
+ <p><h4>Add New Facility</h4></p>
+ <p><h8>Please fill the form to create a new Facility:</h8> </p>
  <form method="POST" action ="/addFacility">
- <p>
+ <div>
      <label for="fid">F_ID</label>
      <input type="text" name="fid">
- </p>
- <p>
+ </div>
+ <div>
      <label for="type">Type</label>
      <input type="text" name="type">
- </p>
- <p>
+ </div>
+ <div>
      <label for="name">Name</label>
      <input type="text" name="name">
- </p>
- <p>
+ </div>
+ <div>
      <label for="open_hour">Open Hours</label>
      <input type="text" name="open_hour">
- </p>
- <p>
+ </div>
+ <div>
      <label for="pname">Park Name</label>
      <input type="text" name="pname">
- </p>
- <p>
+ </div>
+ <div>
      <input type="submit" value="Add">
- </p>
+ </div>
  </form>
+ </div>
  <!--update-->
- <!--error handler-->
- {% if updateMessage %}
- <p>{{ updateMessage }}</p>
- {% endif %}
- <p>Update Current Facility</p>
- <p>Please refill the form with your update information: </p>
+<div class="color">
+ <p><h4>Update Current Facility</h4></p>
+ <p><h8>Please refill the form with your update information: </h8></p>
  <form method="POST" action ="/updateFacility">
-    <p>
+    <div>
         <label for="fid">F_ID</label>
         <input type="text" name="fid">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="type">Type</label>
         <input type="text" name="type">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="name">Name</label>
         <input type="text" name="name">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="open_hour">Open Hours</label>
         <input type="text" name="open_hour">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="pname">Park Name</label>
         <input type="text" name="pname">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Update">
-    </p>
+    </div>
  </form>
-
+</div>
  <!--delete-->
- <!--error handler-->
- {% if deleteMessage %}
- <p>{{ deleteMessage }}</p>
- {% endif %}
 
- <p>Delete Current Facility</p>
- <p>Please enter the F_ID of Facility you want to delete: </p>
+<div class="color">
+ <p><h4>Delete Current Facility</h4></p>
+ <p><h8>Please enter the F_ID of Facility you want to delete: </h8></p>
  <form method="POST" action ="/deleteFacility">
- <p>
+ <div>
      <label for="fid">F_ID</label>
      <input type="text" name="fid">
- </p>
- <p>
+ </div>
+ <div>
      <input type="submit" value="Delete">
- </p>
+ </div>
  </form>
+ </div>
 <!-- back to last page -->
-#back to previous page
 <p><a href="park"><button>Back to Park Page</button></a></p>
 </body>
 </html>
