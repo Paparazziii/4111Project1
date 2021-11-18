@@ -287,7 +287,7 @@ def addAnimal():
       pk.append(result["aid"])
   cursor.close()
   if aid in pk:
-      message = "The aid has already existed!"
+      message = "The AID Has Already Existed!"
       return render_template("index.html",addMessage=message)
     
   cursor2 = g.conn.execute("SELECT pname FROM Park")
@@ -304,6 +304,8 @@ def addAnimal():
                   VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""", 
                  aid, species, age, comesFrom,
                  eatingProperty, activityTime, lifestyle, pname)
+  message = 'Successfully Added!'
+  render_template("index.html",addSuccess=message)
   return redirect('/')
 
 
@@ -368,10 +370,9 @@ def updateAnimal():
   for line in cursor2:
     fk.append(line["pname"])
   cursor.close()
-  if pname not in aid:
+  if pname not in fk:
       message = "The Park Name Does Not Existed! "
       return render_template("index.html",updateMessage=message)
-
 
   g.conn.execute("""UPDATE Animal_Founded SET (species, age, comes_from,
                   eating_property, activity_time, lifestyle, pname) = 
