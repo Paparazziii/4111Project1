@@ -1051,6 +1051,56 @@ def updateManager():
     return redirect('/manager')
 
 
+@app.route('/searchTrainer', methods=['POST'])
+def searchTrainer():
+    aid = request.form['aid']
+
+    if aid == '':
+        message = "AID cannot be NULL"
+        return render_template('index.html', searchMessage=message)
+
+    cursor = g.conn.execute("""SELECT tid FROM Trained_By WHERE aid=%s""", aid)
+    tid = []
+    for result in cursor:
+        tid.append(result["tid"])
+    cursor.close()
+    names = []
+    for t in tid:
+        cursor2 = g.conn.excute("""SELECT * FROM Trainer_Managed WHERE tid=%s""", t)
+        firstName = cursor2["first_name"]
+        lastName = cursor2["last_name"]
+        name = firstName + " " + lastName
+        names.append(name)
+        cursor2.close()
+    context = dict(data=names)
+    return render_template("indexSearch.html", **context)
+
+
+@app.route('/searchBreeder',methods=['POST'])
+def searchBreeder():
+    aid = request.form['aid']
+
+    if aid == '':
+        message = "AID cannot be NULL"
+        return render_template('index.html', searchMessage=message)
+
+    cursor = g.conn.execute("""SELECT bid FROM Breeded_By WHERE aid=%s""", aid)
+    bid = []
+    for result in cursor:
+        bid.append(result["bid"])
+    cursor.close()
+    names = []
+    for t in bid:
+        cursor2 = g.conn.excute("""SELECT * FROM Breeder_Managed WHERE bid=%s""", t)
+        firstName = cursor2["first_name"]
+        lastName = cursor2["last_name"]
+        name = firstName + " " + lastName
+        names.append(name)
+        cursor2.close()
+    context = dict(data=names)
+    return render_template("indexSearch.html", **context)
+
+
 @app.route('/login')
 def login():
     abort(401)
