@@ -810,7 +810,32 @@ def addFacility():
     name = request.form['name']
     openHour = request.form['open_hour']
     pname = request.form['pname']
-                         
+    
+    if fid == '':
+        message = "FID cannot be NULL"
+        return render_template("facility.html", addMessage=message)
+
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("facility.html", addMessage=message)
+
+    cursor = g.conn.execute("SELECT fid FROM Facility_Located")
+    pk = []
+    for result in cursor:
+        pk.append(result["fid"])
+    cursor.close()
+    if fid in pk:
+        message = "The Facility Has Already Existed!"
+        return render_template("facility.html", addMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor.close()
+    if pname not in fk:
+        message = "The Park Does NOT Exist! "
+        return render_template("facility.html", addMessage=message)                     
                          
     g.conn.execute("""INSERT INTO Facility_Located(fid, type, name,
                 open_hour, pname) VALUES(%s, %s, %s, %s, %s)""",
@@ -821,6 +846,16 @@ def addFacility():
 @app.route('/deleteFacility', methods=['POST'])
 def deleteFacility():
     fid = request.form['fid']
+    
+    cursor = g.conn.execute("SELECT fid FROM Facility_Located")
+    pk = []
+    for result in cursor:
+        pk.append(result["fid"])
+    cursor.close()
+    if fid not in pk:
+        message = "The Facility Does NOT Exist!"
+        return render_template("facility.html", addMessage=message)
+    
     g.conn.execute("DELETE FROM Facility_Located WHERE fid = %s", fid)
     return redirect('/facility')
 
@@ -832,6 +867,33 @@ def updateFacility():
     name = request.form['name']
     openHour = request.form['open_hour']
     pname = request.form['pname']
+    
+    if fid == '':
+        message = "FID cannot be NULL"
+        return render_template("facility.html", updateMessage=message)
+
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("facility.html", updateMessage=message)
+
+    cursor = g.conn.execute("SELECT fid FROM Facility_Located")
+    pk = []
+    for result in cursor:
+        pk.append(result["fid"])
+    cursor.close()
+    if fid not in pk:
+        message = "The Facility Does NOT Exist!"
+        return render_template("facility.html", updateMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor.close()
+    if pname not in fk:
+        message = "The Park Does NOT Exist!"
+        return render_template("facility.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Facility_Located SET (type, name,
                 open_hour, pname) = (%s, %s, %s, %s)
                 WHERE fid = %s""",
