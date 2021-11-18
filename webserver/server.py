@@ -491,11 +491,11 @@ def addTrainer():
     
     if tid == '':
       message = "TID cannot be NULL"
-      return render_template("trainer.html", addMessage=message)
+      return render_template("another.html", addMessage=message)
 
     if mid == '':
       message = "MID cannot be NULL"
-      return render_template("trainer.html", addMessage=message)
+      return render_template("another.html", addMessage=message)
 
     cursor = g.conn.execute("SELECT tid FROM Trainer_Managed")
     pk = []
@@ -504,7 +504,7 @@ def addTrainer():
     cursor.close()
     if tid in pk:
       message = "The TID Has Already Existed!"
-      return render_template("trainer.html", addMessage=message)
+      return render_template("another.html", addMessage=message)
 
     cursor2 = g.conn.execute("SELECT mid FROM Manager")
     fk = []
@@ -513,7 +513,7 @@ def addTrainer():
     cursor2.close()
     if mid not in fk:
       message = "The MID Does NOT Exist! "
-      return render_template("trainer.html", addMessage=message)
+      return render_template("another.html", addMessage=message)
 
     g.conn.execute("""INSERT INTO Trainer_Managed(tid, first_name,
               last_name, work_time, mid)
@@ -533,7 +533,7 @@ def deleteTrainer():
     cursor.close()
     if tid not in pk:
       message = "The TID Does NOT Exist!"
-      return render_template("trainer.html", deleteMessage=message)
+      return render_template("another.html", deleteMessage=message)
     
     g.conn.execute("DELETE FROM Trainer_Managed WHERE tid = %s", tid)
     return redirect('/another')
@@ -549,11 +549,11 @@ def updateTrainer():
     
     if tid == '':
       message = "TID cannot be NULL"
-      return render_template("trainer.html", updateMessage=message)
+      return render_template("another.html", updateMessage=message)
 
     if mid == '':
       message = "MID cannot be NULL"
-      return render_template("trainer.html", updateMessage=message)
+      return render_template("another.html", updateMessage=message)
 
     cursor = g.conn.execute("SELECT tid FROM Trainer_Managed")
     pk = []
@@ -562,7 +562,7 @@ def updateTrainer():
     cursor.close()
     if tid not in pk:
       message = "The TID Does NOT Exist!"
-      return render_template("trainer.html", updateMessage=message)
+      return render_template("another.html", updateMessage=message)
 
     cursor2 = g.conn.execute("SELECT mid FROM Manager")
     fk = []
@@ -571,7 +571,7 @@ def updateTrainer():
     cursor2.close()
     if mid not in fk:
       message = "The MID Does NOT Exist! "
-      return render_template("trainer.html", updateMessage=message)
+      return render_template("another.html", updateMessage=message)
     
     g.conn.execute("""UPDATE Trainer_Managed SET (first_name,
               last_name, work_time, mid) = (%s, %s, %s, %s)
@@ -585,8 +585,8 @@ def addFood():
     fname = request.form['fname']
     timePurchased = request.form['time_purchased']
     brand = request.form['brand']
-    unitPrice = float(request.form['unit_price'])
-    amount = int(request.form['amount'])
+    unitPrice = request.form['unit_price']
+    amount = request.form['amount']
     
     if unitPrice == '':
         message = "Unit Price cannot be NULL"
@@ -650,8 +650,8 @@ def updateFood():
     fname = request.form['fname']
     timePurchased = request.form['time_purchased']
     brand = request.form['brand']
-    unitPrice = float(request.form['unit_price'])
-    amount = int(request.form['amount'])
+    unitPrice = request.form['unit_price']
+    amount = request.form['amount']
     
     if unitPrice == '':
         message = "Unit Price cannot be NULL"
@@ -697,7 +697,7 @@ def updateFood():
 def addAnimalShow():
     sid = request.form['sid']
     showName = request.form['show_name']
-    seat = int(request.form['seat'])
+    seat = request.form['seat']
     time = request.form['time']
     pname = request.form['pname']
     
@@ -706,7 +706,7 @@ def addAnimalShow():
       return render_template("animalShow.html", addMessage=message)
     
     if pname =='':
-      mssage = "Park Name cannot be NULL"
+      message = "Park Name cannot be NULL"
       return render_template("animalShow.html", addMessage=message)
     
     if seat == '':
@@ -760,7 +760,7 @@ def deleteAnimalShow():
 def updateAnimalShow():
     sid = request.form['sid']
     showName = request.form['show_name']
-    seat = int(request.form['seat'])
+    seat = request.form['seat']
     time = request.form['time']
     pname = request.form['pname']
     
