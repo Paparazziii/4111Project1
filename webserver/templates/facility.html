@@ -75,8 +75,8 @@ input {
   </style>
 
 <head>
-    <title>Facility Information</title>>
-</head>>
+    <title>Facility Information</title>
+</head>
 <!--message-->
 {% if addMessage %}
 <div class="alert">
@@ -107,7 +107,7 @@ input {
             <h2>
               CURRENT FACILITIES
             </h2>
-          </caption>>
+          </caption>
       <th>F_ID</th>
       <th>Type</th>
       <th>Name</th>
@@ -127,77 +127,80 @@ input {
 
 <!-- operations -->
  <!--add-->
- <p>Add New Facility</p>
- <p>Please fill the form to create a new Facility: </p>
+ <div class="color">
+ <p><h4>Add New Facility</h4></p>
+ <p><h8>Please fill the form to create a new Facility:</h8> </p>
  <form method="POST" action ="/addFacility">
- <p>
+ <div>
      <label for="fid">F_ID</label>
      <input type="text" name="fid">
- </p>
- <p>
+ </div>
+ <div>
      <label for="type">Type</label>
      <input type="text" name="type">
- </p>
- <p>
+ </div>
+ <div>
      <label for="name">Name</label>
      <input type="text" name="name">
- </p>
- <p>
+ </div>
+ <div>
      <label for="open_hour">Open Hours</label>
      <input type="text" name="open_hour">
- </p>
- <p>
+ </div>
+ <div>
      <label for="pname">Park Name</label>
      <input type="text" name="pname">
- </p>
- <p>
+ </div>
+ <div>
      <input type="submit" value="Add">
- </p>
+ </div>
  </form>
+ </div>
  <!--update-->
-
- <p>Update Current Facility</p>
- <p>Please refill the form with your update information: </p>
+<div class="color">
+ <p><h4>Update Current Facility</h4></p>
+ <p><h8>Please refill the form with your update information: </h8></p>
  <form method="POST" action ="/updateFacility">
-    <p>
+    <div>
         <label for="fid">F_ID</label>
         <input type="text" name="fid">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="type">Type</label>
         <input type="text" name="type">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="name">Name</label>
         <input type="text" name="name">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="open_hour">Open Hours</label>
         <input type="text" name="open_hour">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="pname">Park Name</label>
         <input type="text" name="pname">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Update">
-    </p>
+    </div>
  </form>
-
+</div>
  <!--delete-->
 
-
- <p>Delete Current Facility</p>
- <p>Please enter the F_ID of Facility you want to delete: </p>
+<div class="color">
+ <p><h4>Delete Current Facility</h4></p>
+ <p><h8>Please enter the F_ID of Facility you want to delete: </h8></p>
  <form method="POST" action ="/deleteFacility">
- <p>
+ <div>
      <label for="fid">F_ID</label>
      <input type="text" name="fid">
- </p>
- <p>
+ </div>
+ <div>
      <input type="submit" value="Delete">
- </p>
+ </div>
  </form>
+ </div>
 <!-- back to last page -->
 <p><a href="park"><button>Back to Park Page</button></a></p>
 </body>

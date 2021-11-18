@@ -97,7 +97,6 @@ input {
 {% endif %}
 
 <body>
-
    <table class="table">
     <tr>
       <caption>
@@ -122,86 +121,88 @@ input {
     </tr>
     {% endfor %}
   </table>
-
+<!-- link to other pages -->
+<p><a href="manager"><button>Access Manager Info</button></a></p>
+<p></p>
 <!-- operations -->
 
     <!--add-->
-    <p>Add New Trainer</p>
-    <p>Please fill the form to create a new Trainer: </p>
+    <div class="color">
+    <p><h4>Add New Trainer</h4></p>
+    <p><h8>Please fill the form to create a new Trainer:</h8> </p>
     <form method="POST" action ="/addTrainer">
-        <p>
+        <div>
             <label for="tid">T_ID</label>
             <input type="text" name="tid">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="first_name">First Name</label>
             <input type="text" name="first_name">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="last_name">Last Name</label>
             <input type="text" name="last_name">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="work_time">Work Time</label>
             <input type="text" name="work_time">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="mid">M_ID</label>
             <input type="text" name="mid">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Add">
-        </p>
+        </div>
     </form>
+    </div>
     <!--update-->
-
-    <p>Update Current Trainer</p>
-    <p>Please refill the form with your update information: </p>
+<div class="color">
+    <p><h4>Update Current Trainer</h4></p>
+    <p><h8>Please refill the form with your update information: </h8></p>
     <form method="POST" action ="/updateTrainer">
-        <p>
+        <div>
             <label for="tid">T_ID</label>
             <input type="text" name="tid">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="first_name">First Name</label>
             <input type="text" name="first_name">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="last_name">Last Name</label>
             <input type="text" name="last_name">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="work_time">Work Time</label>
             <input type="text" name="work_time">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="mid">M_ID</label>
             <input type="text" name="mid">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Update">
-        </p>
+        </div>
     </form>
-
+</div>
     <!--delete-->
 
-
-    <p>Delete Current Trainer</p>
-    <p>Please enter the T_ID of Trainer you want to delete: </p>
+<div class="color">
+    <p><h4>Delete Current Trainer</h4></p>
+    <p><h5>Please enter the T_ID of Trainer you want to delete: </h5></p>
     <form method="POST" action ="/deleteTrainer">
-        <p>
+        <div>
             <label for="tid">T_ID</label>
             <input type="text" name="tid">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Delete">
-        </p>
+        </div>
     </form>
-
-<!-- link to other pages -->
-<p><a href="manager"><button>Access Manager Info</button>></a></p>
+    </div>
 
 <!-- back to last page -->
-<p><a href="/"><button>Back to Animal Page</button>></a></p>
+<p><a href="/"><button>Back to Animal Page</button></a></p>
 </body>
 </html>

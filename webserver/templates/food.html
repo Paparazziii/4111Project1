@@ -74,8 +74,8 @@ input {
 }
   </style>
 <head>
-    <title>Food Information</title>>
-</head>>
+    <title>Food Information</title>
+</head>
 <!--message-->
 {% if addMessage %}
 <div class="alert">
@@ -127,78 +127,81 @@ input {
 <!-- operations -->
 
 <!--add-->
-<p>Add New Food</p>
-<p>Please fill the form to create a new Food: </p>
+<div class="color">
+<p><h4>Add New Food</h4></p>
+<p><h8>Please fill the form to create a new Food: </h8></p>
 <form method="POST" action ="/addFood">
-<p>
+<div>
     <label for="fname">Food Name</label>
     <input type="text" name="fname">
-</p>
-<p>
+</div>
+<div>
     <label for="time_purchased">Purchased Time</label>
     <input type="text" name="time_purchased">
-</p>
-<p>
+</div>
+<div>
     <label for="brand">Brand</label>
     <input type="text" name="brand">
-</p>
-<p>
+</div>
+<div>
     <label for="unit_price">Unit Price</label>
     <input type="text" name="unit_price">
-</p>
-<p>
+</div>
+<div>
     <label for="amount">Total Amount</label>
     <input type="text" name="amount">
-</p>
-<p>
+</div>
+<div>
     <input type="submit" value="Add">
-</p>
+</div>
 </form>
 <!--update-->
+</div>
 
-<p>Update Current Food</p>
-<p>Please refill the form with your update information: </p>
+<div class="color">
+<p><h4>Update Current Food</h4></p>
+<p><h8>Please refill the form with your update information:</h8> </p>
 <form method="POST" action ="/updateFood">
-    <p>
+    <div>
         <label for="fname">Food Name</label>
         <input type="text" name="fname">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="time_purchased">Purchased Time</label>
         <input type="text" name="time_purchased">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="brand">Brand</label>
         <input type="text" name="brand">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="unit_price">Unit Price</label>
         <input type="text" name="unit_price">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="amount">Total Amount</label>
         <input type="text" name="amount">
-    </p>
-   <p>
+    </div>
+   <div>
        <input type="submit" value="Update">
-   </p>
+   </div>
 </form>
-
+</div>
 <!--delete-->
 
-
-<p>Delete Current Food</p>
-<p>Please enter the Food Name of Food you want to delete: </p>
+<div class="color">
+<p><h4>Delete Current Food</h4></p>
+<p><h8>Please enter the Food Name of Food you want to delete: </h8></p>
 <form method="POST" action ="/deleteFood">
-<p>
+<div>
     <label for="fname">Food Name</label>
     <input type="text" name="fname">
-</p>
-<p>
+</div>
+<div>
     <input type="submit" value="Delete">
-</p>
+</div>
 </form>
-
+</div>
 <!-- back to last page-->
 <p><a href="/"><button>Back to Animals Page</button></a></p>
 </body>

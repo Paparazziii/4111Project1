@@ -75,8 +75,8 @@ input {
   </style>
 
 <head>
-    <title>Parks Information</title>>
-</head>>
+    <title>Parks Information</title>
+</head>
 <!--message-->
 {% if addMessage %}
 <div class="alert">
@@ -105,7 +105,7 @@ input {
       <h2>
         CURRENT PARKS
       </h2>
-    </caption>>
+    </caption>
     <tr>
       <th>Park Name</th>
       <th>Open Hours</th>
@@ -120,70 +120,74 @@ input {
     {% endfor %}
   </table>
     
+  <!--link to other page-->
+  <p><a href="facility"><button>Manage Facilities</button></a></p>
+  <p><a href="another"><button>Manage Trainers</button></a></p>
+  <p></p>
    <!--operations-->
  
     <!--add-->
-    <p>Add New Park</p>
-    <p>Please fill the form to create a new Park: </p>
+    <div class="color">
+    <p><h4>Add New Park</h4></p>
+    <p><h8>Please fill the form to create a new Park:</h8> </p>
     <form method="POST" action ="/addPark">
-    <p>
+    <div>
         <label for="pname">Park Name</label>
         <input type="text" name="pname">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="open_hour">Open Hours</label>
         <input type="text" name="open_hour">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="type">Animal Type</label>
         <input type="text" name="type">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Add">
-    </p>
+    </div>
     </form>
+    </div>
     <!--update-->
- 
-    <p>Update Current Park</p>
-    <p>Please refill the form with your update information: </p>
+    <div class="color">
+    <p><h4>Update Current Park</h4></p>
+    <p><h8>Please refill the form with your update information: </h8></p>
     <form method="POST" action ="/updatePark">
-        <p>
+        <div>
             <label for="pname">Park Name</label>
             <input type="text" name="pname">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="open_hour">Open Hours</label>
             <input type="text" name="open_hour">
-        </p>
-        <p>
+        </div>
+        <div>
             <label for="type">Animal Type</label>
             <input type="text" name="type">
-        </p>
-        <p>
+        </div>
+        <div>
             <input type="submit" value="Update">
-        </p>
+        </div>
     </form>
-
+</div>
     <!--delete-->
-
-    <p>Delete Current Park</p>
-    <p>Please enter the Park Name of Park you want to delete: </p>
+    <div class="color">
+    <p><h4>Delete Current Park</h4></p>
+    <p><h5>Please enter the Park Name of Park you want to delete: </h5></p>
     <form method="POST" action ="/deletePark">
-    <p>
+    <div>
         <label for="pname">Park Name</label>
         <input type="text" name="pname">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Delete">
-    </p>
+    </div>
     </form>
-  
-  <!--link to other page-->
-  <p><a href="facility"><button>Manage Facilities</button>></a></p>
-  <p><a href="another"><button>Manage Trainers</button>></a></p>
+  </div>
+
     
   <!--back to last page-->
-  <p><a href="/"><button>Back to Animal Page</button>></a></p>
+  <p><a href="/"><button>Back to Animal Page</button></a></p>
   </body>
   </html>
   

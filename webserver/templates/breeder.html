@@ -75,7 +75,7 @@ input {
   </style>
 
 <head>
-    <title>Breeders Information</title>>
+    <title>Breeders Information</title>
 </head>>
 <!--message-->
 {% if addMessage %}
@@ -124,84 +124,87 @@ input {
     </tr>
     {% endfor %}
   </table>
-  
+  <!--link to other page-->
+  <p><a href="manager"><button>Access Managers</button></a></p>
+<p></p>
   <!--operations-->
     <!--add-->
-    <p>Add New Breeder</p>
-    <p>Please fill the form to create a new Breeder: </p>
+    <div class="color">
+    <p><h4>Add New Breeder</h4></p>
+    <p><h8>Please fill the form to create a new Breeder: </h8></p>
     <form method="POST" action ="/addBreeder">
-    <p>
+    <div>
         <label for="bid">B_ID</label>
         <input type="text" name="bid">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="first_name">First Name</label>
         <input type="text" name="first_name">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="last_name">Last Name</label>
         <input type="text" name="last_name">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="work_time">Work Time</label>
         <input type="text" name="work_time">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="mid">M_ID</label>
         <input type="text" name="mid">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Add">
-    </p>
+    </div>
     </form>
+    </div>
     <!--update-->
-    <p>Update Current Breeder</p>
-    <p>Please refill the form with your update information: </p>
+    <div class="color">
+    <p><h4>Update Current Breeder</h4></p>
+    <p><h8>Please refill the form with your update information:</h8> </p>
     <form method="POST" action ="/updateBreeder">
-    <p>
+    <div>
         <label for="bid">T_ID</label>
         <input type="text" name="bid">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="first_name">First Name</label>
         <input type="text" name="first_name">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="last_name">Last Name</label>
         <input type="text" name="last_name">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="work_time">Work Time</label>
         <input type="text" name="work_time">
-    </p>
-    <p>
+    </div>
+    <div>
         <label for="mid">M_ID</label>
         <input type="text" name="mid">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Update">
-    </p>
+    </div>
     </form>
-
+</div>
     <!--delete-->
-
-    <p>Delete Current Breeder</p>
-    <p>Please enter the B_ID of Breeder you want to delete: </p>
+    <div class="color">
+    <p><h4>Delete Current Breeder</h4></p>
+    <p><h8>Please enter the B_ID of Breeder you want to delete: </h8></p>
     <form method="POST" action ="/deleteBreeder">
-    <p>
+    <div>
         <label for="bid">B_ID</label>
         <input type="text" name="bid">
-    </p>
-    <p>
+    </div>
+    <div>
         <input type="submit" value="Delete">
-    </p>
+    </div>
     </form>
-  
-  <!--link to other page-->
-  <p><a href="manager"><button>Access Managers</button>></a></p>
+  </div>
 
   <!--back to last page-->
-  <p><a href="/"><button>Back to Animal Page</button>></a></p>
+  <p><a href="/"><button>Back to Animal Page</button></a></p>
   </body>
   </html>
   
