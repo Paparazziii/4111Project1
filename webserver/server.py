@@ -263,6 +263,18 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
+  if aid == None:
+      message = "AID cannot be NULL"
+      return render_template("index.html",addMessage = message)
+  
+  if age<0:
+      message = "Age cannot be Smaller Than 0"
+      return render_template("index.html",addMessage = message)
+  
+  if pname == None:
+      message = "Park Name cannot be NULL"
+      return render_template("index.html",addMessage = message)
+    
   cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
   pk = []
   for result in cursor:
