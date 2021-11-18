@@ -1066,11 +1066,12 @@ def searchTrainer():
     cursor.close()
     names = []
     for t in tid:
-        cursor2 = g.conn.excute("""SELECT * FROM Trainer_Managed WHERE tid=%s""", t)
-        firstName = cursor2["first_name"]
-        lastName = cursor2["last_name"]
-        name = firstName + " " + lastName
-        names.append(name)
+        cursor2 = g.conn.execute("""SELECT * FROM Trainer_Managed WHERE tid=%s""", t)
+        for line in cursor2:
+            firstName = line["first_name"]
+            lastName = line["last_name"]
+            name = firstName + " " + lastName
+            names.append(name)
         cursor2.close()
     context = dict(data=names)
     return render_template("indexSearch.html", **context)
@@ -1091,11 +1092,12 @@ def searchBreeder():
     cursor.close()
     names = []
     for t in bid:
-        cursor2 = g.conn.excute("""SELECT * FROM Breeder_Managed WHERE bid=%s""", t)
-        firstName = cursor2["first_name"]
-        lastName = cursor2["last_name"]
-        name = firstName + " " + lastName
-        names.append(name)
+        cursor2 = g.conn.execute("""SELECT * FROM Breeder_Managed WHERE bid=%s""", t)
+        for line in cursor2:
+            firstName = line["first_name"]
+            lastName = line["last_name"]
+            name = firstName + " " + lastName
+            names.append(name)
         cursor2.close()
     context = dict(data=names)
     return render_template("indexSearch.html", **context)
