@@ -251,12 +251,26 @@ input {
 </form>
 </div>
 
-<!--search-->
-
+<!--search1-->
 <div class="color">
   <p><h4>Search for Corresponding Trainer and Breeder</h4></p>
   <p><h8>Please enter the A_ID of Animal you want to search: </h8></p>
   <form method="POST" action ="/searchTrainer">
+      <div>
+          <label for="aid">A_ID</label>
+          <input type="text" name="aid">
+      </div>
+      <div>
+          <input type="submit" value="Search">
+      </div>
+  </form>
+</div>
+
+<!--search 2-->
+<div class="color">
+  <p><h4>Search for Corresponding Food</h4></p>
+  <p><h8>Please enter the A_ID of Animal you want to search: </h8></p>
+  <form method="POST" action ="/searchFood">
       <div>
           <label for="aid">A_ID</label>
           <input type="text" name="aid">
