@@ -310,6 +310,16 @@ def addAnimal():
 @app.route('/deleteAnimal', methods=['POST'])
 def deleteAnimal():
     aid = request.form['aid']
+    
+    cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
+    pk = []
+    for result in cursor:
+      pk.append(result["aid"])
+    cursor.close()
+    if aid not in pk:
+      message = "The AID Does Not Exist!"
+      return render_template("index.html", deleteMessage=message)
+    
     g.conn.execute("""DELETE FROM Animal_Founded WHERE aid = %s""", aid)
     return redirect('/')
 
@@ -324,6 +334,45 @@ def updateAnimal():
   activityTime = request.form['activity_time']
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
+    
+  if aid == '':
+      message = "AID cannot be NULL"
+      return render_template("index.html",updateMessage = message)
+
+  if age != '':
+      age = int(age)
+  else:
+      message = "Age cannot be NULL"
+      return render_template("index.html",addMessage = message)
+
+  if age<0:
+      message = "Age cannot be Smaller Than 0"
+      return render_template("index.html",updateMessage = message)
+
+  if pname == '':
+      message = "Park Name cannot be NULL"
+      return render_template("index.html",updateMessage = message)
+
+
+  cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
+  pk = []
+  for result in cursor:
+    pk.append(result["aid"])
+  cursor.close()
+  if aid not in pk:
+      message = "The AID Does NOT Exist!"
+      return render_template("index.html",updateMessage=message)
+
+  cursor2 = g.conn.execute("SELECT pname FROM Park")
+  fk = []
+  for line in cursor2:
+    fk.append(line["pname"])
+  cursor.close()
+  if pname not in aid:
+      message = "The Park Name Does Not Existed! "
+      return render_template("index.html",updateMessage=message)
+
+
   g.conn.execute("""UPDATE Animal_Founded SET (species, age, comes_from,
                   eating_property, activity_time, lifestyle, pname) = 
                   (%s, %s, %s, %s, %s, %s, %s) WHERE aid = %s""",
