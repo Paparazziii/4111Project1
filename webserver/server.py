@@ -1078,7 +1078,7 @@ def searchTrainer():
     
     cursor3 = g.conn.execute("""SELECT bid FROM Breeded_By WHERE aid=%s""", aid)
     bid = []
-    for result in cursor:
+    for result in cursor3:
         bid.append(result["bid"])
     cursor3.close()
     namess = []
