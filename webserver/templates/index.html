@@ -6,7 +6,28 @@
       font-size: 15pt;
       font-family: arial;
     }
-  </style>
+    .alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+
 <head>
   <titile>Animals Information</titile>>
 </head>>
@@ -42,11 +63,22 @@
 <!-- operations -->
 
 <!--error handler-->
-<div class ="flashes">
+<!-- {% if addMessage %}
+{% for category, message in addMessage %}
+<div class = "alert alert-{{category}} alert-dismissible fade show" role = "alert">
+  <span>{{message}}</span>
+  <button type = "button" class ="close" data-dismiss ="alert" aria-label="Close">
+  <span aria-hidden="true">x</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %} -->
 {% if addMessage %}
-  {{addMessage|safe}}
-{% endif %}
-</div>>
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endid %}
 <!--add-->
 <p>Add New Animal</p>
 <p>Please fill the form to create a new Animal: </p>
