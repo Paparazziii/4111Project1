@@ -1058,6 +1058,15 @@ def searchTrainer():
     if aid == '':
         message = "AID cannot be NULL"
         return render_template('index.html', searchMessage=message)
+    
+    cursor0 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    pk = []
+    for result in cursor0:
+        pk.append(result["aid"])
+    cursor0.close()
+    if aid not in pk:
+        message = "The AID Does NOT Exist!"
+        return render_template("index.html", searchMessage=message)
 
     cursor = g.conn.execute("""SELECT tid FROM Trained_By WHERE aid=%s""", aid)
     tid = []
@@ -1101,6 +1110,15 @@ def searchFood():
     if aid == '':
         message = "AID cannot be NULL"
         return render_template('index.html',searchMessage=message)
+    
+    cursor0 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    pk = []
+    for result in cursor0:
+        pk.append(result["aid"])
+    cursor0.close()
+    if aid not in pk:
+        message = "The AID Does NOT Exist!"
+        return render_template("index.html", searchMessage=message)
 
     cursor = g.conn.execute("""SELECT fname FROM Eat WHERE aid=%s""",aid)
     food = []
