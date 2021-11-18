@@ -587,12 +587,40 @@ def addFood():
     brand = request.form['brand']
     unitPrice = float(request.form['unit_price'])
     amount = int(request.form['amount'])
-    if unitPrice<0:
+    
+    if unitPrice == '':
+        message = "Unit Price cannot be NULL"
+        return render_template('food.html', addMessage=message)
+    else:
+        unitPrice = float(unitPrice)
+    
+    if amount == '':
+        message = "Amount cannot be NULL"
+        return render_template('food.html', addMessage=message)
+    else:
+        amount = int(amount)
+
+    if unitPrice < 0:
         message = "Unit Price Should be Larger than 0!"
-        return render_template('food.html',addMessage=message)
-    if amount <0:
+        return render_template('food.html', addMessage=message)
+
+    if amount < 0:
         message = "Amount Should be Larger than 0!"
-        return render_template('food.html',addMessgae=message)
+        return render_template('food.html', addMessgae=message)
+
+    if fname == '':
+        message = "Food Name cannot be NULL"
+        return render_template("food.html", addMessage=message)
+
+    cursor = g.conn.execute("SELECT fname FROM Food")
+    pk = []
+    for result in cursor:
+        pk.append(result["fname"])
+    cursor.close()
+    if fname in pk:
+        message = "The Food Has Already Existed!"
+        return render_template("food.html", addMessage=message)
+    
     g.conn.execute("""INSERT INTO Food(fname, time_purchased, brand,
                 unit_price, amount)
                 VALUES(%s, %s, %s, %s, %s)""",
@@ -603,6 +631,16 @@ def addFood():
 @app.route('/deleteFood', methods=['POST'])
 def deleteFood():
     fname = request.form['fname']
+    
+    cursor = g.conn.execute("SELECT fname FROM Food")
+    pk = []
+    for result in cursor:
+        pk.append(result["fname"])
+    cursor.close()
+    if fname not in pk:
+        message = "The Food Does NOT Exist!"
+        return render_template("food.html", deleteMessage=message)
+    
     g.conn.execute("""DELETE FROM Food WHERE fname = %s""", fname)
     return redirect('/food')
 
@@ -614,6 +652,40 @@ def updateFood():
     brand = request.form['brand']
     unitPrice = float(request.form['unit_price'])
     amount = int(request.form['amount'])
+    
+    if unitPrice == '':
+        message = "Unit Price cannot be NULL"
+        return render_template('food.html', updateMessage=message)
+    else:
+        unitPrice = float(unitPrice)
+
+    if amount == '':
+        message = "Amount cannot be NULL"
+        return render_template('food.html', updateMessage=message)
+    else:
+        amount = int(amount)
+
+    if unitPrice < 0:
+        message = "Unit Price Should be Larger than 0!"
+        return render_template('food.html', updateMessage=message)
+
+    if amount < 0:
+        message = "Amount Should be Larger than 0!"
+        return render_template('food.html', updateMessgae=message)
+
+    if fname == '':
+        message = "Food Name cannot be NULL"
+        return render_template("food.html", updateMessage=message)
+
+    cursor = g.conn.execute("SELECT fname FROM Food")
+    pk = []
+    for result in cursor:
+        pk.append(result["fname"])
+    cursor.close()
+    if fname not in pk:
+        message = "The Food Does NOT Exist!"
+        return render_template("food.html", updateMessage=message)
+    
     g.conn.execute("""UPDATE Food SET (time_purchased, brand,
                 unit_price, amount) = (%s, %s, %s, %s)
                 WHERE fname = %s""",
