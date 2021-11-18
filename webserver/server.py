@@ -263,15 +263,20 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  if aid == None:
+  if aid == " ":
       message = "AID cannot be NULL"
       return render_template("index.html",addMessage = message)
-  
-  if age<0:
+
+  if age != " ":
+      age = int(age)
+  else:
+      age = None
+
+  if age != None and age<0:
       message = "Age cannot be Smaller Than 0"
       return render_template("index.html",addMessage = message)
-  
-  if pname == None:
+
+  if pname == " ":
       message = "Park Name cannot be NULL"
       return render_template("index.html",addMessage = message)
     
