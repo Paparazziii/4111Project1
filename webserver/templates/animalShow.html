@@ -98,6 +98,12 @@ input {
 </div>
 {% endif %}
 
+{% if searchMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{searchMessage}}
+</div>
+{% endif %}
 <body>
 
  <!--print table-->
@@ -201,6 +207,21 @@ input {
         </div>
         <div>
             <input type="submit" value="Delete">
+        </div>
+    </form>
+</div>
+
+<!--search-->
+<div class="color">
+    <p><h4>Search for Corresponding Animal and Trainer</h4></p>
+    <p><h8>Please enter the S_ID of Animal Show you want to search: </h8></p>
+    <form method="POST" action ="/searchShow">
+        <div>
+            <label for="sid">S_ID</label>
+            <input type="text" name="sid">
+        </div>
+        <div>
+            <input type="submit" value="Search">
         </div>
     </form>
 </div>
