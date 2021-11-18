@@ -7,8 +7,11 @@
       font-family: arial;
     }
     .alert {
+  
+}
+.success{
   padding: 20px;
-  background-color: #f44336;
+  background-color: #10fa08;
   color: white;
 }
 
@@ -29,9 +32,51 @@
 </style>
 
 <head>
-  <titile>Animals Information</titile>>
-</head>>
+  <title>Animals Information</title>
+</head>
+<!--message-->
+{% if addMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{addMessage}}
+</div>
+{% endif %}
 
+{% if updateMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{updateMessage}}
+</div>
+{% endif %}
+
+{% if deleteMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{deleteMessage}}
+</div>
+{% endif %}
+
+<!--success-->
+{% if addSuccess %}
+<div class="success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Success!</strong> {{addSuccess}}
+</div>
+{% endif %}
+
+{% if updateSuccess %}
+<div class="success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Success!</strong> {{updateSuccess}}
+</div>
+{% endif %}
+
+{% if deleteSuccess %}
+<div class="success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Success!</strong> {{deleteSuccess}}
+</div>
+{% endif %}
 <body>
   <h1>CURRENT ANIMALS</h1>
   
@@ -61,15 +106,6 @@
     {% endfor %}
   </table>
 <!-- operations -->
-
-<!--error handler-->
-
-{% if addMessage %}
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Error!</strong> {{addMessage}}
-</div>
-{% endif %}
 <!--add-->
 <p>Add New Animal</p>
 <p>Please fill the form to create a new Animal: </p>
@@ -110,11 +146,8 @@
     <input type="submit" value="Add">
 </p>
 </form>
+
 <!--update-->
-<!--error handler-->
- {% if updateMessage %}
-<p>{{ updateMessage }}</p>
-{% endif %}
 <p>Update Current Animal</p>
 <p>Please refill the form with your update information: </p>
 <form method="POST" action ="/updateAnimal">
@@ -156,11 +189,6 @@
 </form>
 
 <!--delete-->
-<!--error handler-->
-{% if deleteMessage %}
- <p>{{ deleteMessage }}</p>
-{% endif %}
-
 <p>Delete Current Animal</p>
 <p>Please enter the A_ID of Animal you want to delete: </p>
 <form method="POST" action ="/deleteAnimal">
