@@ -99,6 +99,13 @@ input {
 </div>
 {% endif %}
 
+{% if searchMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{searchMessage}}
+</div>
+{% endif %}
+
 <body>
   <table class="table">
     <caption>
@@ -185,7 +192,49 @@ input {
     </form>
   </div>
 
-    
+    <!--search  facility-->
+<div class="color">
+  <p><h4>Search for Corresponding Facilities</h4></p>
+  <p><h8>Please enter the Park Name of Park you want to search: </h8></p>
+  <form method="POST" action ="/findFacility">
+      <div>
+          <label for="pname">Park Name</label>
+          <input type="text" name="pname">
+      </div>
+      <div>
+          <input type="submit" value="Search">
+      </div>
+  </form>
+</div>
+   <!--search  animal-->
+   <div class="color">
+    <p><h4>Search for Corresponding Animals</h4></p>
+    <p><h8>Please enter the Park Name of Park you want to search: </h8></p>
+    <form method="POST" action ="/findAnimal">
+        <div>
+            <label for="pname">Park Name</label>
+            <input type="text" name="pname">
+        </div>
+        <div>
+            <input type="submit" value="Search">
+        </div>
+    </form>
+  </div>
+  
+<!--search  animal-->
+<div class="color">
+  <p><h4>Search for Corresponding Animal Shows</h4></p>
+  <p><h8>Please enter the Park Name of Park you want to search: </h8></p>
+  <form method="POST" action ="/findShow">
+      <div>
+          <label for="pname">Park Name</label>
+          <input type="text" name="pname">
+      </div>
+      <div>
+          <input type="submit" value="Search">
+      </div>
+  </form>
+</div>
   <!--back to last page-->
   <p><a href="/"><button>Back to Animal Page</button></a></p>
   </body>

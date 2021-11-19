@@ -20,9 +20,13 @@
   
   <div class="color">
       <h1>Search Result</h1>
-        <!--print result-->
-        {% for item in data %}
-        <div>{{item}}</div>
+        {% if animalMessage %}
+        <p>Participating Animal: {{animalMessage}}</p>
+        {% endif %}
+
+        {% if trainerMessage %}
+        <p>Participating Trainer: {{trainerMessage}}</p>
+        {% endif %}
   </div>
 
 

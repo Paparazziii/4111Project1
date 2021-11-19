@@ -97,6 +97,13 @@ input {
   <strong>Error!</strong> {{deleteMessage}}
 </div>
 {% endif %}
+
+{% if searchMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{searchMessage}}
+</div>
+{% endif %}
 <body>
   
 
@@ -202,6 +209,20 @@ input {
 </div>
 </form>
 </div>
+<!--search -->
+<div class="color">
+    <p><h4>Check Storage</h4></p>
+    <p><h8>Please enter an amount (You will get food with inventory less than this amount): </h8></p>
+    <form method="POST" action ="/checkStorage">
+        <div>
+            <label for="amount">Amount</label>
+            <input type="text" name="amount">
+        </div>
+        <div>
+            <input type="submit" value="Search">
+        </div>
+    </form>
+  </div>
 <!-- back to last page-->
 <p><a href="/"><button>Back to Animals Page</button></a></p>
 </body>
