@@ -567,8 +567,12 @@ def updateAnimal():
                            trainerMessage=line3,foodMessage=line4)
 
   if age != '':
-      
-      age = int(age)
+      try:
+        age = int(age)
+      except:
+        message = "Age should be integer"
+        return render_template("index.html",updateMessage = message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
   else:
       message = "Age cannot be NULL"
       return render_template("index.html",updateMessage = message,breederMessage=line2,
@@ -847,13 +851,21 @@ def addFood():
         message = "Unit Price cannot be NULL"
         return render_template('food.html', addMessage=message)
     else:
-        unitPrice = float(unitPrice)
+        try:
+            unitPrice = float(unitPrice)
+        except:
+            message = "Unit Price should be Float"
+            return render_template('food.html', addMessage=message)
     
     if amount == '':
         message = "Amount cannot be NULL"
         return render_template('food.html', addMessage=message)
     else:
-        amount = int(amount)
+        try:
+            amount = int(amount)
+        except:
+            message = "Amount should be Integer"
+            return render_template('food.html', addMessage=message)
 
     if unitPrice <= 0:
         message = "Unit Price Should be Larger than 0!"
@@ -920,13 +932,21 @@ def updateFood():
         message = "Unit Price cannot be NULL"
         return render_template('food.html', updateMessage=message)
     else:
-        unitPrice = float(unitPrice)
+        try:
+            unitPrice = float(unitPrice)
+        except:
+            message = "Unit Price should be Float"
+            return render_template('food.html', updateMessage=message)
 
     if amount == '':
         message = "Amount cannot be NULL"
         return render_template('food.html', updateMessage=message)
     else:
-        amount = int(amount)
+        try:
+            amount = int(amount)
+        except:
+            message = "Amount should be Integer"
+            return render_template('food.html', updateMessage=message)
 
     if unitPrice <= 0:
         message = "Unit Price Should be Larger than 0!"
@@ -991,7 +1011,12 @@ def addAnimalShow():
         return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
                            trainerMessage=lines3)
     else:
-        seat = int(seat)
+        try:
+            seat = int(seat)
+        except:
+            message = "Seat should be Integer"
+            return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     if aid == "Assign Animal":
         message = "Please choose a animal"
@@ -1000,6 +1025,11 @@ def addAnimalShow():
 
     if tid == "Assign Trainer":
         message = "Please choose a trainer"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
+    
+    if seat <=0:
+        message = "Seat should be larger than 0"
         return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
                            trainerMessage=lines3)
 
@@ -1037,6 +1067,20 @@ def addAnimalShow():
 def deleteAnimalShow():
     sid = request.form['sid']
     
+    cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    lines2 = []
+    for result in cursor2:
+        lines2.append(result["aid"])
+    cursor2.close()
+    lines2.append(None)
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    lines3 = []
+    for result in cursor3:
+        lines3.append(result["tid"])
+    cursor3.close()
+    lines3.append(None)
+    
     cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
     pk = []
     for result in cursor:
@@ -1044,7 +1088,8 @@ def deleteAnimalShow():
     cursor.close()
     if sid not in pk:
       message = "The Show Does NOT Exist!"
-      return render_template("animalShow.html", deleteMessage=message)
+      return render_template("animalShow.html", deleteMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
     
     cursor2 = g.conn.execute("SELECT sid FROM Participate_In")
     sids = []
@@ -1066,19 +1111,41 @@ def updateAnimalShow():
     time = request.form['time']
     pname = request.form['pname']
     
+    cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    lines2 = []
+    for result in cursor2:
+        lines2.append(result["aid"])
+    cursor2.close()
+    lines2.append(None)
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    lines3 = []
+    for result in cursor3:
+        lines3.append(result["tid"])
+    cursor3.close()
+    lines3.append(None)
+    
     if sid == '':
       message = "SID cannot be NULL"
-      return render_template("animalShow.html", updateMessage=message)
+      return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
     
     if pname == '':
       message = "Park Name cannot be NULL"
-      return render_template("animalShow.html", updateMessage=message)
+      return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     if seat == '':
       message = "Seat cannot be NULL"
-      return render_template("animalShow.html", updateMessage=message)
+      return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
     else:
-      seat = int(seat)
+      try:
+        seat = int(seat)
+      except:
+        message = "Seat should be integer"
+        return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
     pk = []
@@ -1087,7 +1154,8 @@ def updateAnimalShow():
     cursor.close()
     if sid not in pk:
       message = "The Show Does NOT Exist!"
-      return render_template("animalShow.html", updateMessage=message)
+      return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor2 = g.conn.execute("SELECT pname FROM Park")
     fk = []
@@ -1096,7 +1164,8 @@ def updateAnimalShow():
     cursor2.close()
     if pname not in fk:
       message = "The Park Does NOT Exist! "
-      return render_template("animalShow.html", updateMessage=message)
+      return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
     
     g.conn.execute("""UPDATE Animal_Show_Held SET (show_name,
                 seat, time, pname) = (%s, %s, %s, %s)
