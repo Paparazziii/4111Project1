@@ -328,9 +328,9 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  bid=request.form['assignB']
-  tid=request.form['assignT']
-  fname=request.form['assignF']
+  bid=request.form['B']
+  tid=request.form['T']
+  fname=request.form['F']
 
   print(bid, tid, fname)
     
