@@ -477,6 +477,25 @@ def addAnimal():
 def deleteAnimal():
     aid = request.form['aid']
     
+    
+    cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    line2 = []
+    for result in cursor2:
+        line2.append(result["bid"])
+    cursor2.close()
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    line3 = []
+    for result in cursor3:
+        line3.append(result["tid"])
+    cursor3.close()
+
+    cursor4 = g.conn.execute("SELECT fname FROM Food")
+    line4 = []
+    for result in cursor4:
+        line4.append(result["fname"])
+    cursor4.close()
+    
     cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
     pk = []
     for result in cursor:
@@ -484,7 +503,8 @@ def deleteAnimal():
     cursor.close()
     if aid not in pk:
       message = "The AID Does Not Exist!"
-      return render_template("index.html", deleteMessage=message)
+      return render_template("index.html", deleteMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
     g.conn.execute("""DELETE FROM Breeded_By WHERE aid=%s""",aid)
 
@@ -523,23 +543,46 @@ def updateAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
+  cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    line2 = []
+    for result in cursor2:
+        line2.append(result["bid"])
+    cursor2.close()
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    line3 = []
+    for result in cursor3:
+        line3.append(result["tid"])
+    cursor3.close()
+
+    cursor4 = g.conn.execute("SELECT fname FROM Food")
+    line4 = []
+    for result in cursor4:
+        line4.append(result["fname"])
+    cursor4.close()
+    
   if aid == '':
       message = "AID cannot be NULL"
-      return render_template("index.html",updateMessage = message)
+      return render_template("index.html",updateMessage = message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
   if age != '':
+      
       age = int(age)
   else:
       message = "Age cannot be NULL"
-      return render_template("index.html",updateMessage = message)
+      return render_template("index.html",updateMessage = message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
   if age<0:
       message = "Age cannot be Smaller Than 0"
-      return render_template("index.html",updateMessage = message)
+      return render_template("index.html",updateMessage = message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
   if pname == '':
       message = "Park Name cannot be NULL"
-      return render_template("index.html",updateMessage = message)
+      return render_template("index.html",updateMessage = message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
 
   cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
@@ -549,7 +592,8 @@ def updateAnimal():
   cursor.close()
   if aid not in pk:
       message = "The AID Does NOT Exist!"
-      return render_template("index.html",updateMessage=message)
+      return render_template("index.html",updateMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
   cursor2 = g.conn.execute("SELECT pname FROM Park")
   fk = []
@@ -558,7 +602,8 @@ def updateAnimal():
   cursor2.close()
   if pname not in fk:
       message = "The Park Name Does Not Exist! "
-      return render_template("index.html",updateMessage=message)
+      return render_template("index.html",updateMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
   g.conn.execute("""UPDATE Animal_Founded SET (species, age, comes_from,
                   eating_property, activity_time, lifestyle, pname) = 
@@ -1437,8 +1482,8 @@ def searchShow():
         aids.append(aid)
         tids.append(tid)
     cursor2.close()
-    message1 = ", ".join(aid)
-    message2 = ", ".join(tid)
+    message1 = ", ".join(aids)
+    message2 = ", ".join(tids)
     return render_template("animalShowSearch.html",animalMessage=message1, trainerMessage=message2)
 
 
