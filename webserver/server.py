@@ -1212,6 +1212,33 @@ def findFacility():
     return render_template("parkSearch.html",facilityMessage = message)
 
 
+@app.route('/findAnimal',methods=['POST'])
+def findAnimal():
+    pname = request.form['pname']
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("park.html", searchMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor2.close()
+    if pname not in fk:
+        message = "The Park Does NOT Existed! "
+        return render_template("park.html", searchMessage=message)
+
+    cursor2 = g.conn.execute("SELECT * FROM Animal_Founded WHERE pname=%s",pname)
+    res = []
+    for line in cursor2:
+        aid = line['aid']
+        species = line['species']
+        tot = aid + " " + species
+    cursor2.close()
+    message = ", ".join(res)
+    return render_template("parkSearch.html",animalMessage=message)
+
+
 @app.route('/login')
 def login():
     abort(401)
