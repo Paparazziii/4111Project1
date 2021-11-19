@@ -401,8 +401,8 @@ def addAnimal():
                      tid, aid)
 
   checkpk3 = [fname,aid]
-  cursor5 = g.conn.execute("SELECT * Eat")
-  for line in cursor4:
+  cursor5 = g.conn.execute("SELECT * FROM Eat")
+  for line in cursor5:
       newpk = list(line)
       if checkpk3 == newpk:
           message = "The Relationship Has Already Existed"
