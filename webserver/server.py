@@ -438,6 +438,14 @@ def deleteAnimal():
 
     g.conn.exeucute("DELETE FROM Eat WHERE aid=%s",aid)
     
+    cursor3 = g.conn.execute("SELECT aid FROM Participate_In")
+    aids2 = []
+    for result in cursor3:
+        aids2.append(result["aid"])
+    cursor3.close()
+    if aid in aids2:
+        g.conn.execute("DELETE FROM Participate_in WHERE aid=%s", aid)
+    
     
     g.conn.execute("""DELETE FROM Animal_Founded WHERE aid = %s""", aid)
     
@@ -553,6 +561,14 @@ def deleteBreeder():
     if bid not in pk:
       message = "The BID Does NOT Exist!"
       return render_template("breeder.html", deleteMessage=message)
+    
+    cursor2 = g.conn.execute("SELECT bid FROM Breeded_By")
+    bids = []
+    for result in cursor2:
+        bids.append(result["bid"])
+    cursor2.close()
+    if bid in bids:
+        g.conn.execute("DELETE FROM Breeded_By WHERE bid=%s", bid)
     
     g.conn.execute("DELETE FROM Breeder_Managed WHERE bid = %s", bid)
     return redirect('/breeder')
