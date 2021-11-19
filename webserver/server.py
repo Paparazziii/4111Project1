@@ -119,6 +119,24 @@ def index():
     print(list(result))
   cursor.close()
 
+  cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
+  line2 = []
+  for result in cursor2:
+      line2.append(result["bid"])
+  cursor2.close()
+    
+  cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+  line3 = []
+  for result in cursor3:
+      line3.append(result["tid"])
+  cursor3.close()
+    
+  cursor4 = g.conn.execute("SELECT fname FROM Food")
+  line4 = []
+  for result in cursor4:
+      line4.append(result["fname"])
+  cursor4.close()
+
   #
   # Flask uses Jinja templates, which is an extension to HTML where you can
   # pass data to a template and dynamically generate HTML based on the data
@@ -152,7 +170,8 @@ def index():
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
   #
-  return render_template("index.html", **context)
+  return render_template("index.html", **context, breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
 #
 # This is an example of a different path.  You can see it at:
