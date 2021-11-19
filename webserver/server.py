@@ -239,7 +239,7 @@ def animalShow():
         print(list(result))
     cursor.close()
     context = dict(data=lines)
-        cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
     lines2 = []
     for result in cursor2:
         lines2.append(result["aid"])
@@ -732,13 +732,13 @@ def deleteTrainer():
     if tid in tids:
         g.conn.execute("DELETE FROM Trained_By WHERE bid=%s", tid)
 
-    cursor3 = g.conn.execute("SELECT tid FROM Trained_By")
+    cursor3 = g.conn.execute("SELECT tid FROM Participate_In")
     tids2 = []
     for result in cursor3:
         tids2.append(result["tid"])
     cursor3.close()
     if tid in tids2:
-        g.conn.execute("DELETE FROM Participate_In WHERE bid=%s",tid)
+        g.conn.execute("DELETE FROM Participate_In WHERE tid=%s",tid)
     
     g.conn.execute("DELETE FROM Trainer_Managed WHERE tid = %s", tid)
     return redirect('/another')
@@ -805,13 +805,13 @@ def addFood():
     else:
         amount = int(amount)
 
-    if unitPrice < 0:
+    if unitPrice <= 0:
         message = "Unit Price Should be Larger than 0!"
         return render_template('food.html', addMessage=message)
 
-    if amount < 0:
+    if amount <= 0:
         message = "Amount Should be Larger than 0!"
-        return render_template('food.html', addMessgae=message)
+        return render_template('food.html', addMessage=message)
 
     if fname == '':
         message = "Food Name cannot be NULL"
@@ -878,13 +878,13 @@ def updateFood():
     else:
         amount = int(amount)
 
-    if unitPrice < 0:
+    if unitPrice <= 0:
         message = "Unit Price Should be Larger than 0!"
         return render_template('food.html', updateMessage=message)
 
-    if amount < 0:
+    if amount <= 0:
         message = "Amount Should be Larger than 0!"
-        return render_template('food.html', updateMessgae=message)
+        return render_template('food.html', updateMessage=message)
 
     if fname == '':
         message = "Food Name cannot be NULL"
@@ -953,10 +953,6 @@ def addAnimalShow():
         return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
                            trainerMessage=lines3)
 
-    if aid!=None and tid!=None:
-        g.conn.execute("INSERT INTO Participate_In(sid, aid, tid) VALUES (%s,%s,%s)",
-                       sid, aid, tid)
-
     cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
     pk = []
     for result in cursor:
@@ -980,6 +976,10 @@ def addAnimalShow():
     g.conn.execute("""INSERT INTO Animal_Show_Held(sid, show_name,
                 seat, time, pname) VALUES(%s, %s, %s, %s, %s)""",
                    sid, showName, seat, time, pname)
+
+    if aid!="None" and tid!="None":
+        g.conn.execute("INSERT INTO Participate_In(sid, aid, tid) VALUES (%s,%s,%s)",
+                       sid, aid, tid)
     return redirect('/animalShow')
 
 
@@ -1396,12 +1396,12 @@ def checkStorage():
         message = "Amount should not be smaller than 0"
         return render_template('food.html', searchMessage=message)
 
-    cursor = g.conn.execute("""SELECT amount FROM Food WHERE amount<%s""",amount)
+    cursor = g.conn.execute("""SELECT * FROM Food WHERE amount<%s""",amount)
     res = []
     for line in cursor:
         food = line['fname']
         storage = line['amount']
-        tot = food + " " + storage
+        tot = food + " " + str(storage)
         res.append(tot)
     message0 = ", ".join(res)
     return render_template("foodSearch.html", foodMessage = message0)
@@ -1423,16 +1423,18 @@ def searchShow():
         message = "The Show Does NOT Exist!"
         return render_template("animalShow.html", searchMessage=message)
 
-    res = []
+    aids = []
+    tids = []
     cursor2 = g.conn.execute("""SELECT * FROM Participate_In WHERE sid=%s""", sid)
     for line in cursor2:
         aid = line["aid"]
         tid = line["tid"]
-        tot = aid + " " + tid
-        res.append(tot)
+        aids.append(aid)
+        tids.append(tid)
     cursor2.close()
-    message = ", ".join(res)
-    return render_template("animalShowSearch.html",searchMessage=message)
+    message1 = ", ".join(aid)
+    messgae2 = ", ".join(tid)
+    return render_template("animalShowSearch.html",animalMessage=message1, trainerMessage=message2)
 
 
 @app.route('/findFacility',methods=['POST'])
