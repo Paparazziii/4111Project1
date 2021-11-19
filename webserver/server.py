@@ -244,12 +244,14 @@ def animalShow():
     for result in cursor2:
         lines2.append(result["aid"])
     cursor2.close()
+    lines2.append(None)
 
     cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
     lines3 = []
     for result in cursor3:
         lines3.append(result["tid"])
     cursor3.close()
+    lines3.append(None)
     return render_template("animalShow.html", **context,animalMessage=lines2,
                            trainerMessage=lines3)
 
