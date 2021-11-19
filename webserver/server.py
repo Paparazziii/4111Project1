@@ -425,8 +425,22 @@ def deleteAnimal():
     if aid not in pk:
       message = "The AID Does Not Exist!"
       return render_template("index.html", deleteMessage=message)
+
+    g.conn.excute("""DELETE FROM Breeded_By WHERE aid=%s""",aid)
+
+    cursor2 = g.conn.execute("SELECT aid FROM Trained_By")
+    aids = []
+    for result in cursor2:
+        aids.append(result["aid"])
+    cursor2.close()
+    if aid in aids:
+        g.conn.execute("DELETE FROM Trained_By WHERE aid=%s",aid)
+
+    g.conn.exeucute("DELETE FROM Eat WHERE aid=%s",aid)
+    
     
     g.conn.execute("""DELETE FROM Animal_Founded WHERE aid = %s""", aid)
+    
     return redirect('/')
 
 
