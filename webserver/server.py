@@ -319,111 +319,137 @@ def relationP():
 
 @app.route('/addAnimal',methods=['GET','POST'])
 def addAnimal():
-  aid = request.form['aid']
-  species = request.form['species']
-  age = request.form['age']
-  comesFrom = request.form['comes_from']
-  eatingProperty = request.form['eating_property']
-  activityTime = request.form['activity_time']
-  lifestyle = request.form['lifestyle']
-  pname = request.form['parkname']
+    aid = request.form['aid']
+    species = request.form['species']
+    age = request.form['age']
+    comesFrom = request.form['comes_from']
+    eatingProperty = request.form['eating_property']
+    activityTime = request.form['activity_time']
+    lifestyle = request.form['lifestyle']
+    pname = request.form['parkname']
     
-  bid=request.form['B']
-  tid=request.form['T']
-  fname=request.form['F']
+    bid=request.form['B']
+    tid=request.form['T']
+    fname=request.form['F']
 
-  print(bid, tid, fname)
-    
-  if aid == '':
-      message = "AID cannot be NULL"
-      return render_template("index.html",addMessage = message)
+    cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    line2 = []
+    for result in cursor2:
+        line2.append(result["bid"])
+    cursor2.close()
 
-  if age != '':
-      age = int(age)
-  else:
-      message = "Age cannot be NULL"
-      return render_template("index.html",addMessage = message)
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    line3 = []
+    for result in cursor3:
+        line3.append(result["tid"])
+    cursor3.close()
 
-  if age != None and age<0:
-      message = "Age cannot be Smaller Than 0"
-      return render_template("index.html",addMessage = message)
+    cursor4 = g.conn.execute("SELECT fname FROM Food")
+    line4 = []
+    for result in cursor4:
+        line4.append(result["fname"])
+    cursor4.close()
 
-  if pname == '':
-      message = "Park Name cannot be NULL"
-      return render_template("index.html",addMessage = message)
-    
-  cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
-  pk = []
-  for result in cursor:
-      pk.append(result["aid"])
-  cursor.close()
-  if aid in pk:
-      message = "The AID Has Already Existed!"
-      return render_template("index.html",addMessage=message)
-    
-  cursor2 = g.conn.execute("SELECT pname FROM Park")
-  fk = []
-  for line in cursor2:
-      fk.append(line["pname"])
-  cursor2.close()
+    if aid == " ":
+        message = "AID cannot be NULL"
+        return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
-  if pname not in fk:
-      message = "The Park Name Does Not Exist! "
-      return render_template("index.html",addMessage=message)  
-    
-  if bid == "Assign Breeder":
-      message = "Please Choose A Breeder"
-      return render_template("index.html",addMessage=message)
+    if age < 0:
+        message = "Age cannot be Smaller Than 0"
+        return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
-  if tid == "Assign Trainer":
-      message = "Please Choose A Trainer"
-      return render_template("index.html",addMessage=message)
+    if pname == " ":
+        message = "Park Name cannot be NULL"
+        return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
-  if fname=="Assign Food":
-      message = "Please Choose Food"
-      return render_template("index.html",addMessage=message)
-    
-  g.conn.execute("""INSERT INTO Animal_Founded(aid,species,age,comes_from,
+    if age != " ":
+        age = int(age)
+    else:
+        age = None
+
+    cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
+    pk = []
+    for result in cursor:
+        pk.append(result["aid"])
+    cursor.close()
+    if aid in pk:
+        message = "The AID Has Already Existed!"
+        return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor.close()
+    if pname not in aid:
+        message = "The Park Name Does Not Existed! "
+        return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+
+    g.conn.execute("""INSERT INTO Animal_Founded(aid,species,age,comes_from,
                   eating_property,activity_time,lifestyle,pname)
-                  VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""", 
-                 aid, species, age, comesFrom,
-                 eatingProperty, activityTime, lifestyle, pname)
-  
-  checkpk = [bid,aid]
-  cursor3 = g.conn.execute("SELECT * FROM Breeded_By")
-  for line in cursor3:
-      newpk = list(line)
-      if checkpk == newpk:
-          message = "The Relationship Has Already Existed"
-          return render_template("index.html",addMessage=message)
-  cursor3.close()
-  g.conn.execute("""INSERT INTO Breeded_By(bid, aid) VALUES(%s, %s)""",
-                   bid, aid)
-    
-  checkpk2 = [tid,aid]
-  cursor4 = g.conn.execute("SELECT * FROM Trained_By")
-  for line in cursor4:
-      newpk = list(line)
-      if checkpk2 == newpk:
-          message = "The Relationship Has Already Existed"
-          return render_template("index.html", addMessage=message)
-  cursor4.close()
-    
-  if tid!=None:
-      g.conn.execute("""INSERT INTO Trained_By(tid,aid) VALUES (%s, %s)""",
-                     tid, aid)
+                  VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""",
+                   aid, species, age, comesFrom,
+                   eatingProperty, activityTime, lifestyle, pname)
 
-  checkpk3 = [fname,aid]
-  cursor5 = g.conn.execute("SELECT * FROM Eat")
-  for line in cursor5:
-      newpk = list(line)
-      if checkpk3 == newpk:
-          message = "The Relationship Has Already Existed"
-          return render_template("index.html", addMessage=message)
-  cursor5.close()
-  g.conn.execute("""INSERT INTO Eat(fname,aid) VALUES (%s, %s)""",
-                 fname, aid)
-  return redirect('/')
+
+    if bid == "Assign Breeder":
+        message = "Please Choose A Breeder"
+        return render_template("index.html",addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+
+    if tid == "Assign Trainer":
+        message = "Please Choose A Trainer"
+        return render_template("index.html",addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+
+    if fname=="Assign Food":
+        message = "Please Choose Food"
+        return render_template("index.html",addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+
+    checkpk = [bid,aid]
+    cursor3 = g.conn.excute("SELECT * FROM Breeded_By")
+    for line in cursor3:
+        newpk = list(line)
+        if checkpk == newpk:
+            message = "The Relationship Has Already Existed"
+            return render_template("index.html",addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+    cursor3.close()
+    g.conn.execute("""INSERT INTO Breeded_By(bid, aid) VALUES(%s, %s)""",
+                   bid, aid)
+
+    checkpk2 = [tid,aid]
+    cursor4 = g.conn.execute("SELECT * FROM Trained_By")
+    for line in cursor4:
+        newpk = list(line)
+        if checkpk2 == newpk:
+            message = "The Relationship Has Already Existed"
+            return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+    cursor4.close()
+
+    if tid!=None:
+        g.conn.execute("""INSERT INTO Trained_By(tid,aid) VALUES (%s, %s)""",
+                       tid, aid)
+
+    checkpk3 = [fname,aid]
+    cursor5 = g.conn.execute("SELECT * Eat")
+    for line in cursor4:
+        newpk = list(line)
+        if checkpk3 == newpk:
+            message = "The Relationship Has Already Existed"
+            return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+    cursor5.close()
+    g.conn.execute("""INSERT INTO Eat(fname,aid) VALUES (%s, %s)""",
+                   fname, aid)
+    return redirect('/')
 
 
 @app.route('/deleteAnimal', methods=['POST'])
