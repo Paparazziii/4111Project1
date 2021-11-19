@@ -1228,14 +1228,14 @@ def findAnimal():
         message = "The Park Does NOT Existed! "
         return render_template("park.html", searchMessage=message)
 
-    cursor2 = g.conn.execute("SELECT * FROM Animal_Founded WHERE pname=%s",pname)
+    cursor = g.conn.execute("SELECT * FROM Animal_Founded WHERE pname=%s",pname)
     res = []
-    for line in cursor2:
+    for line in cursor:
         aid = line['aid']
         species = line['species']
         tot = aid + " " + species
         res.append(tot)
-    cursor2.close()
+    cursor.close()
     message = ", ".join(res)
     return render_template("parkSearch.html",animalMessage=message)
 
@@ -1256,17 +1256,35 @@ def findShow():
         message = "The Park Does NOT Existed! "
         return render_template("park.html", searchMessage=message)
 
-    cursor2 = g.conn.execute("SELECT * FROM Animal_Show_Held WHERE pname=%s", pname)
+    cursor = g.conn.execute("SELECT * FROM Animal_Show_Held WHERE pname=%s", pname)
     res = []
-    for line in cursor2:
+    for line in cursor:
         sid = line['sid']
         showNmae = line['showName']
         time = line['time']
         tot = sid + " " + showNmae + " " + time
         res.append(tot)
-    cursor2.close()
+    cursor.close()
     message = ", ".join(res)
     return render_template("parkSearch.html", animalMessage=message)
+
+
+@app.route('/findPark',methods=['POST'])
+def findPark():
+    typee = request.form['type']
+    
+    if typee == "":
+        message = "Type cannot be NULL"
+        return render_template("facility.html",searchMessage=message)
+    
+    res = []
+    cursor = g.conn.execute("SELECT * FROM Facility_Located WHERE type=%s",typee)
+    for line in cursor:
+        parkname = line['pname']
+        res.append(parkname)
+    cursor.close()
+    message = ", ".join(res)
+    return render_template("facilitySearch.html",parkMessage=message)
 
 
 @app.route('/login')
