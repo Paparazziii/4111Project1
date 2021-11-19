@@ -669,6 +669,22 @@ def deleteTrainer():
       message = "The TID Does NOT Exist!"
       return render_template("another.html", deleteMessage=message)
     
+    cursor2 = g.conn.execute("SELECT tid FROM Trained_By")
+    tids = []
+    for result in cursor2:
+        tids.append(result["tid"])
+    cursor2.close()
+    if tid in tids:
+        g.conn.execute("DELETE FROM Trained_By WHERE bid=%s", tid)
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trained_By")
+    tids2 = []
+    for result in cursor3:
+        tids2.append(result["tid"])
+    cursor3.close()
+    if tid in tids2:
+        g.conn.execute("DELETE FROM Participate_In WHERE bid=%s",tid)
+    
     g.conn.execute("DELETE FROM Trainer_Managed WHERE tid = %s", tid)
     return redirect('/another')
 
