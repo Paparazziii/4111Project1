@@ -1234,9 +1234,39 @@ def findAnimal():
         aid = line['aid']
         species = line['species']
         tot = aid + " " + species
+        res.append(tot)
     cursor2.close()
     message = ", ".join(res)
     return render_template("parkSearch.html",animalMessage=message)
+
+
+@app.route('/findShow',methods=['POST'])
+def findShow():
+    pname = request.form['pname']
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("park.html", searchMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor2.close()
+    if pname not in fk:
+        message = "The Park Does NOT Existed! "
+        return render_template("park.html", searchMessage=message)
+
+    cursor2 = g.conn.execute("SELECT * FROM Animal_Show_Held WHERE pname=%s", pname)
+    res = []
+    for line in cursor2:
+        sid = line['sid']
+        showNmae = line['showName']
+        time = line['time']
+        tot = sid + " " + showNmae + " " + time
+        res.append(tot)
+    cursor2.close()
+    message = ", ".join(res)
+    return render_template("parkSearch.html", animalMessage=message)
 
 
 @app.route('/login')
