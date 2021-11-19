@@ -6,7 +6,9 @@
       var x = document.getElementById("assignB").value;
       var y = document.getElementById("assignT").value;
       var z = document.getElementById("assignF").value;
-      document.getElementById("demo").innerHTML=x+y+z;
+      document.getElementById("assignB").value = x;
+      document.getElementById("assignT").value=y;
+      document.getElementById("assignF").value=z;
     }
   </script>
   <style>
@@ -150,7 +152,13 @@ input {
 <!-- operations -->
 <!--add-->
 <!--link to other page-->
-<p id="demo"></p>
+<div>
+  <form method="POST" action ="/addAnimal">
+<input id = "assignB" type ="text" name ="assignB" value="">
+<input id = "assignT" type ="text" name ="assignB" value="">
+<input id = "assignF" type ="text" name ="assignB" value="">
+</form>
+</div>
 
 <p><a href="another"><button>Manage Traniers</button></a></p>
 <p><a href="breeder"><button>Manage Breeders</button></a></p>
