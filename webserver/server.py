@@ -1183,6 +1183,35 @@ def searchShow():
     return render_template("animalShowSearch.html",searchMessage=message)
 
 
+@app.route('/findFacility',methods=['POST'])
+def findFacility():
+    pname = request.form['pname']
+    if pname == '':
+        message = "Park Name cannot be NULL"
+        return render_template("park.html", searchMessage=message)
+
+    cursor2 = g.conn.execute("SELECT pname FROM Park")
+    fk = []
+    for line in cursor2:
+        fk.append(line["pname"])
+    cursor2.close()
+    if pname not in fk:
+        message = "The Park Does NOT Existed! "
+        return render_template("park.html", searchMessage=message)
+
+    res = []
+    cursor = g.conn.execute("SELECT * FROM Facility_Located WHERE pname=%s",pname)
+    for line in cursor:
+        fid = line["fid"]
+        typee = line["type"]
+        name = line["name"]
+        tot = fid + " " + typee + " " + name
+        res.append(tot)
+    cursor.close()
+    message = ", ".join(res)
+    return render_template("parkSearch.html",facilityMessage = message)
+
+
 @app.route('/login')
 def login():
     abort(401)
