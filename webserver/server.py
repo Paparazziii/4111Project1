@@ -369,8 +369,41 @@ def addAnimal():
                   VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""", 
                  aid, species, age, comesFrom,
                  eatingProperty, activityTime, lifestyle, pname)
-  message = 'Successfully Added!'
-  render_template("index.html",addSuccess=message)
+  
+  checkpk = [bid,aid]
+  cursor3 = g.conn.excute("SELECT * FROM Breeded_By")
+  for line in cursor3:
+      newpk = list(line)
+      if checkpk == newpk:
+          message = "The Relationship Has Already Existed"
+          return render_template("index.html",addMessage=message)
+  cursor3.close()
+  g.conn.execute("""INSERT INTO Breeded_By(bid, aid) VALUES(%s, %s)""",
+                   bid, aid)
+    
+  checkpk2 = [tid,aid]
+  cursor4 = g.conn.execute("SELECT * FROM Trained_By")
+  for line in cursor4:
+      newpk = list(line)
+      if checkpk2 == newpk:
+          message = "The Relationship Has Already Existed"
+          return render_template("index.html", addMessage=message)
+  cursor4.close()
+    
+  if tid!=None:
+      g.conn.execute("""INSERT INTO Trained_By(tid,aid) VALUES (%s, %s)""",
+                     tid, aid)
+
+  checkpk3 = [fname,aid]
+  cursor5 = g.conn.execute("SELECT * Eat")
+  for line in cursor4:
+      newpk = list(line)
+      if checkpk3 == newpk:
+          message = "The Relationship Has Already Existed"
+          return render_template("index.html", addMessage=message)
+  cursor5.close()
+  g.conn.execute("""INSERT INTO Eat(fname,aid) VALUES (%s, %s)""",
+                 fname, aid)
   return redirect('/')
 
 
