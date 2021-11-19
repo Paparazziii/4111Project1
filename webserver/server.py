@@ -910,6 +910,14 @@ def deleteAnimalShow():
       message = "The Show Does NOT Exist!"
       return render_template("animalShow.html", deleteMessage=message)
     
+    cursor2 = g.conn.execute("SELECT sid FROM Participate_In")
+    sids = []
+    for result in cursor2:
+        sids.append(result["sid"])
+    cursor2.close()
+    if sid in sids:
+        g.conn.execute("DELETE FROM Participate_In WHERE sid=%s",sid)
+    
     g.conn.execute("DELETE FROM Animal_Show_Held WHERE sid = %s", sid)
     return redirect('/animalShow')
 
