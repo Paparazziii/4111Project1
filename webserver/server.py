@@ -331,6 +331,8 @@ def addAnimal():
   bid=request.form['assignB']
   tid=request.form.get['assignT']
   fname=request.form.get['assignF']
+
+  print(bid, tid, fname)
     
   if aid == '':
       message = "AID cannot be NULL"
