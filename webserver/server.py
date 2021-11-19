@@ -317,7 +317,7 @@ def relationP():
 #  g.conn.execute('INSERT INTO test(name) VALUES (%s)', name)
 #  return redirect('/')
 
-@app.route('/addAnimal',methods=['POST'])
+@app.route('/addAnimal',methods=['GET','POST'])
 def addAnimal():
   aid = request.form['aid']
   species = request.form['species']
@@ -328,9 +328,9 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  bid=request.form['assignB']
-  tid=request.form['assignT']
-  fname=request.form['assignF']
+  bid=request.args.get('assignB')
+  tid=request.args.get('assignT')
+  fname=request.args.get('assignF')
 
   print(bid, tid, fname)
     
