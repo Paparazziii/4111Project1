@@ -1,1 +1,76 @@
 
+
+
+
+<!-- park template -->
+<html>
+  <script src ="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+    .table table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table th {
+	background-color:#93DAFF;
+	color:#000000
+}
+.table,.table th,.table td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table th,.table td {
+	border: 1px solid #6fcdfe;
+	border-width:1px 0 1px 0
+}
+.table tr {
+	border: 1px solid #ffffff;
+}
+.table tr:nth-child(odd){
+	background-color:#dbf2fe;
+}
+.table tr:nth-child(even){
+	background-color:#ffffff;
+}
+
+  </style>
+
+<head>
+    <title>Participate</title>
+</head>
+
+<body>
+  <table class="table">
+    <caption>
+      <h2>
+        Participation
+      </h2>
+    </caption>
+    <tr>
+      <th>S_ID</th>
+      <th>A_ID</th>
+      <th>T_ID</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{item[0]}}</td>
+      <td>{{item[1]}}</td>
+      <td>{{iteme[2]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    
+
+  <!--back to last page-->
+  <p><a href="/"><button>Back to Animal Page</button></a></p>
+  <p><a href="trainer"><button>Back to Train Page</button></a></p>
+  <p><a href="animalShow"><button>Back to Animal Show Page</button></a></p>
+  </body>
+  </html>
+  
