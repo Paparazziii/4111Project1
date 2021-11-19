@@ -366,9 +366,22 @@ def addAnimal():
   for line in cursor2:
       fk.append(line["pname"])
   cursor2.close()
+
   if pname not in fk:
       message = "The Park Name Does Not Exist! "
       return render_template("index.html",addMessage=message)  
+    
+  if bid == "Assign Breeder":
+      message = "Please Choose A Breeder"
+      return render_template("index.html",addMessage=message)
+
+  if tid == "Assign Trainer":
+      message = "Please Choose A Trainer"
+      return render_template("index.html",addMessage=message)
+
+  if fname=="Assign Food":
+      message = "Please Choose Food"
+      return render_template("index.html",addMessage=message)
     
   g.conn.execute("""INSERT INTO Animal_Founded(aid,species,age,comes_from,
                   eating_property,activity_time,lifestyle,pname)
