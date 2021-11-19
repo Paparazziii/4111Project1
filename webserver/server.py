@@ -1438,7 +1438,7 @@ def searchShow():
         tids.append(tid)
     cursor2.close()
     message1 = ", ".join(aid)
-    messgae2 = ", ".join(tid)
+    message2 = ", ".join(tid)
     return render_template("animalShowSearch.html",animalMessage=message1, trainerMessage=message2)
 
 
