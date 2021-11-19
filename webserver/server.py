@@ -435,7 +435,7 @@ def addAnimal():
                            trainerMessage=line3,foodMessage=line4)
 
     checkpk = [bid,aid]
-    cursor3 = g.conn.excute("SELECT * FROM Breeded_By")
+    cursor3 = g.conn.execute("SELECT * FROM Breeded_By")
     for line in cursor3:
         newpk = list(line)
         if checkpk == newpk:
@@ -456,13 +456,13 @@ def addAnimal():
                            trainerMessage=line3,foodMessage=line4)
     cursor4.close()
 
-    if tid!=None:
+    if tid!="None":
         g.conn.execute("""INSERT INTO Trained_By(tid,aid) VALUES (%s, %s)""",
                        tid, aid)
 
     checkpk3 = [fname,aid]
-    cursor5 = g.conn.execute("SELECT * Eat")
-    for line in cursor4:
+    cursor5 = g.conn.execute("SELECT * FROM Eat")
+    for line in cursor5:
         newpk = list(line)
         if checkpk3 == newpk:
             message = "The Relationship Has Already Existed"
