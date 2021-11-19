@@ -239,7 +239,19 @@ def animalShow():
         print(list(result))
     cursor.close()
     context = dict(data=lines)
-    return render_template("animalShow.html", **context)
+        cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    lines2 = []
+    for result in cursor2:
+        lines2.append(result["aid"])
+    cursor2.close()
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    lines3 = []
+    for result in cursor3:
+        lines3.append(result["tid"])
+    cursor3.close()
+    return render_template("animalShow.html", **context,animalMessage=lines2,
+                           trainerMessage=lines3)
 
 
 @app.route('/manager')
