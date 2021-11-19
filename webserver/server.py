@@ -328,9 +328,9 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  bid=request.form.get('assignB')
-  tid=request.form.get('assignT')
-  fname=request.form.get('assignF')
+  bid=request.form['assignB']
+  tid=request.form.get['assignT']
+  fname=request.form.get['assignF']
     
   if aid == '':
       message = "AID cannot be NULL"
@@ -375,7 +375,7 @@ def addAnimal():
                  eatingProperty, activityTime, lifestyle, pname)
   
   checkpk = [bid,aid]
-  cursor3 = g.conn.excute("SELECT * FROM Breeded_By")
+  cursor3 = g.conn.execute("SELECT * FROM Breeded_By")
   for line in cursor3:
       newpk = list(line)
       if checkpk == newpk:
