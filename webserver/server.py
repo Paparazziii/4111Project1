@@ -1260,13 +1260,14 @@ def findShow():
     res = []
     for line in cursor:
         sid = line['sid']
-        showNmae = line['showName']
-        time = line['time']
-        tot = sid + " " + showNmae + " " + time
+        showName = line['show_name']
+        if showName == None:
+            showName=' '
+        tot = sid + " " + showName + " "
         res.append(tot)
     cursor.close()
     message = ", ".join(res)
-    return render_template("parkSearch.html", animalMessage=message)
+    return render_template("parkSearch.html", showMessage=message)
 
 
 @app.route('/findPark',methods=['POST'])
