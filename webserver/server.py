@@ -130,6 +130,7 @@ def index():
   for result in cursor3:
       line3.append(result["tid"])
   cursor3.close()
+  line3.append(None)
     
   cursor4 = g.conn.execute("SELECT fname FROM Food")
   line4 = []
