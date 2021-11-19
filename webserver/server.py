@@ -350,25 +350,27 @@ def addAnimal():
         line4.append(result["fname"])
     cursor4.close()
 
-    if aid == " ":
+    if aid == '':
         message = "AID cannot be NULL"
         return render_template("index.html", addMessage=message,breederMessage=line2,
                            trainerMessage=line3,foodMessage=line4)
+
+    if age == '':
+        message = "Age cannot be NULL"
+        return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
+    else:
+        age = int(age)
 
     if age < 0:
         message = "Age cannot be Smaller Than 0"
         return render_template("index.html", addMessage=message,breederMessage=line2,
                            trainerMessage=line3,foodMessage=line4)
 
-    if pname == " ":
+    if pname == ' ':
         message = "Park Name cannot be NULL"
         return render_template("index.html", addMessage=message,breederMessage=line2,
                            trainerMessage=line3,foodMessage=line4)
-
-    if age != " ":
-        age = int(age)
-    else:
-        age = None
 
     cursor = g.conn.execute("SELECT aid FROM Animal_Founded")
     pk = []
