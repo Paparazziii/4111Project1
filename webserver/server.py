@@ -328,6 +328,10 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
+  bid=request.form.get('assignB')
+  tid=request.form.get('assignT')
+  fname=request.form.get('assignF')
+    
   if aid == '':
       message = "AID cannot be NULL"
       return render_template("index.html",addMessage = message)
