@@ -374,7 +374,12 @@ def addAnimal():
         return render_template("index.html", addMessage=message,breederMessage=line2,
                            trainerMessage=line3,foodMessage=line4)
     else:
-        age = int(age)
+        try:
+            age = int(age)
+        except:
+            message = "Age should be integer"
+            return render_template("index.html", addMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
     if age < 0:
         message = "Age cannot be Smaller Than 0"
