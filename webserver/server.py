@@ -914,37 +914,68 @@ def addAnimalShow():
     time = request.form['time']
     pname = request.form['pname']
     
+    aid = request.form['A']
+    tid = request.form['T']
+
+    cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    lines2 = []
+    for result in cursor2:
+        lines2.append(result["aid"])
+    cursor2.close()
+    lines2.append(None)
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    lines3 = []
+    for result in cursor3:
+        lines3.append(result["tid"])
+    cursor3.close()
+    lines3.append(None)
+
     if sid == '':
-      message = "SID cannot be NULL"
-      return render_template("animalShow.html", addMessage=message)
-    
-    if pname =='':
-      message = "Park Name cannot be NULL"
-      return render_template("animalShow.html", addMessage=message)
-    
+        message = "SID cannot be NULL"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
+
     if seat == '':
-      message = "Seat cannot be NULL"
-      return render_template("animalShow.html",addMessage=message)
+        message = "Seat cannot be NULL"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
     else:
-      seat = int(seat)
+        seat = int(seat)
+
+    if aid == "Assign Animal":
+        message = "Please choose a animal"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
+
+    if tid == "Assign Trainer":
+        message = "Please choose a trainer"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
+
+    if aid!=None and tid!=None:
+        g.conn.execute("INSERT INTO Participate_In(sid, aid, tid) VALUES (%s,%s,%s)",
+                       sid, aid, tid)
 
     cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
     pk = []
     for result in cursor:
-      pk.append(result["sid"])
+        pk.append(result["sid"])
     cursor.close()
     if sid in pk:
-      message = "The Show Has Already Existed!"
-      return render_template("animalShow.html", addMessage=message)
+        message = "The Show Has Already Existed!"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor2 = g.conn.execute("SELECT pname FROM Park")
     fk = []
     for line in cursor2:
-      fk.append(line["pname"])
-    cursor2.close()
+        fk.append(line["pname"])
+    cursor.close()
     if pname not in fk:
-      message = "The Park Does NOT Exist! "
-      return render_template("animalShow.html", addMessage=message)
+        message = "The Park Does NOT Exist! "
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
     
     g.conn.execute("""INSERT INTO Animal_Show_Held(sid, show_name,
                 seat, time, pname) VALUES(%s, %s, %s, %s, %s)""",
