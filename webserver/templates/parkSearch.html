@@ -18,9 +18,17 @@
 <body>
     <div class="color">
         <h1>Search Result</h1>
-          <!--print result-->
-          {% for item in data %}
-          <div>{{item}}</div>
+         {% if facilityMessage %}
+         <p>Facility in the Park: {{facilityMessage}}</p>
+         {% endif %}
+
+         {% if animalMessage %}
+         <p>Animal in the Park: {{animalMessage}}</p>
+         {% endif %}
+
+         {% if showMessage %}
+         <p>Animal Show in the Park: {{showMessage}}</p>
+         {% endif %}
     </div>
 <!-- back to last page -->
 <p><a href="park"><button>Back</button></a></p>
