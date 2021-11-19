@@ -328,9 +328,9 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  bid=request.args.get('assignB')
-  tid=request.args.get('assignT')
-  fname=request.args.get('assignF')
+  bid=request.form['B']
+  tid=request.form['T']
+  fname=request.form['F']
 
   print(bid, tid, fname)
     
@@ -790,6 +790,14 @@ def deleteFood():
     if fname not in pk:
         message = "The Food Does NOT Exist!"
         return render_template("food.html", deleteMessage=message)
+    
+    cursor2 = g.conn.execute("SELECT fname FROM Eat")
+    fnames = []
+    for result in cursor2:
+        fnames.append(result["fname"])
+    cursor2.close()
+    if fname in fnames:
+        g.conn.execute("DELETE FROM Eat WHERE fname=%s",fname)
     
     g.conn.execute("""DELETE FROM Food WHERE fname = %s""", fname)
     return redirect('/food')
