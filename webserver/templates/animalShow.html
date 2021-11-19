@@ -162,6 +162,25 @@ input {
             <label for="pname">Park Name</label>
             <input type="text" name="pname">
         </div>
+
+        <div>
+          <select id ="assignT" nmae = "assignT">
+            <option>Assign Trainer</option>
+            {% for i in trainerMessage %}
+            <option value = "{{i}}">{{i}}</option>
+            {% endfor %}
+            </select>
+          </div>
+      
+          <div>
+            <select id ="assignA" nmae = "assignA">
+              <option>Assign Animal</option>
+              {% for i in animalMessage %}
+              <option value = "{{i}}">{{i}}</option>
+              {% endfor %}
+              </select>
+            </div>
+
         <div>
             <input type="submit" value="Add">
         </div>

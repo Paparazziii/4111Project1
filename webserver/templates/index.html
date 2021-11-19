@@ -193,6 +193,33 @@ input {
   <input type="text" style="width: 150px"name="parkname">
 </div>
 <div>
+  <select id ="assignB" nmae = "assignB">
+    <option >Assign Breeder</option>>
+    {% for i in breederMessage %}
+    <option value = "{{i}}">{{i}}</option>
+    {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <select id ="assignT" nmae = "assignT">
+      <option>Assign Trainer</option>
+      {% for i in trainerMessage %}
+      <option value = "{{i}}">{{i}}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <select id ="assignF" nmae = "assignF">
+        <option>Assign Food</option>
+        {% for i in foodMessage %}
+        <option value = "{{i}}">{{i}}</option>
+        {% endfor %}
+        </select>
+      </div>
+    
+      <div>
   <button type="submit">Add</button>
   </div>
 </form>
