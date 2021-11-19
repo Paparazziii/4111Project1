@@ -310,7 +310,7 @@ def relationFA():
         lines.append(list(result))
     cursor.close()
     context = dict(data=lines)
-    return render_template("relationBA.html",**context)
+    return render_template("relationFA.html",**context)
 
 
 @app.route('/relationP')
