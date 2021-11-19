@@ -328,9 +328,9 @@ def addAnimal():
   lifestyle = request.form['lifestyle']
   pname = request.form['parkname']
     
-  bid=request.form['B']
-  tid=request.form['T']
-  fname=request.form['F']
+  bid=request.form['assignB']
+  tid=request.form['assignT']
+  fname=request.form['assignF']
 
   print(bid, tid, fname)
     
@@ -426,7 +426,7 @@ def deleteAnimal():
       message = "The AID Does Not Exist!"
       return render_template("index.html", deleteMessage=message)
 
-    g.conn.excute("""DELETE FROM Breeded_By WHERE aid=%s""",aid)
+    g.conn.execute("""DELETE FROM Breeded_By WHERE aid=%s""",aid)
 
     cursor2 = g.conn.execute("SELECT aid FROM Trained_By")
     aids = []
@@ -436,7 +436,7 @@ def deleteAnimal():
     if aid in aids:
         g.conn.execute("DELETE FROM Trained_By WHERE aid=%s",aid)
 
-    g.conn.exeucute("DELETE FROM Eat WHERE aid=%s",aid)
+    g.conn.execute("DELETE FROM Eat WHERE aid=%s",aid)
     
     cursor3 = g.conn.execute("SELECT aid FROM Participate_In")
     aids2 = []
