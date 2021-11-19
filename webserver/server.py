@@ -245,6 +245,51 @@ def park():
     context = dict(data=lines)
     return render_template("park.html", **context)
 
+
+@app.route('/relationBA')
+def relationBA():
+    cursor = g.conn.execute("SELECT * FROM Breeded_By")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("relationBA.html",**context)
+
+
+@app.route('/relationTA')
+def relationTA():
+    cursor = g.conn.execute("SELECT * FROM Trained_By")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("relationTA.html",**context)
+
+
+@app.route('/relationFA')
+def relationFA():
+    cursor = g.conn.execute("SELECT * FROM Eat")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("relationBA.html",**context)
+
+
+@app.route('/relationP')
+def relationP():
+    cursor = g.conn.execute("SELECT * FROM Participate_In")
+    lines = []
+    for result in cursor:
+        lines.append(list(result))
+    cursor.close()
+    context = dict(data=lines)
+    return render_template("relationP.html",**context)
+
+
 # Example of adding new data to the database
 #@app.route('/add', methods=['POST'])
 #def add():
