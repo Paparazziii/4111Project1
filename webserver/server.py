@@ -357,6 +357,7 @@ def addAnimal():
     for result in cursor3:
         line3.append(result["tid"])
     cursor3.close()
+    line3.append(None)
 
     cursor4 = g.conn.execute("SELECT fname FROM Food")
     line4 = []
@@ -406,7 +407,7 @@ def addAnimal():
     for line in cursor2:
         fk.append(line["pname"])
     cursor.close()
-    if pname not in aid:
+    if pname not in fk:
         message = "The Park Name Does Not Existed! "
         return render_template("index.html", addMessage=message,breederMessage=line2,
                            trainerMessage=line3,foodMessage=line4)
@@ -489,6 +490,7 @@ def deleteAnimal():
     for result in cursor3:
         line3.append(result["tid"])
     cursor3.close()
+    line3.append(None)
 
     cursor4 = g.conn.execute("SELECT fname FROM Food")
     line4 = []
@@ -554,6 +556,7 @@ def updateAnimal():
   for result in cursor3:
     line3.append(result["tid"])
   cursor3.close()
+  line3.append(None)
 
   cursor4 = g.conn.execute("SELECT fname FROM Food")
   line4 = []
@@ -1430,10 +1433,30 @@ def updateManager():
 @app.route('/searchTrainer', methods=['POST'])
 def searchTrainer():
     aid = request.form['aid']
+    
+    cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    line2 = []
+    for result in cursor2:
+        line2.append(result["bid"])
+    cursor2.close()
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    line3 = []
+    for result in cursor3:
+        line3.append(result["tid"])
+    cursor3.close()
+    line3.append(None)
+
+    cursor4 = g.conn.execute("SELECT fname FROM Food")
+    line4 = []
+    for result in cursor4:
+        line4.append(result["fname"])
+    cursor4.close()
 
     if aid == '':
         message = "AID cannot be NULL"
-        return render_template('index.html', searchMessage=message)
+        return render_template('index.html', searchMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
     
     cursor0 = g.conn.execute("SELECT aid FROM Animal_Founded")
     pk = []
@@ -1442,7 +1465,8 @@ def searchTrainer():
     cursor0.close()
     if aid not in pk:
         message = "The AID Does NOT Exist!"
-        return render_template("index.html", searchMessage=message)
+        return render_template("index.html", searchMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
     cursor = g.conn.execute("""SELECT tid FROM Trained_By WHERE aid=%s""", aid)
     tid = []
@@ -1485,9 +1509,31 @@ def searchTrainer():
 @app.route('/searchFood',methods=['POST'])
 def searchFood():
     aid = request.form['aid']
+    
+    cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
+    line2 = []
+    for result in cursor2:
+        line2.append(result["bid"])
+    cursor2.close()
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    line3 = []
+    for result in cursor3:
+        line3.append(result["tid"])
+    cursor3.close()
+    line3.append(None)
+
+    cursor4 = g.conn.execute("SELECT fname FROM Food")
+    line4 = []
+    for result in cursor4:
+        line4.append(result["fname"])
+    cursor4.close()
+
+    
     if aid == '':
         message = "AID cannot be NULL"
-        return render_template('index.html',searchMessage=message)
+        return render_template('index.html',searchMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
     
     cursor0 = g.conn.execute("SELECT aid FROM Animal_Founded")
     pk = []
@@ -1496,7 +1542,8 @@ def searchFood():
     cursor0.close()
     if aid not in pk:
         message = "The AID Does NOT Exist!"
-        return render_template("index.html", searchMessage=message)
+        return render_template("index.html", searchMessage=message,breederMessage=line2,
+                           trainerMessage=line3,foodMessage=line4)
 
     cursor = g.conn.execute("""SELECT fname FROM Eat WHERE aid=%s""",aid)
     food = []
@@ -1536,7 +1583,8 @@ def searchShow():
     sid = request.form['sid']
     if sid == '':
         message = "SID cannot be empty"
-        return render_template("animalShow.html", searchMessage=message)
+        return render_template("animalShow.html", searchMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
     pk = []
@@ -1545,7 +1593,8 @@ def searchShow():
     cursor.close()
     if sid not in pk:
         message = "The Show Does NOT Exist!"
-        return render_template("animalShow.html", searchMessage=message)
+        return render_template("animalShow.html", searchMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     aids = []
     tids = []
@@ -1621,9 +1670,25 @@ def findAnimal():
 @app.route('/findShow',methods=['POST'])
 def findShow():
     pname = request.form['pname']
+    
+    cursor2 = g.conn.execute("SELECT aid FROM Animal_Founded")
+    lines2 = []
+    for result in cursor2:
+        lines2.append(result["aid"])
+    cursor2.close()
+    lines2.append(None)
+
+    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+    lines3 = []
+    for result in cursor3:
+        lines3.append(result["tid"])
+    cursor3.close()
+    lines3.append(None)
+    
     if pname == '':
         message = "Park Name cannot be NULL"
-        return render_template("park.html", searchMessage=message)
+        return render_template("park.html", searchMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor2 = g.conn.execute("SELECT pname FROM Park")
     fk = []
@@ -1632,7 +1697,8 @@ def findShow():
     cursor2.close()
     if pname not in fk:
         message = "The Park Does NOT Existed! "
-        return render_template("park.html", searchMessage=message)
+        return render_template("park.html", searchMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor = g.conn.execute("SELECT * FROM Animal_Show_Held WHERE pname=%s", pname)
     res = []
