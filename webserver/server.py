@@ -1126,6 +1126,7 @@ def searchFood():
     food = []
     for line in cursor:
         food.append(line['fname'])
+    cursor.close()
     message = ', '.join(food)
     return render_template("indexSearch.html",foodMessage=message)
 
@@ -1152,6 +1153,34 @@ def checkStorage():
         res.append(tot)
     message0 = ", ".join(res)
     return render_template("foodSearch.html", foodMessage = message0)
+
+
+@app.route('/searchShow',methods=['POST'])
+def searchShow():
+    sid = request.form['sid']
+    if sid == '':
+        message = "SID cannot be empty"
+        return render_template("animalShow.html", searchMessage=message)
+
+    cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
+    pk = []
+    for result in cursor:
+        pk.append(result["sid"])
+    cursor.close()
+    if sid not in pk:
+        message = "The Show Does NOT Exist!"
+        return render_template("animalShow.html", searchMessage=message)
+
+    res = []
+    cursor2 = g.conn.execute("""SELECT * FROM Participate_In WHERE sid=%s""", sid)
+    for line in cursor2:
+        aid = line["aid"]
+        tid = line["tid"]
+        tot = aid + " " + tid
+        res.append(tot)
+    cursor2.close()
+    message = ", ".join(res)
+    return render_template("animalShowSearch.html",searchMessage=message)
 
 
 @app.route('/login')
