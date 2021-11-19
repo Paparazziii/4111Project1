@@ -2,6 +2,12 @@
 <html>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    function myFunction(){
+      var x = document.getElementById("assignB").value;
+      var y = doument.getElementById("assignT").value;
+      var z = document.getElementById("assignF").value;
+      document.getElementById("demo").innerHTML=x+y+z;
+    }
   </script>
   <style>
     body{ 
@@ -144,6 +150,7 @@ input {
 <!-- operations -->
 <!--add-->
 <!--link to other page-->
+<p id="demo"></p>
 
 <p><a href="another"><button>Manage Traniers</button></a></p>
 <p><a href="breeder"><button>Manage Breeders</button></a></p>
@@ -193,8 +200,8 @@ input {
   <input type="text" style="width: 150px"name="parkname">
 </div>
 <div>
-  <select id ="assignB" nmae = "assignB">
-    <option >Assign Breeder</option>>
+  <select id ="assignB" nmae = "assignB" onchange="myFunction()">
+    <option >Assign Breeder</option>
     {% for i in breederMessage %}
     <option value = "{{i}}">{{i}}</option>
     {% endfor %}
@@ -202,7 +209,7 @@ input {
   </div>
 
   <div>
-    <select id ="assignT" nmae = "assignT">
+    <select id ="assignT" nmae = "assignT" onchange="myFunction()">
       <option>Assign Trainer</option>
       {% for i in trainerMessage %}
       <option value = "{{i}}">{{i}}</option>
@@ -211,7 +218,7 @@ input {
     </div>
 
     <div>
-      <select id ="assignF" nmae = "assignF">
+      <select id ="assignF" nmae = "assignF" onchange="myFunction()">
         <option>Assign Food</option>
         {% for i in foodMessage %}
         <option value = "{{i}}">{{i}}</option>
