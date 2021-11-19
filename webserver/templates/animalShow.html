@@ -1,11 +1,19 @@
 
 <html>
-    <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script sec ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      function myFunction(){
+      var x = document.getElementById("assignA").value;
+      var y = document.getElementById("assignT").value;
+      document.getElementById("selectA").value = x;
+      document.getElementById("selectT").value=y;
+    }
+    </script>
     <style>
       body{ 
         font-size: 15pt;
         font-family: arial;
       }
+      
       .table table {
 	width:100%;
 	margin:15px 0;
@@ -70,6 +78,9 @@ input {
 .button{
 
   float:inline-start;
+}
+.disappear{
+  display: none;
 }
     </style>
   <head>
@@ -164,7 +175,7 @@ input {
         </div>
 
         <div>
-          <select id ="assignT" nmae = "assignT">
+          <select id ="assignT" nmae = "assignT" onchange="myFunction()">
             <option>Assign Trainer</option>
             {% for i in trainerMessage %}
             <option value = "{{i}}">{{i}}</option>
@@ -172,8 +183,13 @@ input {
             </select>
           </div>
       
+          <div class="disappear">
+            <label for="T">T</label>
+            <input id = "selectT" type="text" name="T" value ="Assign Trainer">
+        </div>
+
           <div>
-            <select id ="assignA" nmae = "assignA">
+            <select id ="assignA" nmae = "assignA" onchange="myFunction()">
               <option>Assign Animal</option>
               {% for i in animalMessage %}
               <option value = "{{i}}">{{i}}</option>
@@ -181,6 +197,11 @@ input {
               </select>
             </div>
 
+          <div class="disappear">
+            <label for="A">A</label>
+            <input id ="selectA"type="text" name="A" value="Assign Animal">
+        </div>
+        
         <div>
             <input type="submit" value="Add">
         </div>
