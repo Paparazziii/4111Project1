@@ -1146,6 +1146,11 @@ def updateAnimalShow():
         message = "Seat should be integer"
         return render_template("animalShow.html", updateMessage=message,animalMessage=lines2,
                            trainerMessage=lines3)
+    
+    if seat <=0:
+        message = "Seat should be larger than 0"
+        return render_template("animalShow.html", addMessage=message,animalMessage=lines2,
+                           trainerMessage=lines3)
 
     cursor = g.conn.execute("SELECT sid FROM Animal_Show_Held")
     pk = []
