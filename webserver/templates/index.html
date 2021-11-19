@@ -6,9 +6,9 @@
       var x = document.getElementById("assignB").value;
       var y = document.getElementById("assignT").value;
       var z = document.getElementById("assignF").value;
-      document.getElementById("assignB").value = x;
-      document.getElementById("assignT").value=y;
-      document.getElementById("assignF").value=z;
+      document.getElementById("selectB").value = x;
+      document.getElementById("selectT").value=y;
+      document.getElementById("selectF").value=z;
     }
   </script>
   <style>
@@ -152,13 +152,6 @@ input {
 <!-- operations -->
 <!--add-->
 <!--link to other page-->
-<div>
-  <form method="POST" action ="/addAnimal">
-<input id = "assignB" type ="text" name ="B" value="hi">
-<input id = "assignT" type ="text" name ="T" value="ni">
-<input id = "assignF" type ="text" name ="F" value="hao">
-</form>
-</div>
 
 <p><a href="another"><button>Manage Traniers</button></a></p>
 <p><a href="breeder"><button>Manage Breeders</button></a></p>
@@ -170,6 +163,7 @@ input {
 <p><a href="relationTA"><button>View Trainer-Animal</button></a></p>
 <p><a href="relationP"><button>View Participation</button></a></p>
 <p></p>
+
 
   <div class="color">
     <p><h4>Add New Animal</h4></p>
@@ -207,6 +201,7 @@ input {
   <label for="parkname">Park Name</label>
   <input type="text" style="width: 150px"name="parkname">
 </div>
+
 <div>
   <select id ="assignB" nmae = "assignB" onchange="myFunction()">
     <option >Assign Breeder</option>
@@ -216,23 +211,39 @@ input {
     </select>
   </div>
 
+<div>
+  <label for="B">Assign B</label>
+  <input id ="selectB" type="text" style="width: 150px"name="B" value ="please chose one">
+</div>
+
   <div>
-    <select id ="assignT" nmae = "assignT" onchange="myFunction()">
-      <option>Assign Trainer</option>
-      {% for i in trainerMessage %}
+    <select id ="assignF" nmae = "assignF" onchange="myFunction()">
+      <option>Assign Food</option>
+      {% for i in foodMessage %}
       <option value = "{{i}}">{{i}}</option>
       {% endfor %}
       </select>
     </div>
 
-    <div>
-      <select id ="assignF" nmae = "assignF" onchange="myFunction()">
-        <option>Assign Food</option>
-        {% for i in foodMessage %}
-        <option value = "{{i}}">{{i}}</option>
-        {% endfor %}
-        </select>
-      </div>
+<div>
+  <label for="F">Assign F</label>
+  <input id = "selectF" type="text" style="width: 150px"name="F" value ="plese chose one">
+</div>
+
+<div>
+  <select id ="assignT" nmae = "assignT" onchange="myFunction()">
+    <option>Assign Trainer</option>
+    {% for i in trainerMessage %}
+    <option value = "{{i}}">{{i}}</option>
+    {% endfor %}
+    </select>
+  </div>
+
+<div>
+  <label for="T">Assign T</label>
+  <input id ="selectT" type="text" style="width: 150px"name="T" value ="please chose one">
+</div>
+
     
       <div>
   <button type="submit">Add</button>
