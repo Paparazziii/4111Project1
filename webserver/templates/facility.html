@@ -99,6 +99,12 @@ input {
 </div>
 {% endif %}
 
+{% if searchMessage %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Error!</strong> {{searchMessage}}
+</div>
+{% endif %}
 <body>
 
   <table class="table">
@@ -201,6 +207,21 @@ input {
  </div>
  </form>
  </div>
+
+ <!--search facility-->
+<div class="color">
+  <p><h4>Check Location of Facilities</h4></p>
+  <p><h8>Please enter the Type of Facility you want to search: </h8></p>
+  <form method="POST" action ="/findPark">
+      <div>
+          <label for="type">Type</label>
+          <input type="text" name="type">
+      </div>
+      <div>
+          <input type="submit" value="Search">
+      </div>
+  </form>
+</div>
 <!-- back to last page -->
 <p><a href="park"><button>Back to Park Page</button></a></p>
 </body>
