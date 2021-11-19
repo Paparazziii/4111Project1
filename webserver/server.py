@@ -544,22 +544,22 @@ def updateAnimal():
   pname = request.form['parkname']
     
   cursor2 = g.conn.execute("SELECT bid FROM Breeder_Managed")
-    line2 = []
-    for result in cursor2:
-        line2.append(result["bid"])
-    cursor2.close()
+  line2 = []
+  for result in cursor2:
+    line2.append(result["bid"])
+  cursor2.close()
 
-    cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
-    line3 = []
-    for result in cursor3:
-        line3.append(result["tid"])
-    cursor3.close()
+  cursor3 = g.conn.execute("SELECT tid FROM Trainer_Managed")
+  line3 = []
+  for result in cursor3:
+    line3.append(result["tid"])
+  cursor3.close()
 
-    cursor4 = g.conn.execute("SELECT fname FROM Food")
-    line4 = []
-    for result in cursor4:
-        line4.append(result["fname"])
-    cursor4.close()
+  cursor4 = g.conn.execute("SELECT fname FROM Food")
+  line4 = []
+  for result in cursor4:
+    line4.append(result["fname"])
+  cursor4.close()
     
   if aid == '':
       message = "AID cannot be NULL"
